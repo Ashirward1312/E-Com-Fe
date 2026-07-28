@@ -3,7 +3,7 @@ import API from "../api/axios";
 // Register
 export const register = async (userData) => {
     try {
-        const response = await API.post("register/", userData);
+        const response = await API.post("accounts/register/", userData);
         return response.data;
     } catch (error) {
         throw error;
@@ -13,7 +13,7 @@ export const register = async (userData) => {
 // Login
 export const login = async (credentials) => {
     try {
-        const response = await API.post("login/", credentials);
+        const response = await API.post("accounts/login/", credentials);
         return response.data;
     } catch (error) {
         throw error;
@@ -23,7 +23,7 @@ export const login = async (credentials) => {
 // Get Profile
 export const getProfile = async () => {
     try {
-        const response = await API.get("profile/");
+        const response = await API.get("accounts/profile/");
         return response.data;
     } catch (error) {
         throw error;
@@ -33,11 +33,15 @@ export const getProfile = async () => {
 // Update Profile
 export const updateProfile = async (userData) => {
     try {
-        const response = await API.put("profile/update/", userData, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-        });
+        const response = await API.put(
+            "accounts/profile/update/",
+            userData,
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            }
+        );
 
         return response.data;
     } catch (error) {
@@ -48,7 +52,10 @@ export const updateProfile = async (userData) => {
 // Refresh Token
 export const refreshToken = async (refresh) => {
     try {
-        const response = await API.post("refresh/", { refresh });
+        const response = await API.post("accounts/refresh/", {
+            refresh,
+        });
+
         return response.data;
     } catch (error) {
         throw error;

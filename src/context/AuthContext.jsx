@@ -46,29 +46,34 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem("access", data.access);
             localStorage.setItem("refresh", data.refresh);
 
-            setUser(data.user);
+            const userData = await getProfile();
+
+            setUser(userData);
             setIsAuthenticated(true);
 
             return {
                 success: true,
-                user: data.user,
+                user: userData,
             };
         } catch (error) {
             return {
                 success: false,
-                message:
-                    error.response?.data?.detail ||
-                    "Invalid username or password",
+                message: error.detail || "Invalid username or password",
             };
         }
     };
 
     const logout = () => {
+        // Remove Tokens
         localStorage.removeItem("access");
         localStorage.removeItem("refresh");
 
+        // Clear Auth State
         setUser(null);
         setIsAuthenticated(false);
+
+        // Redirect
+        window.location.href = "/login";
     };
 
     return (

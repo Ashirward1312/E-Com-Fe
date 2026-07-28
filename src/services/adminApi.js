@@ -2,6 +2,37 @@ import API from "../api/axios";
 
 const adminApi = {
 
+
+    // ==========================
+    // Users
+    // ==========================
+
+    async getUsers() {
+        const response = await API.get("accounts/admin/users/");
+        return response.data;
+    },
+
+    async getUser(id) {
+        const response = await API.get(`accounts/admin/users/${id}/`);
+        return response.data;
+    },
+
+    async updateUser(id, data) {
+        const response = await API.put(
+            `accounts/admin/users/${id}/`,
+            data
+        );
+
+        return response.data;
+    },
+
+    async deleteUser(id) {
+        const response = await API.delete(
+            `accounts/admin/users/${id}/`
+        );
+
+        return response.data;
+    },
     // Dashboard
     async getDashboard() {
         const response = await API.get(
@@ -112,6 +143,45 @@ const adminApi = {
         return response.data;
     },
 
+    // ==========================
+    // Categories
+    // ==========================
+
+    async getCategories() {
+        const response = await API.get(
+            "products/admin/categories/"
+        );
+
+        return response.data;
+    },
+
+    async createCategory(data) {
+        const response = await API.post(
+            "products/admin/categories/",
+            data
+        );
+
+        return response.data;
+    },
+
+    async updateCategory(id, data) {
+        const response = await API.put(
+            `products/admin/categories/${id}/`,
+            data
+        );
+
+        return response.data;
+    },
+
+    async deleteCategory(id) {
+        const response = await API.delete(
+            `products/admin/categories/${id}/`
+        );
+
+        return response.data;
+    },
+
 };
+
 
 export default adminApi;

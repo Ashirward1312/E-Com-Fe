@@ -1,10 +1,26 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { checkout } from "../../services/orderApi";
-
+import AuthContext from "../../context/AuthContext";
+import { getCart, clearCart } from "../../utils/cart";
+import { syncCart } from "../../services/cartApi";
 const Checkout = () => {
 
     const navigate = useNavigate();
+    const { isAuthenticated, loading } = useContext(AuthContext);
+
+    useEffect(() => {
+        if (loading) return;
+
+        if (!isAuthenticated) {
+            navigate("/login", {
+                state: {
+                    from: "/checkout",
+                },
+                replace: true,
+            });
+        }
+    }, [loading, isAuthenticated, navigate]);
 
     const [form, setForm] = useState({
         full_name: "",
@@ -17,6 +33,8 @@ const Checkout = () => {
         payment_method: "cod",
     });
 
+
+
     const handleChange = (e) => {
         setForm({
             ...form,
@@ -28,23 +46,40 @@ const Checkout = () => {
         e.preventDefault();
 
         try {
+            const cart = getCart();
+
+            if (cart.length === 0) {
+                alert("Your cart is empty.");
+                return;
+            }
+
+            await syncCart(
+                cart.map((item) => ({
+                    product_id: item.product_id,
+                    quantity: item.quantity,
+                }))
+            );
 
             const data = await checkout(form);
 
+            clearCart();
+
             navigate("/order-success", {
                 state: data.order,
+                replace: true,
             });
 
         } catch (error) {
 
             alert(
                 error.response?.data?.detail ||
+                error.response?.data?.message ||
                 "Checkout Failed"
             );
 
         }
-
     };
+
 
     return (
         <form

@@ -1,4 +1,6 @@
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../../../context/AuthContext";
 import {
     LayoutDashboard,
     Package,
@@ -6,9 +8,11 @@ import {
     Tags,
     Users,
     TicketPercent,
+    LogOut,
 } from "lucide-react";
 
 const Sidebar = () => {
+    const { logout } = useContext(AuthContext);
 
     const menus = [
         {
@@ -44,7 +48,7 @@ const Sidebar = () => {
     ];
 
     return (
-        <aside className="w-64 min-h-screen bg-[#0B1F3A] text-white">
+        <aside className="w-64 min-h-screen bg-[#0B1F3A] text-white flex flex-col">
 
             <div className="p-6 border-b border-gray-700">
 
@@ -58,7 +62,7 @@ const Sidebar = () => {
 
             </div>
 
-            <nav className="mt-6">
+            <nav className="mt-6 flex-1">
 
                 {menus.map((menu) => (
 
@@ -75,15 +79,27 @@ const Sidebar = () => {
                     >
                         {menu.icon}
 
-                        <span>
-                            {menu.name}
-                        </span>
+                        <span>{menu.name}</span>
 
                     </NavLink>
 
                 ))}
 
             </nav>
+
+            <div className="border-t border-gray-700">
+
+                <button
+                    onClick={logout}
+                    className="flex w-full items-center gap-3 px-6 py-4 transition-all hover:bg-red-600"
+                >
+                    <LogOut size={20} />
+
+                    <span>Logout</span>
+
+                </button>
+
+            </div>
 
         </aside>
     );

@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState ,useContext} from "react";
 import { Link } from "react-router-dom";
 import { getProducts } from "../../services/productApi";
-import { addToCart } from "../../services/cartApi";
+import CartContext from "../../context/CartContext";
 
 
 const Product = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const { addToCart } = useContext(CartContext);
 
     useEffect(() => {
         fetchProducts();
@@ -23,18 +24,10 @@ const Product = () => {
         }
     };
 
-    const handleAddToCart = async (productId) => {
-        try {
-            const data = await addToCart(productId);
+    const handleAddToCart = (product) => {
+        addToCart(product);
 
-            alert(data.message);
-        } catch (error) {
-            alert(
-                error.response?.data?.error ||
-                error.response?.data?.detail ||
-                "Failed to add product."
-            );
-        }
+        alert("Product added to cart.");
     };
     if (loading) {
         return (
@@ -83,9 +76,9 @@ const Product = () => {
                             >
                                 View Details
                             </Link>
-                    
+
                             <button
-                                onClick={() => handleAddToCart(product.id)}
+                                onClick={() => handleAddToCart(product)}
                                 className="rounded-lg bg-orange-500 px-4 py-2 text-white"
                             >
                                 Add to Cart

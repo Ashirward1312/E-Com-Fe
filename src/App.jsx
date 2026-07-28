@@ -99,11 +99,14 @@ import AdminLayout from "./Page/layouts/AdminLayout";
 import Dashboard from "./Page/Admin/Dashboard";
 
 import Products from "./Page/Admin/Products";
-// import Orders from "./Page/Admin/Orders";
+import Orders from "./Page/Admin/Orders";
 // import Categories from "./Page/Admin/Categories";
 // import Coupons from "./Page/Admin/Coupons";
 // import Users from "./Page/Admin/Users";
+import AdminOrderDetail from "./Page/Admin/OrderDetail";
 import AddProduct from "./Page/Admin/AddProduct";
+import Categories from "./Page/Admin/Categories";
+import Users from "./Page/Admin/Users";
 
 function Home() {
   return (
@@ -240,6 +243,20 @@ function App() {
         <Route
           path="products/add"
           element={<AddProduct />}
+        />
+        <Route path="orders" element={<Orders />} />
+        <Route
+          path="orders/:orderId"
+          element={<AdminOrderDetail />}
+        />
+
+        <Route
+          path="categories"
+          element={<Categories />}
+        />
+        <Route
+          path="users"
+          element={<Users />}
         />
       </Route>
     </Routes>

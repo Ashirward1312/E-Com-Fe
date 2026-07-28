@@ -1,15 +1,39 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Menu, X, ShoppingCart, BookOpen } from "lucide-react";
+import CartContext from "../context/CartContext";
+
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { totalItems } = useContext(CartContext);
 
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "About Us", path: "/about" },
     { name: "Courses", path: "/products" },
   ];
+
+  // useEffect(() => {
+  //   const updateCartCount = () => {
+  //     const cart = getCart();
+
+  //     const total = cart.reduce(
+  //       (sum, item) => sum + item.quantity,
+  //       0
+  //     );
+
+  //     setCartCount(total);
+  //   };
+
+  //   updateCartCount();
+
+  //   window.addEventListener("storage", updateCartCount);
+
+  //   return () => {
+  //     window.removeEventListener("storage", updateCartCount);
+  //   };
+  // }, []);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#0B1C33] py-5 shadow-lg font-poppins">
@@ -42,9 +66,16 @@ const Header = () => {
           {/* Cart */}
           <Link
             to="/cart"
-            className="text-white hover:text-[#C8A45A] transition"
+            onClick={() => setMobileOpen(false)}
+            className="flex items-center justify-between text-white hover:text-[#C8A45A] transition"
           >
-            <ShoppingCart className="w-5 h-5" />
+            <span>Cart</span>
+
+            {totalItems > 0 && (
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-xs font-bold text-white">
+                {totalItems}
+              </span>
+            )}
           </Link>
 
           {/* Login Button */}

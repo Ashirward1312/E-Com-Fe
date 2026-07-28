@@ -58,3 +58,13 @@ export const clearCart = async () => {
         throw error;
     }
 };
+
+
+
+export const syncCart = async (items) => {
+    const { data } = await API.post("/cart/sync/", {
+        items,
+    });
+
+    return data;
+};
