@@ -88,6 +88,7 @@ import Register from "./Page/Register";
 import Product from "./Page/Product/Product";
 import Cart from "./Page/Cart/Cart";
 import Checkout from "./Page/Checkout/Checkout";
+import CheckoutRoute from "./routes/CheckoutRoute";
 
 import MyOrders from "./Page/Orders/MyOrders";
 import OrderDetail from "./Page/Orders/OrderDetail";
@@ -107,6 +108,15 @@ import AdminOrderDetail from "./Page/Admin/OrderDetail";
 import AddProduct from "./Page/Admin/AddProduct";
 import Categories from "./Page/Admin/Categories";
 import Users from "./Page/Admin/Users";
+
+import UserRoute from "./routes/UserRoute";
+
+import AccountLayout from "./Page/account/components/AccountLayout";
+
+import AccountDashboard from "./Page/account/Dashboard";
+import Profile from "./Page/account/Profile";
+import AccountOrders from "./Page/account/Orders";
+import AccountOrderDetail from "./Page/account/OrderDetail";
 
 function Home() {
   return (
@@ -183,10 +193,9 @@ function App() {
       <Route
         path="/checkout"
         element={
-          <>
-            <Header />
+          <CheckoutRoute>
             <Checkout />
-          </>
+          </CheckoutRoute>
         }
       />
 
@@ -257,6 +266,37 @@ function App() {
         <Route
           path="users"
           element={<Users />}
+        />
+      </Route>
+
+      {/* user Routes */}
+
+      <Route
+        path="/account"
+        element={
+          <UserRoute>
+            <AccountLayout />
+          </UserRoute>
+        }
+      >
+        <Route
+          index
+          element={<AccountDashboard />}
+        />
+
+        <Route
+          path="profile"
+          element={<Profile />}
+        />
+
+        <Route
+          path="orders"
+          element={<AccountOrders />}
+        />
+
+        <Route
+          path="orders/:orderId"
+          element={<AccountOrderDetail />}
         />
       </Route>
     </Routes>

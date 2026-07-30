@@ -36,10 +36,10 @@ const Products = () => {
                 prev.filter((item) => item.id !== id)
             );
 
-            alert("Product deleted successfully");
+            successToast("Product deleted successfully");
         } catch (error) {
             console.log(error);
-            alert("Delete Failed");
+            errorToast("Delete Failed");
         }
     };
 

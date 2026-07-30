@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import CartContext from "../../context/CartContext";
+import AuthContext from "../../context/AuthContext";
 
 const Cart = () => {
     const navigate = useNavigate();
@@ -13,6 +14,7 @@ const Cart = () => {
         totalPrice,
     } = useContext(CartContext);
 
+    const { isAuthenticated } = useContext(AuthContext);
 
     const increaseQty = (item) => {
         updateQuantity(item.product_id, item.quantity + 1);
@@ -39,6 +41,19 @@ const Cart = () => {
             </div>
         );
     }
+
+    const handleCheckout = () => {
+        if (!isAuthenticated) {
+            navigate("/login", {
+                state: {
+                    from: "/checkout",
+                },
+            });
+            return;
+        }
+
+        navigate("/checkout");
+    };
 
     return (
         <div className="container mx-auto px-4 py-10">
@@ -107,7 +122,7 @@ const Cart = () => {
                 <h2 className="text-3xl font-bold mt-2">Total : ₹{totalPrice}</h2>
 
                 <button
-                    onClick={() => navigate("/checkout")}
+                    onClick={handleCheckout}
                     className="mt-6 bg-indigo-600 text-white px-8 py-3 rounded-lg"
                 >
                     Proceed to Checkout

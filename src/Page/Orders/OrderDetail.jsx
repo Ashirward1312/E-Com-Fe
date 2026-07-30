@@ -4,6 +4,7 @@ import {
     getOrderDetail,
     cancelOrder,
 } from "../../services/orderApi";
+import { successToast, errorToast } from "../../utils/toast";
 
 const OrderDetail = () => {
     const { orderId } = useParams();
@@ -36,11 +37,11 @@ const OrderDetail = () => {
         try {
             const data = await cancelOrder(order.order_id);
 
-            alert(data.message);
+            successToast(data.message);
 
             fetchOrder();
         } catch (error) {
-            alert(
+            errorToast(
                 error.response?.data?.detail ||
                 "Unable to cancel order."
             );

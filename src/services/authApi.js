@@ -61,3 +61,11 @@ export const refreshToken = async (refresh) => {
         throw error;
     }
 };
+
+export const getDashboard = async () => {
+    const response = await API.get(
+        "accounts/dashboard/"
+    );
+
+    return response.data;
+};

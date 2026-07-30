@@ -74,7 +74,7 @@ export const AuthProvider = ({ children }) => {
 
         // Redirect
         window.location.href = "/login";
-    };
+    };  
 
     return (
         <AuthContext.Provider

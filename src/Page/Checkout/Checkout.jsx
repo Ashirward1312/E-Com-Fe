@@ -1,45 +1,46 @@
-import { useState, useContext, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { checkout } from "../../services/orderApi";
-import AuthContext from "../../context/AuthContext";
 import { getCart, clearCart } from "../../utils/cart";
 import { syncCart } from "../../services/cartApi";
+import { successToast, errorToast } from "../../utils/toast";
 const Checkout = () => {
 
-    const navigate = useNavigate();
-    const { isAuthenticated, loading } = useContext(AuthContext);
 
-    useEffect(() => {
-        if (loading) return;
 
-        if (!isAuthenticated) {
-            navigate("/login", {
-                state: {
-                    from: "/checkout",
-                },
-                replace: true,
-            });
-        }
-    }, [loading, isAuthenticated, navigate]);
+    const [form, setForm] = useState(() => {
+        const saved = localStorage.getItem("checkoutForm");
 
-    const [form, setForm] = useState({
-        full_name: "",
-        phone: "",
-        email: "",
-        address: "",
-        city: "",
-        state: "",
-        pincode: "",
-        payment_method: "cod",
+        return saved
+            ? JSON.parse(saved)
+            : {
+                full_name: "",
+                phone: "",
+                email: "",
+                address: "",
+                city: "",
+                state: "",
+                pincode: "",
+                payment_method: "cod",
+            };
     });
+
+    const navigate = useNavigate();
 
 
 
     const handleChange = (e) => {
-        setForm({
+        const updatedForm = {
             ...form,
             [e.target.name]: e.target.value,
-        });
+        };
+
+        setForm(updatedForm);
+
+        localStorage.setItem(
+            "checkoutForm",
+            JSON.stringify(updatedForm)
+        );
     };
 
     const handleSubmit = async (e) => {
@@ -49,7 +50,7 @@ const Checkout = () => {
             const cart = getCart();
 
             if (cart.length === 0) {
-                alert("Your cart is empty.");
+                successToast("Your cart is empty.");
                 return;
             }
 
@@ -63,6 +64,7 @@ const Checkout = () => {
             const data = await checkout(form);
 
             clearCart();
+            localStorage.removeItem("checkoutForm");
 
             navigate("/order-success", {
                 state: data.order,
@@ -70,13 +72,9 @@ const Checkout = () => {
             });
 
         } catch (error) {
+            console.error("Checkout Error:", error);
 
-            alert(
-                error.response?.data?.detail ||
-                error.response?.data?.message ||
-                "Checkout Failed"
-            );
-
+            errorToast(error.message || "Checkout Failed");
         }
     };
 

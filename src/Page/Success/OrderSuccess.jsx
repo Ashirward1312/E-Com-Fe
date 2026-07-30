@@ -76,7 +76,7 @@ const OrderSuccess = () => {
                 <div className="mt-8 flex gap-4">
 
                     <Link
-                        to="/my-orders"
+                        to="/account/orders"
                         className="flex-1 rounded-lg bg-indigo-600 py-3 text-center text-white"
                     >
                         My Orders

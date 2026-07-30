@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import adminApi from "../../services/adminApi";
+import { successToast, errorToast } from "../../utils/toast";
 
 const AddProduct = () => {
     const navigate = useNavigate();
@@ -69,7 +70,7 @@ const AddProduct = () => {
 
             await adminApi.addProduct(data);
 
-            alert("Product Added Successfully");
+            successToast("Product Added Successfully");
 
             navigate("/admin/products");
 
@@ -77,7 +78,7 @@ const AddProduct = () => {
 
             console.log(error);
 
-            alert("Failed to Add Product");
+            errorToast("Failed to Add Product");
 
         } finally {
 

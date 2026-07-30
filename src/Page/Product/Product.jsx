@@ -2,6 +2,7 @@ import { useEffect, useState ,useContext} from "react";
 import { Link } from "react-router-dom";
 import { getProducts } from "../../services/productApi";
 import CartContext from "../../context/CartContext";
+import { successToast, errorToast } from "../../utils/toast";
 
 
 const Product = () => {
@@ -27,7 +28,7 @@ const Product = () => {
     const handleAddToCart = (product) => {
         addToCart(product);
 
-        alert("Product added to cart.");
+        successToast("Product added to cart.");
     };
     if (loading) {
         return (
