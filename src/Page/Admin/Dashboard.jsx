@@ -24,19 +24,12 @@ const Dashboard = () => {
 
     const fetchDashboard = async () => {
         try {
-
             const data = await adminApi.getDashboard();
-
             setDashboard(data);
-
         } catch (error) {
-
             console.log(error);
-
         } finally {
-
             setLoading(false);
-
         }
     };
 
@@ -49,99 +42,92 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="space-y-8">
+        <div className="space-y-10 p-8">
 
+            {/* Header */}
             <div>
-                <h1 className="text-3xl font-bold">
+                <h1 className="text-3xl font-bold text-[#0B1C33]">
                     Dashboard
                 </h1>
-
-                <p className="text-gray-500">
+                <p className="text-gray-500 mt-1">
                     Welcome to Admin Dashboard
                 </p>
             </div>
 
+            {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
 
-                <div className="bg-white rounded-xl shadow p-6 flex items-center justify-between">
+                {/* Products */}
+                <div className="bg-white rounded-xl border border-gray-200 p-6 flex items-center justify-between">
 
                     <div>
-
-                        <p className="text-gray-500">
+                        <p className="text-gray-500 text-sm">
                             Products
                         </p>
-
-                        <h2 className="text-3xl font-bold mt-2">
+                        <h2 className="text-3xl font-bold mt-2 text-[#0B1C33]">
                             {dashboard.total_products}
                         </h2>
-
                     </div>
 
                     <Package
-                        size={42}
+                        size={30}
                         className="text-indigo-600"
                     />
 
                 </div>
 
-                <div className="bg-white rounded-xl shadow p-6 flex items-center justify-between">
+                {/* Orders */}
+                <div className="bg-white rounded-xl border border-gray-200 p-6 flex items-center justify-between">
 
                     <div>
-
-                        <p className="text-gray-500">
+                        <p className="text-gray-500 text-sm">
                             Orders
                         </p>
-
-                        <h2 className="text-3xl font-bold mt-2">
+                        <h2 className="text-3xl font-bold mt-2 text-[#0B1C33]">
                             {dashboard.total_orders}
                         </h2>
-
                     </div>
 
                     <ShoppingCart
-                        size={42}
+                        size={30}
                         className="text-orange-500"
                     />
 
                 </div>
 
-                <div className="bg-white rounded-xl shadow p-6 flex items-center justify-between">
+                {/* Users */}
+                <div className="bg-white rounded-xl border border-gray-200 p-6 flex items-center justify-between">
 
                     <div>
-
-                        <p className="text-gray-500">
+                        <p className="text-gray-500 text-sm">
                             Users
                         </p>
-
-                        <h2 className="text-3xl font-bold mt-2">
+                        <h2 className="text-3xl font-bold mt-2 text-[#0B1C33]">
                             {dashboard.total_users}
                         </h2>
-
                     </div>
 
                     <Users
-                        size={42}
+                        size={30}
                         className="text-green-600"
                     />
 
                 </div>
 
-                <div className="bg-white rounded-xl shadow p-6 flex items-center justify-between">
+                {/* Revenue */}
+                <div className="bg-white rounded-xl border border-gray-200 p-6 flex items-center justify-between">
 
                     <div>
-
-                        <p className="text-gray-500">
+                        <p className="text-gray-500 text-sm">
                             Revenue
                         </p>
-
-                        <h2 className="text-3xl font-bold mt-2">
+                        <h2 className="text-3xl font-bold mt-2 text-[#0B1C33]">
                             ₹ {dashboard.total_revenue}
                         </h2>
-
                     </div>
 
                     <IndianRupee
-                        size={42}
+                        size={30}
                         className="text-red-500"
                     />
 

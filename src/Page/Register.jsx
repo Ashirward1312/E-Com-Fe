@@ -15,6 +15,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -32,8 +33,7 @@ const Register = () => {
 
     try {
       await register(formData);
-
-      setSuccess("Registration successful.");
+      setSuccess("Registration successful ✅");
 
       setTimeout(() => {
         navigate("/login");
@@ -49,84 +49,160 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md rounded-xl bg-white p-8 shadow-lg">
-        <h2 className="mb-6 text-center text-3xl font-bold">
-          Register
-        </h2>
+    <div className="min-h-screen relative overflow-hidden bg-[#f4f4f4]">
 
-        {error && (
-          <div className="mb-4 rounded bg-red-100 p-3 text-red-600">
-            {error}
+      {/* Grid Background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:40px_40px] opacity-40"></div>
+
+      <div className="relative flex items-center justify-center min-h-screen px-6">
+
+        <div className="w-full max-w-2xl bg-white shadow-2xl rounded-3xl p-12">
+
+          {/* Heading */}
+          <div className="text-center mb-10">
+            <h1 className="text-xl font-semibold text-[#C8A45A] tracking-wide">
+              IASVeda
+            </h1>
+
+            <h2 className="text-4xl font-bold text-[#0B1C33] mt-3">
+              Create Your Account
+            </h2>
+
+            <p className="mt-4 text-gray-600">
+              Join India’s Trusted Civil Services Platform
+            </p>
           </div>
-        )}
 
-        {success && (
-          <div className="mb-4 rounded bg-green-100 p-3 text-green-600">
-            {success}
+          {error && (
+            <div className="mb-4 rounded-lg bg-red-100 p-3 text-sm text-red-600">
+              {error}
+            </div>
+          )}
+
+          {success && (
+            <div className="mb-4 rounded-lg bg-green-100 p-3 text-sm text-green-600">
+              {success}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+
+            <div className="grid md:grid-cols-2 gap-6">
+
+              <input
+                type="text"
+                name="username"
+                placeholder="Username"
+                value={formData.username}
+                onChange={handleChange}
+                className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0B1C33]"
+                required
+              />
+
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0B1C33]"
+                required
+              />
+
+            </div>
+
+            <input
+              type="text"
+              name="phone"
+              placeholder="Phone Number"
+              value={formData.phone}
+              onChange={handleChange}
+              className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0B1C33]"
+            />
+
+            {/* Password with Eye */}
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                className="w-full rounded-xl border border-gray-300 px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-[#0B1C33]"
+                required
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-4 flex items-center text-gray-500 hover:text-[#0B1C33] transition"
+              >
+                {showPassword ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.875 18.825A10.05 10.05 0 0112 19c-5 0-9-4-10-7a17.32 17.32 0 012.9-4.568M6.223 6.223A9.956 9.956 0 0112 5c5 0 9 4 10 7a17.26 17.26 0 01-4.293 5.774M15 12a3 3 0 11-6 0 3 3 0 016 0zm6 6L3 3"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5
+                      c4.477 0 8.268 2.943 9.542 7
+                      -1.274 4.057-5.065 7-9.542 7
+                      -4.477 0-8.268-2.943-9.542-7z"
+                    />
+                  </svg>
+                )}
+              </button>
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full rounded-xl bg-[#0B1C33] py-3 text-white font-semibold hover:bg-[#1a2f4f] transition shadow-lg disabled:opacity-50"
+            >
+              {loading ? "Creating Account..." : "Register"}
+            </button>
+
+          </form>
+
+          <div className="mt-6 text-center">
+            <p className="text-gray-600 text-sm">
+              Already have an account?{" "}
+              <Link
+                to="/login"
+                className="text-[#C8A45A] font-semibold hover:underline"
+              >
+                Login
+              </Link>
+            </p>
           </div>
-        )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        </div>
 
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={formData.username}
-            onChange={handleChange}
-            className="w-full rounded-lg border px-4 py-2 focus:border-indigo-500 outline-none"
-            required
-          />
-
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full rounded-lg border px-4 py-2 focus:border-indigo-500 outline-none"
-            required
-          />
-
-          <input
-            type="text"
-            name="phone"
-            placeholder="Phone Number"
-            value={formData.phone}
-            onChange={handleChange}
-            className="w-full rounded-lg border px-4 py-2 focus:border-indigo-500 outline-none"
-          />
-
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            className="w-full rounded-lg border px-4 py-2 focus:border-indigo-500 outline-none"
-            required
-          />
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full rounded-lg bg-indigo-600 py-2 font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
-          >
-            {loading ? "Creating Account..." : "Register"}
-          </button>
-
-        </form>
-
-        <p className="mt-5 text-center text-sm">
-          Already have an account?{" "}
-          <Link
-            to="/login"
-            className="font-semibold text-indigo-600 hover:underline"
-          >
-            Login
-          </Link>
-        </p>
       </div>
     </div>
   );

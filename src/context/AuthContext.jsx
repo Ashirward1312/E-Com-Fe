@@ -73,7 +73,7 @@ export const AuthProvider = ({ children }) => {
         setIsAuthenticated(false);
 
         // Redirect
-        window.location.href = "/login";
+        window.location.href = "/products";
     };  
 
     return (

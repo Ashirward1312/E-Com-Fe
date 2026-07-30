@@ -34,7 +34,6 @@ const AddProduct = () => {
     };
 
     const handleChange = (e) => {
-
         const { name, value, type, checked, files } = e.target;
 
         setFormData({
@@ -50,11 +49,9 @@ const AddProduct = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         setLoading(true);
 
         try {
-
             const data = new FormData();
 
             data.append("category_id", formData.category);
@@ -71,19 +68,13 @@ const AddProduct = () => {
             await adminApi.addProduct(data);
 
             successToast("Product Added Successfully");
-
             navigate("/admin/products");
 
         } catch (error) {
-
             console.log(error);
-
             errorToast("Failed to Add Product");
-
         } finally {
-
             setLoading(false);
-
         }
     };
 
@@ -100,145 +91,128 @@ const AddProduct = () => {
             >
 
                 <div>
-
                     <label className="block mb-2 font-medium">
                         Product Name
                     </label>
-
                     <input
                         type="text"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        className="w-full border rounded-lg p-3"
+                        className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         required
                     />
-
                 </div>
 
                 <div>
-
                     <label className="block mb-2 font-medium">
                         Category
                     </label>
-
                     <select
                         name="category"
                         value={formData.category}
                         onChange={handleChange}
-                        className="w-full border rounded-lg p-3"
+                        className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         required
                     >
-
                         <option value="">
                             Select Category
                         </option>
 
                         {categories.map((category) => (
-
                             <option
                                 key={category.id}
                                 value={category.id}
                             >
                                 {category.name}
                             </option>
-
                         ))}
-
                     </select>
-
                 </div>
 
                 <div>
-
                     <label className="block mb-2 font-medium">
                         Description
                     </label>
-
                     <textarea
                         rows="5"
                         name="description"
                         value={formData.description}
                         onChange={handleChange}
-                        className="w-full border rounded-lg p-3"
+                        className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         required
                     />
-
                 </div>
 
                 <div className="grid grid-cols-2 gap-6">
-
                     <div>
-
                         <label className="block mb-2 font-medium">
                             Price
                         </label>
-
                         <input
                             type="number"
                             name="price"
                             value={formData.price}
                             onChange={handleChange}
-                            className="w-full border rounded-lg p-3"
+                            className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             required
                         />
-
                     </div>
 
                     <div>
-
                         <label className="block mb-2 font-medium">
                             Stock
                         </label>
-
                         <input
                             type="number"
                             name="stock"
                             value={formData.stock}
                             onChange={handleChange}
-                            className="w-full border rounded-lg p-3"
+                            className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             required
                         />
-
                     </div>
-
                 </div>
 
+                {/* ✅ Highlighted Upload Section */}
                 <div>
-
                     <label className="block mb-2 font-medium">
                         Product Image
                     </label>
 
-                    <input
-                        type="file"
-                        name="image"
-                        accept="image/*"
-                        onChange={handleChange}
-                        className="w-full"
-                    />
+                    <div className="border-2 border-dashed border-indigo-400 rounded-lg p-6 text-center bg-indigo-50 hover:bg-indigo-100 transition">
 
+                        <input
+                            type="file"
+                            name="image"
+                            accept="image/*"
+                            onChange={handleChange}
+                            className="w-full cursor-pointer"
+                        />
+
+                        <p className="mt-2 text-sm text-indigo-600">
+                            Click to upload product image
+                        </p>
+
+                    </div>
                 </div>
 
                 <div className="flex items-center gap-3">
-
                     <input
                         type="checkbox"
                         name="is_active"
                         checked={formData.is_active}
                         onChange={handleChange}
                     />
-
                     <label>
                         Active Product
                     </label>
-
                 </div>
 
                 <button
                     type="submit"
                     disabled={loading}
-                    className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700"
+                    className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition"
                 >
                     {loading ? "Saving..." : "Save Product"}
                 </button>

@@ -37,111 +37,80 @@ const Dashboard = () => {
    };
 
    if (loading) {
-      return <h2>Loading...</h2>;
+      return <div className="p-8">Loading...</div>;
    }
 
    return (
-      <div>
+      <div className="p-8">
 
-         <div className="mb-8">
-
-            <h1 className="text-3xl font-bold">
+         {/* Header */}
+         <div className="mb-10">
+            <h1 className="text-3xl font-bold text-[#0B1C33]">
                Welcome Back 👋
             </h1>
-
             <p className="mt-2 text-gray-500">
                Manage your account and track your orders.
             </p>
-
          </div>
 
+         {/* Stats Grid */}
          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
 
             <StatCard
                title="Total Orders"
                value={stats.total_orders}
-               color="bg-blue-500"
-               icon={<Package size={26} />}
+               icon={<Package size={22} />}
             />
 
             <StatCard
                title="Pending"
                value={stats.pending_orders}
-               color="bg-yellow-500"
-               icon={<Clock size={26} />}
+               icon={<Clock size={22} />}
             />
 
             <StatCard
                title="Delivered"
                value={stats.completed_orders}
-               color="bg-green-500"
-               icon={<CheckCircle size={26} />}
+               icon={<CheckCircle size={22} />}
             />
 
             <StatCard
                title="Cancelled"
                value={stats.cancelled_orders}
-               color="bg-red-500"
-               icon={<XCircle size={26} />}
+               icon={<XCircle size={22} />}
             />
 
          </div>
 
-         <div className="mt-10 rounded-xl bg-white p-6 shadow">
+         {/* Quick Actions */}
+         <div className="mt-12 border border-gray-200 rounded-lg bg-white p-8">
 
-            <h2 className="mb-6 text-2xl font-semibold">
+            <h2 className="text-xl font-semibold text-[#0B1C33] mb-8">
                Quick Actions
             </h2>
 
             <div className="grid gap-6 md:grid-cols-3">
 
-               <Link
+               <QuickCard
                   to="/account/profile"
-                  className="rounded-lg border p-6 transition hover:border-orange-500 hover:shadow"
-               >
-                  <User className="mb-3 text-orange-500" size={32} />
+                  icon={<User size={22} />}
+                  title="My Profile"
+                  desc="View and update your profile."
+               />
 
-                  <h3 className="font-semibold">
-                     My Profile
-                  </h3>
-
-                  <p className="mt-2 text-sm text-gray-500">
-                     View and update your profile.
-                  </p>
-
-               </Link>
-
-               <Link
+               <QuickCard
                   to="/account/orders"
-                  className="rounded-lg border p-6 transition hover:border-orange-500 hover:shadow"
-               >
-                  <Package className="mb-3 text-orange-500" size={32} />
+                  icon={<Package size={22} />}
+                  title="My Orders"
+                  desc="Track your orders."
+               />
 
-                  <h3 className="font-semibold">
-                     My Orders
-                  </h3>
-
-                  <p className="mt-2 text-sm text-gray-500">
-                     Track your orders.
-                  </p>
-
-               </Link>
-
-               <Link
+               <QuickCard
                   to="/products"
-                  className="rounded-lg border p-6 transition hover:border-orange-500 hover:shadow"
-               >
-                  <ShoppingBag className="mb-3 text-orange-500" size={32} />
-
-                  <h3 className="font-semibold">
-                     Continue Shopping
-                  </h3>
-
-                  <p className="mt-2 text-sm text-gray-500">
-                     Browse all available books.
-                  </p>
-
-               </Link>
+                  icon={<ShoppingBag size={22} />}
+                  title="Continue Shopping"
+                  desc="Browse all available books."
+               />
 
             </div>
 
@@ -151,38 +120,45 @@ const Dashboard = () => {
    );
 };
 
-const StatCard = ({
-   title,
-   value,
-   icon,
-   color,
-}) => {
+const StatCard = ({ title, value, icon }) => {
    return (
-      <div className="rounded-xl bg-white p-6 shadow">
+      <div className="border border-gray-200 bg-white rounded-lg p-6 flex items-center justify-between">
 
-         <div className="flex items-center justify-between">
+         <div>
+            <p className="text-gray-500 text-sm">
+               {title}
+            </p>
+            <h2 className="mt-2 text-2xl font-bold text-[#0B1C33]">
+               {value}
+            </h2>
+         </div>
 
-            <div>
-
-               <p className="text-gray-500">
-                  {title}
-               </p>
-
-               <h2 className="mt-2 text-3xl font-bold">
-                  {value}
-               </h2>
-
-            </div>
-
-            <div
-               className={`rounded-full p-4 text-white ${color}`}
-            >
-               {icon}
-            </div>
-
+         <div className="p-3 rounded-md bg-[#C8A45A] text-[#0B1C33]">
+            {icon}
          </div>
 
       </div>
+   );
+};
+
+const QuickCard = ({ to, icon, title, desc }) => {
+   return (
+      <Link
+         to={to}
+         className="border border-gray-200 rounded-lg p-6 hover:border-[#C8A45A] hover:shadow-sm transition"
+      >
+         <div className="mb-4 text-[#C8A45A]">
+            {icon}
+         </div>
+
+         <h3 className="font-semibold text-[#0B1C33]">
+            {title}
+         </h3>
+
+         <p className="mt-2 text-sm text-gray-500">
+            {desc}
+         </p>
+      </Link>
    );
 };
 

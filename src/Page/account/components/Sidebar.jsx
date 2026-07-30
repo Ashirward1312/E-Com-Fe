@@ -30,21 +30,21 @@ const Sidebar = () => {
    ];
 
    return (
-      <aside className="w-64 min-h-screen bg-[#0B1F3A] text-white flex flex-col">
+      <aside className="w-64 min-h-screen bg-[#0B1C33] text-white flex flex-col">
 
-         <div className="p-6 border-b border-gray-700">
-
-            <h2 className="text-2xl font-bold text-orange-400">
+         {/* Header */}
+         <div className="p-6 border-b border-[#1f2f4a]">
+            <h2 className="text-2xl font-bold text-[#C8A45A] tracking-wide">
                IASVeda
             </h2>
 
-            <p className="text-sm text-gray-300">
+            <p className="text-sm text-gray-400 mt-1">
                My Account
             </p>
-
          </div>
 
-         <nav className="mt-6 flex-1">
+         {/* Navigation */}
+         <nav className="mt-6 flex-1 space-y-1">
 
             {menus.map((menu) => (
 
@@ -53,30 +53,29 @@ const Sidebar = () => {
                   to={menu.path}
                   end={menu.path === "/account"}
                   className={({ isActive }) =>
-                     `flex items-center gap-3 px-6 py-4 transition-all ${isActive
-                        ? "bg-orange-500 text-white"
-                        : "hover:bg-[#162C4F]"
+                     `flex items-center gap-3 px-6 py-4 transition-all duration-300 ${
+                        isActive
+                           ? "bg-[#C8A45A] text-[#0B1C33] font-semibold"
+                           : "hover:bg-[#132743] text-gray-300 hover:text-[#C8A45A]"
                      }`
                   }
                >
                   {menu.icon}
-
                   <span>{menu.name}</span>
-
                </NavLink>
 
             ))}
 
          </nav>
 
-         <div className="border-t border-gray-700">
+         {/* Logout */}
+         <div className="border-t border-[#1f2f4a]">
 
             <button
                onClick={logout}
-               className="flex w-full items-center gap-3 px-6 py-4 transition-all hover:bg-red-600"
+               className="flex w-full items-center gap-3 px-6 py-4 text-gray-300 hover:bg-red-600 hover:text-white transition-all duration-300"
             >
                <LogOut size={20} />
-
                <span>Logout</span>
             </button>
 

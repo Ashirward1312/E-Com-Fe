@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AuthContext from "../../../context/AuthContext";
 import {
     LayoutDashboard,
@@ -7,12 +7,14 @@ import {
     ShoppingCart,
     Tags,
     Users,
-    TicketPercent,
     LogOut,
+    Menu,
+    X,
 } from "lucide-react";
 
 const Sidebar = () => {
     const { logout } = useContext(AuthContext);
+    const [open, setOpen] = useState(true);
 
     const menus = [
         {
@@ -36,11 +38,6 @@ const Sidebar = () => {
             icon: <Tags size={20} />,
         },
         {
-            name: "Coupons",
-            path: "/admin/coupons",
-            icon: <TicketPercent size={20} />,
-        },
-        {
             name: "Users",
             path: "/admin/users",
             icon: <Users size={20} />,
@@ -48,21 +45,37 @@ const Sidebar = () => {
     ];
 
     return (
-        <aside className="w-64 min-h-screen bg-[#0B1F3A] text-white flex flex-col">
+        <aside
+            className={`min-h-screen bg-[#0B1B31] text-white flex flex-col shadow-2xl transition-all duration-300 ${
+                open ? "w-64" : "w-20"
+            }`}
+        >
 
-            <div className="p-6 border-b border-gray-700">
+            {/* Header */}
+            <div className="p-6 border-b border-[#1f2f4a] flex items-center justify-between">
 
-                <h2 className="text-2xl font-bold text-orange-400">
-                    IASVeda
-                </h2>
+                {open && (
+                    <div>
+                        <h2 className="text-2xl font-bold text-[#C8A45A] tracking-wide">
+                            IASVeda
+                        </h2>
+                        <p className="text-sm text-gray-400 mt-1">
+                            Admin Panel
+                        </p>
+                    </div>
+                )}
 
-                <p className="text-sm text-gray-300">
-                    Admin Panel
-                </p>
+                <button
+                    onClick={() => setOpen(!open)}
+                    className="text-[#C8A45A] hover:text-white transition"
+                >
+                    {open ? <X size={22} /> : <Menu size={22} />}
+                </button>
 
             </div>
 
-            <nav className="mt-6 flex-1">
+            {/* Navigation */}
+            <nav className="mt-6 flex-1 space-y-1">
 
                 {menus.map((menu) => (
 
@@ -71,34 +84,30 @@ const Sidebar = () => {
                         to={menu.path}
                         end={menu.path === "/admin"}
                         className={({ isActive }) =>
-                            `flex items-center gap-3 px-6 py-4 transition-all ${isActive
-                                ? "bg-orange-500 text-white"
-                                : "hover:bg-[#162C4F]"
+                            `flex items-center gap-3 px-6 py-4 transition-all duration-300 ${
+                                isActive
+                                    ? "bg-[#C8A45A] text-[#0B1B31] font-semibold"
+                                    : "hover:bg-[#132743] text-gray-300 hover:text-[#C8A45A]"
                             }`
                         }
                     >
                         {menu.icon}
-
-                        <span>{menu.name}</span>
-
+                        {open && <span>{menu.name}</span>}
                     </NavLink>
 
                 ))}
 
             </nav>
 
-            <div className="border-t border-gray-700">
-
+            {/* Logout */}
+            <div className="border-t border-[#1f2f4a]">
                 <button
                     onClick={logout}
-                    className="flex w-full items-center gap-3 px-6 py-4 transition-all hover:bg-red-600"
+                    className="flex w-full items-center gap-3 px-6 py-4 transition-all duration-300 text-gray-300 hover:bg-red-600 hover:text-white"
                 >
                     <LogOut size={20} />
-
-                    <span>Logout</span>
-
+                    {open && <span>Logout</span>}
                 </button>
-
             </div>
 
         </aside>
