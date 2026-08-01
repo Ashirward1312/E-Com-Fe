@@ -18,6 +18,10 @@ const Cart = () => {
     const { isAuthenticated } = useContext(AuthContext);
 
     const increaseQty = (item) => {
+        if (item.quantity >= item.stock) {
+            errorToast("Stock limit reached");
+            return;
+        }
         updateQuantity(item.product_id, item.quantity + 1);
     };
 

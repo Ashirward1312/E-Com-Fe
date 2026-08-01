@@ -70,7 +70,23 @@ const Checkout = () => {
 
         } catch (error) {
             console.error("Checkout Error:", error);
-            errorToast(error.message || "Checkout Failed");
+
+            if (error.response && error.response.data) {
+                const data = error.response.data;
+
+                if (data.stock_error) {
+                    errorToast(data.stock_error);
+                } else if (data.product_error) {
+                    errorToast(data.product_error);
+                } else if (typeof data === "string") {
+                    errorToast(data);
+                } else {
+                    errorToast(Object.values(data)[0]);
+                }
+
+            } else {
+                errorToast("Something went wrong. Please try again.");
+            }
         }
     };
 
@@ -83,7 +99,7 @@ const Checkout = () => {
                 <div className="text-center mb-12">
 
                     <h1 className="text-3xl font-bold text-[#0B1C33]">
-                        
+
                         CHECKOUT
                     </h1>
 

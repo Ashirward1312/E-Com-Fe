@@ -100,6 +100,8 @@ import AdminLayout from "./Page/layouts/AdminLayout";
 import Dashboard from "./Page/Admin/Dashboard";
 
 import Products from "./Page/Admin/Products";
+import ProductDetail from "./Page/Product/Productdetail";
+
 import Orders from "./Page/Admin/Orders";
 // import Categories from "./Page/Admin/Categories";
 // import Coupons from "./Page/Admin/Coupons";
@@ -176,6 +178,15 @@ function App() {
           <>
             <Header />
             <Product />
+          </>
+        }
+      />
+      <Route
+        path="/products/:id"
+        element={
+          <>
+            <Header />
+            <ProductDetail />
           </>
         }
       />

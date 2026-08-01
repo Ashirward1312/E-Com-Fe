@@ -38,11 +38,17 @@ const Product = () => {
     }
 
     return (
-        <div className="container mx-auto px-6 py-12 bg-gray-50 min-h-screen">
+        <div className="container mx-auto px-6 pt-32 pb-12 bg-gray-50 min-h-screen">
 
-            <h1 className="mb-10 text-3xl font-bold text-[#0B1C33]">
-                Our Collection
-            </h1>
+            <div className="mb-12 text-center">
+                <h1 className="text-4xl font-extrabold text-[#0B1C33] tracking-tight">
+                    IASVeda Civil Services Books
+                </h1>
+                <div className="w-24 h-1 bg-[#C8A45A] mx-auto mt-4 rounded-full"></div>
+                <p className="mt-4 text-gray-500 text-lg max-w-2xl mx-auto">
+                    Explore our comprehensive collection of study materials and premium guides curated specifically for your UPSC preparation.
+                </p>
+            </div>
 
             <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
