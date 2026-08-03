@@ -8,7 +8,6 @@ const AddProduct = () => {
     const navigate = useNavigate();
 
     const [categories, setCategories] = useState([]);
-
     const [loading, setLoading] = useState(false);
 
     const [formData, setFormData] = useState({
@@ -17,6 +16,7 @@ const AddProduct = () => {
         author: "",
         description: "",
         price: "",
+        sale_price: "", // ✅ ADDED
         pages: "",
         language: "English",
         image: null,
@@ -39,7 +39,6 @@ const AddProduct = () => {
     };
 
     const handleChange = (e) => {
-
         const { name, value, type, checked, files } = e.target;
 
         setFormData({
@@ -51,16 +50,23 @@ const AddProduct = () => {
                         ? files[0]
                         : value,
         });
-
     };
 
     const handleSubmit = async (e) => {
-
         e.preventDefault();
-
         setLoading(true);
 
         try {
+
+            // ✅ Sale validation
+            if (
+                formData.sale_price &&
+                Number(formData.sale_price) >= Number(formData.price)
+            ) {
+                errorToast("Sale price must be less than actual price");
+                setLoading(false);
+                return;
+            }
 
             const data = new FormData();
 
@@ -69,229 +75,250 @@ const AddProduct = () => {
             data.append("author", formData.author);
             data.append("description", formData.description);
             data.append("price", formData.price);
+
+            // ✅ Append sale price only if filled
+            if (formData.sale_price) {
+                data.append("sale_price", formData.sale_price);
+            }
+
             data.append("pages", formData.pages);
             data.append("language", formData.language);
             data.append("is_active", formData.is_active);
 
-            if (formData.image) {
-                data.append("upload_image", formData.image);
-            }
-
-            if (formData.ebook) {
-                data.append("upload_ebook", formData.ebook);
-            }
-
-            if (formData.preview) {
-                data.append("upload_preview", formData.preview);
-            }
+            if (formData.image) data.append("upload_image", formData.image);
+            if (formData.ebook) data.append("upload_ebook", formData.ebook);
+            if (formData.preview) data.append("upload_preview", formData.preview);
 
             await adminApi.addProduct(data);
 
             successToast("Product Added Successfully");
-
             navigate("/admin/products");
 
         } catch (error) {
-
             console.log(error);
-
             errorToast("Failed to Add Product");
-
         } finally {
-
             setLoading(false);
-
         }
     };
 
     return (
-        <div>
+        <div className="min-h-screen bg-gray-100 p-10">
 
-            <h2>Add Product</h2>
+            <div className="max-w-5xl mx-auto bg-white border border-gray-200 shadow-md rounded-lg">
 
-            <form onSubmit={handleSubmit}>
+                {/* Header */}
+                <div className="border-b px-8 py-6 bg-gray-50 rounded-t-lg">
+                    <h2 className="text-2xl font-semibold text-gray-800">
+                        Add Product
+                    </h2>
+                </div>
 
-                <div>
-                    <label>Category</label>
+                {/* Form */}
+                <form onSubmit={handleSubmit} className="p-8">
 
-                    <select
-                        name="category"
-                        value={formData.category}
-                        onChange={handleChange}
-                        required
-                    >
-                        <option value="">
-                            Select Category
-                        </option>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
 
-                        {categories.map((category) => (
-                            <option
-                                key={category.id}
-                                value={category.id}
+                        {/* Category */}
+                        <div>
+                            <label className="block text-sm font-medium mb-2 text-gray-700">
+                                Category
+                            </label>
+                            <select
+                                name="category"
+                                value={formData.category}
+                                onChange={handleChange}
+                                required
+                                className="w-full border border-gray-300 rounded-md px-3 py-2"
                             >
-                                {category.name}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+                                <option value="">Select Category</option>
+                                {categories.map((category) => (
+                                    <option key={category.id} value={category.id}>
+                                        {category.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
 
-                <br />
+                        {/* Book Name */}
+                        <div>
+                            <label className="block text-sm font-medium mb-2 text-gray-700">
+                                Book Name
+                            </label>
+                            <input
+                                type="text"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                required
+                                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                            />
+                        </div>
 
-                <div>
-                    <label>Book Name</label>
+                        {/* Author */}
+                        <div>
+                            <label className="block text-sm font-medium mb-2 text-gray-700">
+                                Author
+                            </label>
+                            <input
+                                type="text"
+                                name="author"
+                                value={formData.author}
+                                onChange={handleChange}
+                                required
+                                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                            />
+                        </div>
 
-                    <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+                        {/* Actual Price */}
+                        <div>
+                            <label className="block text-sm font-medium mb-2 text-gray-700">
+                                Actual Price
+                            </label>
+                            <input
+                                type="number"
+                                name="price"
+                                value={formData.price}
+                                onChange={handleChange}
+                                required
+                                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                            />
+                        </div>
 
-                <br />
+                        {/* ✅ SALE PRICE */}
+                        <div>
+                            <label className="block text-sm font-medium mb-2 text-gray-700">
+                                Sale Price (Optional)
+                            </label>
+                            <input
+                                type="number"
+                                name="sale_price"
+                                value={formData.sale_price}
+                                onChange={handleChange}
+                                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                            />
+                            <p className="text-xs text-gray-400 mt-1">
+                                Leave empty if no sale
+                            </p>
+                        </div>
 
-                <div>
-                    <label>Author</label>
+                        {/* Pages */}
+                        <div>
+                            <label className="block text-sm font-medium mb-2 text-gray-700">
+                                Pages
+                            </label>
+                            <input
+                                type="number"
+                                name="pages"
+                                value={formData.pages}
+                                onChange={handleChange}
+                                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                            />
+                        </div>
 
-                    <input
-                        type="text"
-                        name="author"
-                        value={formData.author}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+                        {/* Language */}
+                        <div>
+                            <label className="block text-sm font-medium mb-2 text-gray-700">
+                                Language
+                            </label>
+                            <select
+                                name="language"
+                                value={formData.language}
+                                onChange={handleChange}
+                                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                            >
+                                <option value="English">English</option>
+                                <option value="Hindi">Hindi</option>
+                            </select>
+                        </div>
 
-                <br />
+                        {/* Description */}
+                        <div className="md:col-span-2">
+                            <label className="block text-sm font-medium mb-2 text-gray-700">
+                                Description
+                            </label>
+                            <textarea
+                                name="description"
+                                value={formData.description}
+                                onChange={handleChange}
+                                rows="4"
+                                required
+                                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                            />
+                        </div>
 
-                <div>
-                    <label>Description</label>
+                        {/* Cover Image */}
+                        <div>
+                            <label className="block text-sm font-medium mb-2 text-gray-700">
+                                Cover Image
+                            </label>
+                            <input
+                                type="file"
+                                name="image"
+                                accept="image/*"
+                                onChange={handleChange}
+                                className="w-full text-sm"
+                            />
+                        </div>
 
-                    <textarea
-                        name="description"
-                        value={formData.description}
-                        onChange={handleChange}
-                        rows="5"
-                        required
-                    />
-                </div>
+                        {/* Ebook */}
+                        <div>
+                            <label className="block text-sm font-medium mb-2 text-gray-700">
+                                E-book PDF
+                            </label>
+                            <input
+                                type="file"
+                                name="ebook"
+                                accept=".pdf"
+                                onChange={handleChange}
+                                className="w-full text-sm"
+                            />
+                        </div>
 
-                <br />
+                        {/* Preview */}
+                        <div>
+                            <label className="block text-sm font-medium mb-2 text-gray-700">
+                                Preview PDF
+                            </label>
+                            <input
+                                type="file"
+                                name="preview"
+                                accept=".pdf"
+                                onChange={handleChange}
+                                className="w-full text-sm"
+                            />
+                        </div>
 
-                <div>
-                    <label>Price</label>
+                        {/* Active */}
+                        <div className="flex items-center mt-6">
+                            <input
+                                type="checkbox"
+                                name="is_active"
+                                checked={formData.is_active}
+                                onChange={handleChange}
+                                className="mr-2"
+                            />
+                            <label className="text-sm text-gray-700">
+                                Active Product
+                            </label>
+                        </div>
 
-                    <input
-                        type="number"
-                        name="price"
-                        value={formData.price}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+                    </div>
 
-                <br />
+                    {/* Submit */}
+                    <div className="mt-10 border-t pt-6 text-right">
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="bg-gray-800 text-white px-8 py-2 rounded-md hover:bg-black transition disabled:opacity-50"
+                        >
+                            {loading ? "Saving..." : "Save Product"}
+                        </button>
+                    </div>
 
-                <div>
-                    <label>Pages</label>
+                </form>
 
-                    <input
-                        type="number"
-                        name="pages"
-                        value={formData.pages}
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <br />
-
-                <div>
-                    <label>Language</label>
-
-                    <select
-                        name="language"
-                        value={formData.language}
-                        onChange={handleChange}
-                    >
-                        <option value="English">
-                            English
-                        </option>
-
-                        <option value="Hindi">
-                            Hindi
-                        </option>
-                    </select>
-                </div>
-
-                <br />
-
-                <div>
-                    <label>Cover Image</label>
-
-                    <input
-                        type="file"
-                        name="image"
-                        accept="image/*"
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <br />
-
-                <div>
-                    <label>E-book PDF</label>
-
-                    <input
-                        type="file"
-                        name="ebook"
-                        accept=".pdf"
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <br />
-
-                <div>
-                    <label>Preview PDF</label>
-
-                    <input
-                        type="file"
-                        name="preview"
-                        accept=".pdf"
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <br />
-
-                <div>
-
-                    <label>
-
-                        <input
-                            type="checkbox"
-                            name="is_active"
-                            checked={formData.is_active}
-                            onChange={handleChange}
-                        />
-
-                        Active
-
-                    </label>
-
-                </div>
-
-                <br />
-
-                <button
-                    type="submit"
-                    disabled={loading}
-                >
-                    {loading ? "Saving..." : "Save Product"}
-                </button>
-
-            </form>
+            </div>
 
         </div>
     );

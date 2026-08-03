@@ -247,35 +247,18 @@ const ProductDetail = () => {
     };
 
     const handleAddToCart = () => {
-        addToCart({
-            ...product,
-            quantity: 1,
-        });
-
+        addToCart({ ...product, quantity: 1 });
         successToast("E-book added to cart");
     };
 
     const handleBuyNow = () => {
-        addToCart({
-            ...product,
-            quantity: 1,
-        });
-
+        addToCart({ ...product, quantity: 1 });
         navigate("/checkout");
-    };
-
-    const handleReadSample = () => {
-        if (!product.preview) {
-            errorToast("Preview not available");
-            return;
-        }
-
-        window.open(product.preview, "_blank");
     };
 
     if (loading) {
         return (
-            <div className="flex justify-center items-center min-h-screen">
+            <div className="flex justify-center items-center min-h-screen pt-32">
                 Loading...
             </div>
         );
@@ -283,94 +266,151 @@ const ProductDetail = () => {
 
     if (!product) {
         return (
-            <div className="flex justify-center items-center min-h-screen">
+            <div className="flex justify-center items-center min-h-screen pt-32">
                 Product not found
             </div>
         );
     }
 
+    const hasDiscount =
+        product.sale_price &&
+        product.sale_price < product.price;
+
     return (
-        <div className="max-w-6xl mx-auto p-10">
+        <div className="bg-gray-50 min-h-screen pt-36 pb-20">
 
-            <div className="mb-6 text-sm text-gray-500">
+            <div className="max-w-6xl mx-auto px-8">
 
-                <Link to="/">Home</Link> /
-
-                <Link to="/products"> Products</Link> /
-
-                <span> {product.name}</span>
-
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-10">
-
-                <div>
-
-                    <img
-                        src={product.image || "/book-placeholder.png"}
-                        alt={product.name}
-                        className="w-full rounded-lg border"
-                    />
-
+                {/* Back Button */}
+                <div className="mb-6">
+                    <button
+                        onClick={() => navigate("/products")}
+                        className="flex items-center gap-2 text-gray-600 hover:text-[#C8A45A] font-medium transition"
+                    >
+                        <span>&larr;</span> Back to Products
+                    </button>
                 </div>
 
-                <div>
-
-                    <p className="text-sm text-indigo-600">
-                        {product.category?.name}
-                    </p>
-
-                    <h1 className="text-3xl font-bold mt-2">
+                {/* Breadcrumb */}
+                <div className="mb-10 text-sm text-gray-500">
+                    <Link to="/" className="hover:text-[#C8A45A]">
+                        Home
+                    </Link>{" "}
+                    /{" "}
+                    <Link to="/products" className="hover:text-[#C8A45A]">
+                        Products
+                    </Link>{" "}
+                    /{" "}
+                    <span className="text-[#0B1C33] font-medium">
                         {product.name}
-                    </h1>
+                    </span>
+                </div>
 
-                    <p className="mt-4">
-                        <strong>Author :</strong>{" "}
-                        {product.author || "IASVeda"}
-                    </p>
+                <div className="grid md:grid-cols-2 gap-16 bg-white shadow-2xl rounded-3xl p-12">
 
-                    <p className="mt-2">
-                        <strong>Pages :</strong>{" "}
-                        {product.pages || "--"}
-                    </p>
+                    {/* LEFT IMAGE */}
+                    <div className="flex justify-center">
 
-                    <p className="mt-2">
-                        <strong>Language :</strong>{" "}
-                        {product.language || "English"}
-                    </p>
+                        <div className="bg-gray-100 rounded-2xl p-8 shadow-inner w-full max-w-sm">
 
-                    <p className="mt-4 text-3xl font-bold text-green-600">
-                        ₹ {product.price}
-                    </p>
+                            <img
+                                src={product.image || "/book-placeholder.png"}
+                                alt={product.name}
+                                className="w-full max-h-[360px] object-contain mx-auto"
+                            />
 
-                    <p className="mt-6 text-gray-600">
-                        {product.description}
-                    </p>
+                        </div>
 
-                    <div className="mt-8 flex flex-col gap-3">
+                    </div>
 
-                        {/* {product.preview && (
+                    {/* RIGHT DETAILS */}
+                    <div>
+
+                        <p className="text-xs uppercase tracking-widest text-[#C8A45A] font-semibold">
+                            Digital E‑Book
+                        </p>
+
+                        <h1 className="text-4xl font-bold text-[#0B1C33] mt-3 leading-tight">
+                            {product.name}
+                        </h1>
+
+                        <div className="mt-6">
+
+                            {hasDiscount ? (
+                                <div className="flex items-center gap-4">
+                                    <span className="text-3xl font-bold text-[#C8A45A]">
+                                        ₹ {product.sale_price}
+                                    </span>
+                                    <span className="text-xl text-gray-400 line-through">
+                                        ₹ {product.price}
+                                    </span>
+                                    <span className="bg-red-500 text-white text-sm px-3 py-1 rounded-full font-semibold">
+                                        {product.discount_percentage}% OFF
+                                    </span>
+                                </div>
+                            ) : (
+                                <span className="text-3xl font-bold text-[#C8A45A]">
+                                    ₹ {product.price}
+                                </span>
+                            )}
+
+                        </div>
+
+                        {/* Info Section */}
+                        <div className="mt-8 border-t border-b border-gray-200 py-6 space-y-4">
+
+                            <div className="flex justify-between">
+                                <span className="text-gray-500 font-medium">
+                                    Author
+                                </span>
+                                <span className="text-[#0B1C33]">
+                                    {product.author || "IASVeda"}
+                                </span>
+                            </div>
+
+                            <div className="flex justify-between">
+                                <span className="text-gray-500 font-medium">
+                                    Pages
+                                </span>
+                                <span className="text-[#0B1C33]">
+                                    {product.pages || "--"}
+                                </span>
+                            </div>
+
+                            <div className="flex justify-between">
+                                <span className="text-gray-500 font-medium">
+                                    Language
+                                </span>
+                                <span className="text-[#0B1C33]">
+                                    {product.language || "English"}
+                                </span>
+                            </div>
+
+                        </div>
+
+                        {/* Description */}
+                        <div className="mt-6 text-gray-600 leading-relaxed">
+                            {product.description}
+                        </div>
+
+                        {/* Buttons */}
+                        <div className="mt-10 space-y-4">
+
                             <button
-                                onClick={handleReadSample}
-                                className="bg-gray-200 px-5 py-3 rounded"
+                                onClick={handleAddToCart}
+                                className="w-full bg-[#0B1C33] text-white py-3 rounded-xl font-medium hover:bg-[#162e4f] transition shadow-md"
                             >
-                                Read Sample
+                                Add to Cart
                             </button>
-                        )} */}
 
-                        <button
-                            onClick={handleAddToCart}
-                            className="bg-indigo-600 text-white px-5 py-3 rounded"
-                        >
-                            Add to Cart
-                        </button>
+                            <button
+                                onClick={handleBuyNow}
+                                className="w-full bg-[#C8A45A] text-[#0B1C33] py-3 rounded-xl font-semibold hover:bg-yellow-400 transition shadow-md"
+                            >
+                                Buy Now
+                            </button>
 
-                        <button
-                            onClick={handleBuyNow}
-                            className="bg-green-600 text-white px-5 py-3 rounded"
-                        >
-                            Buy Now
-                        </button>
+                        </div>
 
                     </div>
 
