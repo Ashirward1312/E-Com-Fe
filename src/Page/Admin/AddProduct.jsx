@@ -4,21 +4,26 @@ import adminApi from "../../services/adminApi";
 import { successToast, errorToast } from "../../utils/toast";
 
 const AddProduct = () => {
+
     const navigate = useNavigate();
 
     const [categories, setCategories] = useState([]);
 
+    const [loading, setLoading] = useState(false);
+
     const [formData, setFormData] = useState({
         category: "",
         name: "",
+        author: "",
         description: "",
         price: "",
-        stock: "",
+        pages: "",
+        language: "English",
         image: null,
+        ebook: null,
+        preview: null,
         is_active: true,
     });
-
-    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         fetchCategories();
@@ -34,6 +39,7 @@ const AddProduct = () => {
     };
 
     const handleChange = (e) => {
+
         const { name, value, type, checked, files } = e.target;
 
         setFormData({
@@ -45,74 +51,73 @@ const AddProduct = () => {
                         ? files[0]
                         : value,
         });
+
     };
 
     const handleSubmit = async (e) => {
+
         e.preventDefault();
+
         setLoading(true);
 
         try {
+
             const data = new FormData();
 
             data.append("category_id", formData.category);
             data.append("name", formData.name);
+            data.append("author", formData.author);
             data.append("description", formData.description);
             data.append("price", formData.price);
-            data.append("stock", formData.stock);
+            data.append("pages", formData.pages);
+            data.append("language", formData.language);
             data.append("is_active", formData.is_active);
 
             if (formData.image) {
                 data.append("upload_image", formData.image);
             }
 
+            if (formData.ebook) {
+                data.append("upload_ebook", formData.ebook);
+            }
+
+            if (formData.preview) {
+                data.append("upload_preview", formData.preview);
+            }
+
             await adminApi.addProduct(data);
 
             successToast("Product Added Successfully");
+
             navigate("/admin/products");
 
         } catch (error) {
+
             console.log(error);
+
             errorToast("Failed to Add Product");
+
         } finally {
+
             setLoading(false);
+
         }
     };
 
     return (
-        <div className="max-w-4xl mx-auto bg-white rounded-xl shadow p-8">
+        <div>
 
-            <h1 className="text-3xl font-bold mb-8">
-                Add Product
-            </h1>
+            <h2>Add Product</h2>
 
-            <form
-                onSubmit={handleSubmit}
-                className="space-y-6"
-            >
+            <form onSubmit={handleSubmit}>
 
                 <div>
-                    <label className="block mb-2 font-medium">
-                        Product Name
-                    </label>
-                    <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                        required
-                    />
-                </div>
+                    <label>Category</label>
 
-                <div>
-                    <label className="block mb-2 font-medium">
-                        Category
-                    </label>
                     <select
                         name="category"
                         value={formData.category}
                         onChange={handleChange}
-                        className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         required
                     >
                         <option value="">
@@ -130,89 +135,158 @@ const AddProduct = () => {
                     </select>
                 </div>
 
+                <br />
+
                 <div>
-                    <label className="block mb-2 font-medium">
-                        Description
-                    </label>
-                    <textarea
-                        rows="5"
-                        name="description"
-                        value={formData.description}
+                    <label>Book Name</label>
+
+                    <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
                         onChange={handleChange}
-                        className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         required
                     />
                 </div>
 
-                <div className="grid grid-cols-2 gap-6">
-                    <div>
-                        <label className="block mb-2 font-medium">
-                            Price
-                        </label>
-                        <input
-                            type="number"
-                            name="price"
-                            value={formData.price}
-                            onChange={handleChange}
-                            className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            required
-                        />
-                    </div>
+                <br />
 
-                    <div>
-                        <label className="block mb-2 font-medium">
-                            Stock
-                        </label>
-                        <input
-                            type="number"
-                            name="stock"
-                            value={formData.stock}
-                            onChange={handleChange}
-                            className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            required
-                        />
-                    </div>
-                </div>
-
-                {/* ✅ Highlighted Upload Section */}
                 <div>
-                    <label className="block mb-2 font-medium">
-                        Product Image
-                    </label>
+                    <label>Author</label>
 
-                    <div className="border-2 border-dashed border-indigo-400 rounded-lg p-6 text-center bg-indigo-50 hover:bg-indigo-100 transition">
-
-                        <input
-                            type="file"
-                            name="image"
-                            accept="image/*"
-                            onChange={handleChange}
-                            className="w-full cursor-pointer"
-                        />
-
-                        <p className="mt-2 text-sm text-indigo-600">
-                            Click to upload product image
-                        </p>
-
-                    </div>
+                    <input
+                        type="text"
+                        name="author"
+                        value={formData.author}
+                        onChange={handleChange}
+                        required
+                    />
                 </div>
 
-                <div className="flex items-center gap-3">
+                <br />
+
+                <div>
+                    <label>Description</label>
+
+                    <textarea
+                        name="description"
+                        value={formData.description}
+                        onChange={handleChange}
+                        rows="5"
+                        required
+                    />
+                </div>
+
+                <br />
+
+                <div>
+                    <label>Price</label>
+
                     <input
-                        type="checkbox"
-                        name="is_active"
-                        checked={formData.is_active}
+                        type="number"
+                        name="price"
+                        value={formData.price}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+
+                <br />
+
+                <div>
+                    <label>Pages</label>
+
+                    <input
+                        type="number"
+                        name="pages"
+                        value={formData.pages}
                         onChange={handleChange}
                     />
-                    <label>
-                        Active Product
-                    </label>
                 </div>
+
+                <br />
+
+                <div>
+                    <label>Language</label>
+
+                    <select
+                        name="language"
+                        value={formData.language}
+                        onChange={handleChange}
+                    >
+                        <option value="English">
+                            English
+                        </option>
+
+                        <option value="Hindi">
+                            Hindi
+                        </option>
+                    </select>
+                </div>
+
+                <br />
+
+                <div>
+                    <label>Cover Image</label>
+
+                    <input
+                        type="file"
+                        name="image"
+                        accept="image/*"
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <br />
+
+                <div>
+                    <label>E-book PDF</label>
+
+                    <input
+                        type="file"
+                        name="ebook"
+                        accept=".pdf"
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <br />
+
+                <div>
+                    <label>Preview PDF</label>
+
+                    <input
+                        type="file"
+                        name="preview"
+                        accept=".pdf"
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <br />
+
+                <div>
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            name="is_active"
+                            checked={formData.is_active}
+                            onChange={handleChange}
+                        />
+
+                        Active
+
+                    </label>
+
+                </div>
+
+                <br />
 
                 <button
                     type="submit"
                     disabled={loading}
-                    className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition"
                 >
                     {loading ? "Saving..." : "Save Product"}
                 </button>
