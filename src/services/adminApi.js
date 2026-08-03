@@ -89,11 +89,10 @@ const adminApi = {
     },
 
     // Categories
-    async getCategories() {
+    async getPublicCategories() {
         const response = await API.get(
             "products/categories/"
         );
-
         return response.data;
     },
 
@@ -151,7 +150,6 @@ const adminApi = {
         const response = await API.get(
             "products/admin/categories/"
         );
-
         return response.data;
     },
 

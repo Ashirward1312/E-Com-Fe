@@ -119,6 +119,8 @@ import AccountDashboard from "./Page/account/Dashboard";
 import Profile from "./Page/account/Profile";
 import AccountOrders from "./Page/account/Orders";
 import AccountOrderDetail from "./Page/account/OrderDetail";
+import EditProduct from "./Page/Admin/EditProduct";
+import Library from "./Page/account/Library";
 
 function Home() {
   return (
@@ -145,7 +147,6 @@ function AboutPage() {
 function App() {
   return (
     <Routes>
-
       {/* User Routes */}
 
       <Route
@@ -240,6 +241,11 @@ function App() {
         }
       />
 
+      <Route
+    path="/account/library"
+    element={<Library />}
+/>
+
       {/* Admin Routes */}
 
       <Route
@@ -250,34 +256,20 @@ function App() {
           </AdminRoute>
         }
       >
-        <Route
-          index
-          element={<Dashboard />}
-        />
+        <Route index element={<Dashboard />} />
 
-        <Route
-          path="products"
-          element={<Products />}
-        />
+        <Route path="products" element={<Products />} />
 
+        <Route path="products/add" element={<AddProduct />} />
         <Route
-          path="products/add"
-          element={<AddProduct />}
+          path="products/edit/:id"
+          element={<EditProduct />}
         />
         <Route path="orders" element={<Orders />} />
-        <Route
-          path="orders/:orderId"
-          element={<AdminOrderDetail />}
-        />
+        <Route path="orders/:orderId" element={<AdminOrderDetail />} />
 
-        <Route
-          path="categories"
-          element={<Categories />}
-        />
-        <Route
-          path="users"
-          element={<Users />}
-        />
+        <Route path="categories" element={<Categories />} />
+        <Route path="users" element={<Users />} />
       </Route>
 
       {/* user Routes */}
@@ -290,25 +282,13 @@ function App() {
           </UserRoute>
         }
       >
-        <Route
-          index
-          element={<AccountDashboard />}
-        />
+        <Route index element={<AccountDashboard />} />
 
-        <Route
-          path="profile"
-          element={<Profile />}
-        />
+        <Route path="profile" element={<Profile />} />
 
-        <Route
-          path="orders"
-          element={<AccountOrders />}
-        />
+        <Route path="orders" element={<AccountOrders />} />
 
-        <Route
-          path="orders/:orderId"
-          element={<AccountOrderDetail />}
-        />
+        <Route path="orders/:orderId" element={<AccountOrderDetail />} />
       </Route>
     </Routes>
   );

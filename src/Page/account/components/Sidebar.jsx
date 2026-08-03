@@ -27,6 +27,12 @@ const Sidebar = () => {
          path: "/account/orders",
          icon: <Package size={20} />,
       },
+      {
+         name: "My Library",
+         path: "/account/library",
+         icon: <Package size={20} />,
+      },
+
    ];
 
    return (
@@ -53,10 +59,9 @@ const Sidebar = () => {
                   to={menu.path}
                   end={menu.path === "/account"}
                   className={({ isActive }) =>
-                     `flex items-center gap-3 px-6 py-4 transition-all duration-300 ${
-                        isActive
-                           ? "bg-[#C8A45A] text-[#0B1C33] font-semibold"
-                           : "hover:bg-[#132743] text-gray-300 hover:text-[#C8A45A]"
+                     `flex items-center gap-3 px-6 py-4 transition-all duration-300 ${isActive
+                        ? "bg-[#C8A45A] text-[#0B1C33] font-semibold"
+                        : "hover:bg-[#132743] text-gray-300 hover:text-[#C8A45A]"
                      }`
                   }
                >
