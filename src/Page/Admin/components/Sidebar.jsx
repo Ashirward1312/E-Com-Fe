@@ -1,6 +1,6 @@
-import { NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
 import AuthContext from "../../../context/AuthContext";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
     LayoutDashboard,
     Package,
@@ -15,6 +15,19 @@ import {
 const Sidebar = () => {
     const { logout } = useContext(AuthContext);
     const [open, setOpen] = useState(true);
+
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+
+        logout();
+
+        navigate("/", {
+            replace: true,
+        });
+
+    };
 
     const menus = [
         {
@@ -46,9 +59,8 @@ const Sidebar = () => {
 
     return (
         <aside
-            className={`min-h-screen bg-[#0B1B31] text-white flex flex-col shadow-2xl transition-all duration-300 ${
-                open ? "w-64" : "w-20"
-            }`}
+            className={`min-h-screen bg-[#0B1B31] text-white flex flex-col shadow-2xl transition-all duration-300 ${open ? "w-64" : "w-20"
+                }`}
         >
 
             {/* Header */}
@@ -84,10 +96,9 @@ const Sidebar = () => {
                         to={menu.path}
                         end={menu.path === "/admin"}
                         className={({ isActive }) =>
-                            `flex items-center gap-3 px-6 py-4 transition-all duration-300 ${
-                                isActive
-                                    ? "bg-[#C8A45A] text-[#0B1B31] font-semibold"
-                                    : "hover:bg-[#132743] text-gray-300 hover:text-[#C8A45A]"
+                            `flex items-center gap-3 px-6 py-4 transition-all duration-300 ${isActive
+                                ? "bg-[#C8A45A] text-[#0B1B31] font-semibold"
+                                : "hover:bg-[#132743] text-gray-300 hover:text-[#C8A45A]"
                             }`
                         }
                     >
@@ -102,7 +113,7 @@ const Sidebar = () => {
             {/* Logout */}
             <div className="border-t border-[#1f2f4a]">
                 <button
-                    onClick={logout}
+                    onClick={handleLogout}
                     className="flex w-full items-center gap-3 px-6 py-4 transition-all duration-300 text-gray-300 hover:bg-red-600 hover:text-white"
                 >
                     <LogOut size={20} />

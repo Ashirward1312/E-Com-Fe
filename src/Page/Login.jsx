@@ -43,7 +43,7 @@ const Login = () => {
     if (result.user.is_staff || result.user.is_superuser) {
       navigate("/admin", { replace: true });
     } else {
-      const redirectTo = location.state?.from || "/products";
+      const redirectTo = location.state?.from || "/account";
       navigate(redirectTo, { replace: true });
     }
   };

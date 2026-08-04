@@ -71,7 +71,7 @@
 // export default App;
 
 import { Routes, Route } from "react-router-dom";
-
+import PublicRoute from "./routes/PublicRoute";
 import Header from "./Header/Header";
 import Hero from "./Hero/Hero";
 import Why from "./Why/Why";
@@ -169,9 +169,23 @@ function App() {
         }
       />
 
-      <Route path="/login" element={<Login />} />
+      <Route
+        path="/login"
+        element={
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        }
+      />
 
-      <Route path="/register" element={<Register />} />
+      <Route
+        path="/register"
+        element={
+          <PublicRoute>
+            <Register />
+          </PublicRoute>
+        }
+      />
 
       <Route
         path="/products"
@@ -241,7 +255,6 @@ function App() {
         }
       />
 
-
       {/* Admin Routes */}
 
       <Route
@@ -257,10 +270,7 @@ function App() {
         <Route path="products" element={<Products />} />
 
         <Route path="products/add" element={<AddProduct />} />
-        <Route
-          path="products/edit/:id"
-          element={<EditProduct />}
-        />
+        <Route path="products/edit/:id" element={<EditProduct />} />
         <Route path="orders" element={<Orders />} />
         <Route path="orders/:orderId" element={<AdminOrderDetail />} />
 

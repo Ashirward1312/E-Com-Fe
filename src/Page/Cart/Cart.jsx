@@ -13,14 +13,12 @@ const Cart = () => {
         totalPrice,
     } = useContext(CartContext);
 
-    const { isAuthenticated } = useContext(AuthContext);
+    const { user, loading } = useContext(AuthContext);
 
     const handleCheckout = () => {
-        if (!isAuthenticated) {
-            navigate("/login", { state: { from: "/checkout" } });
-            return;
-        }
+
         navigate("/checkout");
+
     };
 
     if (!cart || cart.length === 0) {
