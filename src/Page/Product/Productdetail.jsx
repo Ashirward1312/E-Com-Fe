@@ -246,10 +246,7 @@ const ProductDetail = () => {
         }
     };
 
-    const handleAddToCart = () => {
-        addToCart({ ...product, quantity: 1 });
-        successToast("E-book added to cart");
-    };
+
 
     const handleBuyNow = () => {
         addToCart({ ...product, quantity: 1 });
@@ -395,13 +392,6 @@ const ProductDetail = () => {
 
                         {/* Buttons */}
                         <div className="mt-10 space-y-4">
-
-                            <button
-                                onClick={handleAddToCart}
-                                className="w-full bg-[#0B1C33] text-white py-3 rounded-xl font-medium hover:bg-[#162e4f] transition shadow-md"
-                            >
-                                Add to Cart
-                            </button>
 
                             <button
                                 onClick={handleBuyNow}

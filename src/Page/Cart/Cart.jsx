@@ -25,109 +25,124 @@ const Cart = () => {
 
     if (!cart || cart.length === 0) {
         return (
-            <div className="min-h-screen flex flex-col justify-center items-center pt-32 bg-gray-50">
-                <h2 className="text-3xl font-bold text-[#0B1C33]">
+            <div className="min-h-screen flex flex-col justify-center items-center pt-32 bg-gradient-to-b from-white to-gray-50">
+                <h2 className="text-4xl font-bold text-[#0B1C33]">
                     Your Cart is Empty
                 </h2>
-                <p className="text-gray-500 mt-4">
-                    Add some digital books to continue.
+                <p className="text-gray-500 mt-4 text-lg">
+                    Browse our premium digital collection.
                 </p>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 pt-32 pb-20">
+        <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 pt-32 pb-20">
 
             <div className="max-w-7xl mx-auto px-8">
 
-                {/* Page Title */}
-                <h1 className="text-4xl font-extrabold text-[#0B1C33] mb-14">
-                    Shopping Cart
-                </h1>
+                <div className="mb-16">
+                    <h1 className="text-4xl font-extrabold text-[#0B1C33]">
+                        Your Digital Cart
+                    </h1>
+                    <div className="mt-4 h-1 w-24 bg-[#C8A45A] rounded-full"></div>
+                </div>
 
-                <div className="grid lg:grid-cols-3 gap-12">
+                <div className="grid lg:grid-cols-3 gap-14">
 
-                    {/* ✅ LEFT SIDE – ITEMS */}
-                    <div className="lg:col-span-2 space-y-8">
+                    {/* LEFT – ITEMS */}
+                    <div className="lg:col-span-2 space-y-10">
 
                         {cart.map((item) => (
+
                             <div
                                 key={item.product_id}
-                                className="flex flex-col sm:flex-row items-center sm:items-start gap-8 bg-white border border-gray-200 rounded-3xl p-8 shadow-sm hover:shadow-lg transition"
+                                className="bg-white border border-gray-200 rounded-3xl p-8 shadow-md hover:shadow-xl transition duration-300"
                             >
 
-                                {/* Image Section */}
-                                <div className="bg-gray-100 rounded-2xl p-6 w-40 h-52 flex items-center justify-center shadow-inner">
-                                    <img
-                                        src={item.image}
-                                        alt={item.name}
-                                        className="max-h-full max-w-full object-contain"
-                                    />
-                                </div>
+                                <div className="flex flex-col sm:flex-row gap-10 items-center">
 
-                                {/* Details Section */}
-                                <div className="flex-1 w-full flex flex-col justify-between">
+                                    {/* Image */}
+                                    <div className="bg-gray-100 rounded-2xl p-6 w-44 h-60 flex items-center justify-center shadow-inner">
+                                        <img
+                                            src={item.image}
+                                            alt={item.name}
+                                            className="max-h-full max-w-full object-contain"
+                                        />
+                                    </div>
 
-                                    <div>
+                                    {/* Details */}
+                                    <div className="flex-1 text-center sm:text-left">
+
                                         <h2 className="text-2xl font-bold text-[#0B1C33]">
                                             {item.name}
                                         </h2>
 
-                                        <p className="text-gray-500 mt-3 text-lg">
-                                            ₹ {Number(item.price).toLocaleString("en-IN")}
-                                        </p>
-                                    </div>
-
-                                    <div className="mt-6 flex justify-between items-center">
-
-                                        <p className="text-xl font-semibold text-[#C8A45A]">
-                                            ₹ {(item.price * item.quantity).toLocaleString("en-IN")}
+                                        <p className="mt-3 text-lg text-gray-500">
+                                            Digital E‑Book
                                         </p>
 
-                                        <button
-                                            onClick={() => removeItem(item.product_id)}
-                                            className="px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition font-medium"
-                                        >
-                                            Remove
-                                        </button>
+                                        {/* Always 1 */}
+                                        <p className="mt-2 text-sm text-gray-400">
+                                            Quantity: 1
+                                        </p>
+
+                                        <div className="mt-6 flex justify-between items-center">
+
+                                            <span className="text-2xl font-bold text-[#C8A45A]">
+                                                ₹ {Number(item.price).toLocaleString("en-IN")}
+                                            </span>
+
+                                            <button
+                                                onClick={() => removeItem(item.product_id)}
+                                                className="px-5 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition font-medium"
+                                            >
+                                                Remove
+                                            </button>
+
+                                        </div>
 
                                     </div>
 
                                 </div>
 
                             </div>
+
                         ))}
 
                     </div>
 
-                    {/* ✅ RIGHT SIDE – SUMMARY */}
-                    <div className="bg-white border border-gray-200 rounded-3xl p-10 shadow-lg sticky top-32 h-fit">
+                    {/* RIGHT – SUMMARY */}
+                    <div className="bg-white border border-gray-200 rounded-3xl p-10 shadow-xl sticky top-32 h-fit">
 
-                        <h2 className="text-2xl font-bold text-[#0B1C33] mb-8">
+                        <h2 className="text-2xl font-bold text-[#0B1C33] mb-10">
                             Order Summary
                         </h2>
 
-                        <div className="space-y-5 text-gray-600">
+                        <div className="space-y-6 text-gray-600">
 
                             <div className="flex justify-between text-lg">
-                                <span>Total Items</span>
+                                <span>Total Books</span>
                                 <span className="font-semibold text-[#0B1C33]">
-                                    {totalItems}
+                                    {cart.length}
                                 </span>
                             </div>
 
                             <div className="flex justify-between text-lg">
                                 <span>Subtotal</span>
                                 <span className="font-semibold text-[#0B1C33]">
-                                    ₹ {Number(totalPrice).toLocaleString("en-IN")}
+                                    ₹ {cart
+                                        .reduce((total, item) => total + Number(item.price), 0)
+                                        .toLocaleString("en-IN")}
                                 </span>
                             </div>
 
                             <div className="border-t pt-6 flex justify-between text-2xl font-bold">
                                 <span>Total</span>
                                 <span className="text-[#C8A45A]">
-                                    ₹ {Number(totalPrice).toLocaleString("en-IN")}
+                                    ₹ {cart
+                                        .reduce((total, item) => total + Number(item.price), 0)
+                                        .toLocaleString("en-IN")}
                                 </span>
                             </div>
 

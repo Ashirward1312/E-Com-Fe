@@ -50,12 +50,12 @@ const Orders = () => {
                      <th className="px-6 py-4 text-left font-semibold">
                         Order ID
                      </th>
-                     <th className="px-6 py-4 text-left font-semibold">
+                     {/* <th className="px-6 py-4 text-left font-semibold">
                         Customer
                      </th>
                      <th className="px-6 py-4 text-left font-semibold">
                         Phone
-                     </th>
+                     </th> */}
                      <th className="px-6 py-4 text-left font-semibold">
                         Total
                      </th>
@@ -99,14 +99,14 @@ const Orders = () => {
                            <td className="px-6 py-4 font-medium text-[#0B1C33]">
                               {order.order_id}
                            </td>
-
+{/* 
                            <td className="px-6 py-4 text-gray-700">
                               {order.full_name}
-                           </td>
+                           </td> */}
 
-                           <td className="px-6 py-4 text-gray-600">
+                           {/* <td className="px-6 py-4 text-gray-600">
                               {order.phone}
-                           </td>
+                           </td> */}
 
                            <td className="px-6 py-4 font-semibold text-[#0B1C33]">
                               ₹ {order.final_price}

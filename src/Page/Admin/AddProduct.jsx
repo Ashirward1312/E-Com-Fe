@@ -16,7 +16,7 @@ const AddProduct = () => {
         author: "",
         description: "",
         price: "",
-        sale_price: "", // ✅ ADDED
+        sale_price: "",
         pages: "",
         language: "English",
         image: null,
@@ -52,13 +52,26 @@ const AddProduct = () => {
         });
     };
 
+    const calculateDiscount = () => {
+        if (
+            formData.sale_price &&
+            Number(formData.sale_price) < Number(formData.price)
+        ) {
+            const discount =
+                ((formData.price - formData.sale_price) /
+                    formData.price) *
+                100;
+            return Math.round(discount);
+        }
+        return 0;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
         try {
 
-            // ✅ Sale validation
             if (
                 formData.sale_price &&
                 Number(formData.sale_price) >= Number(formData.price)
@@ -76,7 +89,6 @@ const AddProduct = () => {
             data.append("description", formData.description);
             data.append("price", formData.price);
 
-            // ✅ Append sale price only if filled
             if (formData.sale_price) {
                 data.append("sale_price", formData.sale_price);
             }
@@ -102,47 +114,52 @@ const AddProduct = () => {
         }
     };
 
+    const discount = calculateDiscount();
+
     return (
-        <div className="min-h-screen bg-gray-100 p-10">
+        <div className="p-8">
 
-            <div className="max-w-5xl mx-auto bg-white border border-gray-200 shadow-md rounded-lg">
+            <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
 
-                {/* Header */}
-                <div className="border-b px-8 py-6 bg-gray-50 rounded-t-lg">
-                    <h2 className="text-2xl font-semibold text-gray-800">
-                        Add Product
+                <div className="border-b px-10 py-6 bg-white flex items-center justify-between">
+                    <h2 className="text-2xl font-bold text-[#0B1C33]">
+                        Add New Digital Product
                     </h2>
                 </div>
 
-                {/* Form */}
-                <form onSubmit={handleSubmit} className="p-8">
+                <form onSubmit={handleSubmit} className="p-10">
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
                         {/* Category */}
                         <div>
-                            <label className="block text-sm font-medium mb-2 text-gray-700">
+                            <label className="block mb-2 text-sm font-semibold text-gray-700">
                                 Category
                             </label>
-                            <select
-                                name="category"
-                                value={formData.category}
-                                onChange={handleChange}
-                                required
-                                className="w-full border border-gray-300 rounded-md px-3 py-2"
-                            >
-                                <option value="">Select Category</option>
-                                {categories.map((category) => (
-                                    <option key={category.id} value={category.id}>
-                                        {category.name}
-                                    </option>
-                                ))}
-                            </select>
+                            <div className="relative">
+                                <select
+                                    name="category"
+                                    value={formData.category}
+                                    onChange={handleChange}
+                                    required
+                                    className="w-full appearance-none bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all shadow-sm cursor-pointer"
+                                >
+                                    <option value="">Select Category</option>
+                                    {categories.map((category) => (
+                                        <option key={category.id} value={category.id}>
+                                            {category.name}
+                                        </option>
+                                    ))}
+                                </select>
+                                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+                                    <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                </div>
+                            </div>
                         </div>
 
                         {/* Book Name */}
                         <div>
-                            <label className="block text-sm font-medium mb-2 text-gray-700">
+                            <label className="block mb-2 text-sm font-semibold text-gray-700">
                                 Book Name
                             </label>
                             <input
@@ -151,13 +168,13 @@ const AddProduct = () => {
                                 value={formData.name}
                                 onChange={handleChange}
                                 required
-                                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                                className="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all shadow-sm"
                             />
                         </div>
 
                         {/* Author */}
                         <div>
-                            <label className="block text-sm font-medium mb-2 text-gray-700">
+                            <label className="block mb-2 text-sm font-semibold text-gray-700">
                                 Author
                             </label>
                             <input
@@ -166,13 +183,13 @@ const AddProduct = () => {
                                 value={formData.author}
                                 onChange={handleChange}
                                 required
-                                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                                className="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all shadow-sm"
                             />
                         </div>
 
                         {/* Actual Price */}
                         <div>
-                            <label className="block text-sm font-medium mb-2 text-gray-700">
+                            <label className="block mb-2 text-sm font-semibold text-gray-700">
                                 Actual Price
                             </label>
                             <input
@@ -181,30 +198,35 @@ const AddProduct = () => {
                                 value={formData.price}
                                 onChange={handleChange}
                                 required
-                                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                                className="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all shadow-sm"
                             />
                         </div>
 
-                        {/* ✅ SALE PRICE */}
+                        {/* Sale Price */}
                         <div>
-                            <label className="block text-sm font-medium mb-2 text-gray-700">
-                                Sale Price (Optional)
+                            <label className="flex items-center gap-2 mb-2 text-sm font-semibold text-gray-700">
+                                Sale Price
+                                <span className="text-[10px] uppercase tracking-wider bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-bold">
+                                    Optional
+                                </span>
                             </label>
                             <input
                                 type="number"
                                 name="sale_price"
                                 value={formData.sale_price}
                                 onChange={handleChange}
-                                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                                className="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all shadow-sm"
                             />
-                            <p className="text-xs text-gray-400 mt-1">
-                                Leave empty if no sale
-                            </p>
+                            {discount > 0 && (
+                                <p className="text-xs text-green-600 mt-2 font-semibold">
+                                    {discount}% Discount Applied
+                                </p>
+                            )}
                         </div>
 
                         {/* Pages */}
                         <div>
-                            <label className="block text-sm font-medium mb-2 text-gray-700">
+                            <label className="block mb-2 text-sm font-semibold text-gray-700">
                                 Pages
                             </label>
                             <input
@@ -212,44 +234,52 @@ const AddProduct = () => {
                                 name="pages"
                                 value={formData.pages}
                                 onChange={handleChange}
-                                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                                className="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all shadow-sm"
                             />
                         </div>
 
                         {/* Language */}
                         <div>
-                            <label className="block text-sm font-medium mb-2 text-gray-700">
+                            <label className="block mb-2 text-sm font-semibold text-gray-700">
                                 Language
                             </label>
-                            <select
-                                name="language"
-                                value={formData.language}
-                                onChange={handleChange}
-                                className="w-full border border-gray-300 rounded-md px-3 py-2"
-                            >
-                                <option value="English">English</option>
-                                <option value="Hindi">Hindi</option>
-                            </select>
+                            <div className="relative">
+                                <select
+                                    name="language"
+                                    value={formData.language}
+                                    onChange={handleChange}
+                                    className="w-full appearance-none bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all shadow-sm cursor-pointer"
+                                >
+                                    <option value="English">English</option>
+                                    <option value="Hindi">Hindi</option>
+                                </select>
+                                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+                                    <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                </div>
+                            </div>
                         </div>
 
-                        {/* Description */}
-                        <div className="md:col-span-2">
-                            <label className="block text-sm font-medium mb-2 text-gray-700">
-                                Description
-                            </label>
-                            <textarea
-                                name="description"
-                                value={formData.description}
-                                onChange={handleChange}
-                                rows="4"
-                                required
-                                className="w-full border border-gray-300 rounded-md px-3 py-2"
-                            />
-                        </div>
+                    </div>
 
-                        {/* Cover Image */}
+                    {/* Description */}
+                    <div className="mt-8">
+                        <label className="block mb-2 text-sm font-semibold text-gray-700">
+                            Description
+                        </label>
+                        <textarea
+                            name="description"
+                            value={formData.description}
+                            onChange={handleChange}
+                            rows="4"
+                            required
+                            className="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all shadow-sm"
+                        />
+                    </div>
+
+                    {/* Files */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
                         <div>
-                            <label className="block text-sm font-medium mb-2 text-gray-700">
+                            <label className="block mb-2 text-sm font-semibold text-gray-700">
                                 Cover Image
                             </label>
                             <input
@@ -257,13 +287,12 @@ const AddProduct = () => {
                                 name="image"
                                 accept="image/*"
                                 onChange={handleChange}
-                                className="w-full text-sm"
+                                className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#C8A45A]/10 file:text-[#C8A45A] hover:file:bg-[#C8A45A]/20 cursor-pointer"
                             />
                         </div>
 
-                        {/* Ebook */}
                         <div>
-                            <label className="block text-sm font-medium mb-2 text-gray-700">
+                            <label className="block mb-2 text-sm font-semibold text-gray-700">
                                 E-book PDF
                             </label>
                             <input
@@ -271,13 +300,12 @@ const AddProduct = () => {
                                 name="ebook"
                                 accept=".pdf"
                                 onChange={handleChange}
-                                className="w-full text-sm"
+                                className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#0B1C33]/10 file:text-[#0B1C33] hover:file:bg-[#0B1C33]/20 cursor-pointer"
                             />
                         </div>
 
-                        {/* Preview */}
                         <div>
-                            <label className="block text-sm font-medium mb-2 text-gray-700">
+                            <label className="block mb-2 text-sm font-semibold text-gray-700">
                                 Preview PDF
                             </label>
                             <input
@@ -285,32 +313,30 @@ const AddProduct = () => {
                                 name="preview"
                                 accept=".pdf"
                                 onChange={handleChange}
-                                className="w-full text-sm"
+                                className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200 cursor-pointer"
                             />
                         </div>
-
-                        {/* Active */}
-                        <div className="flex items-center mt-6">
-                            <input
-                                type="checkbox"
-                                name="is_active"
-                                checked={formData.is_active}
-                                onChange={handleChange}
-                                className="mr-2"
-                            />
-                            <label className="text-sm text-gray-700">
-                                Active Product
-                            </label>
-                        </div>
-
                     </div>
 
-                    {/* Submit */}
-                    <div className="mt-10 border-t pt-6 text-right">
+                    <div className="mt-8 flex items-center gap-3">
+                        <input
+                            type="checkbox"
+                            name="is_active"
+                            id="is_active"
+                            checked={formData.is_active}
+                            onChange={handleChange}
+                            className="w-4 h-4 text-[#C8A45A] bg-gray-100 border-gray-300 rounded focus:ring-[#C8A45A] cursor-pointer"
+                        />
+                        <label htmlFor="is_active" className="text-sm font-semibold text-gray-700 cursor-pointer">
+                            Active Product
+                        </label>
+                    </div>
+
+                    <div className="mt-10 pt-8 border-t border-gray-100 text-right">
                         <button
                             type="submit"
                             disabled={loading}
-                            className="bg-gray-800 text-white px-8 py-2 rounded-md hover:bg-black transition disabled:opacity-50"
+                            className="bg-[#0B1C33] text-white px-10 py-3 rounded-xl text-sm font-semibold hover:bg-[#162e4f] transition shadow-md disabled:opacity-70 disabled:cursor-not-allowed"
                         >
                             {loading ? "Saving..." : "Save Product"}
                         </button>

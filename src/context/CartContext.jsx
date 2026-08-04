@@ -8,28 +8,32 @@ import {
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
+
    const [cart, setCart] = useState([]);
 
    useEffect(() => {
       setCart(getCart());
    }, []);
 
-   const addToCart = (product, quantity = 1) => {
+   // ✅ DIGITAL RULE: Only 1 copy allowed
+   const addToCart = (product) => {
+
       const currentCart = getCart();
 
-      const index = currentCart.findIndex(
+      const exists = currentCart.find(
          (item) => item.product_id === product.id
       );
 
-      if (index >= 0) {
-         currentCart[index].quantity += quantity;
-      } else {
+      // ✅ If already exists, do nothing (no quantity increase)
+      if (!exists) {
          currentCart.push({
             product_id: product.id,
             name: product.name,
             image: product.image,
-            price: product.price,
-            quantity,
+            price: product.sale_price && product.sale_price < product.price
+               ? product.sale_price
+               : product.price,
+            quantity: 1,
          });
       }
 
@@ -37,20 +41,8 @@ export const CartProvider = ({ children }) => {
       setCart([...currentCart]);
    };
 
-   const updateQuantity = (productId, quantity) => {
-      if (quantity < 1) return;
-
-      const updatedCart = cart.map((item) =>
-         item.product_id === productId
-            ? { ...item, quantity }
-            : item
-      );
-
-      saveCart(updatedCart);
-      setCart(updatedCart);
-   };
-
    const removeItem = (productId) => {
+
       const updatedCart = cart.filter(
          (item) => item.product_id !== productId
       );
@@ -64,13 +56,12 @@ export const CartProvider = ({ children }) => {
       setCart([]);
    };
 
-   const totalItems = cart.reduce(
-      (sum, item) => sum + item.quantity,
-      0
-   );
+   // ✅ Badge count = number of unique products
+   const totalItems = cart.length;
 
+   // ✅ No quantity multiplication
    const totalPrice = cart.reduce(
-      (sum, item) => sum + item.price * item.quantity,
+      (sum, item) => sum + Number(item.price),
       0
    );
 
@@ -79,7 +70,6 @@ export const CartProvider = ({ children }) => {
          value={{
             cart,
             addToCart,
-            updateQuantity,
             removeItem,
             clearCart,
             totalItems,

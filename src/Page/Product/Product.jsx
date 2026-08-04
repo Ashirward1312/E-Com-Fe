@@ -110,13 +110,14 @@
 
 // export default Product;
 import { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getProducts } from "../../services/productApi";
 import CartContext from "../../context/CartContext";
 import { successToast } from "../../utils/toast";
 
 const Product = () => {
     const [products, setProducts] = useState([]);
+    const navigate = useNavigate();
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -190,9 +191,9 @@ const Product = () => {
         }
     };
 
-    const handleAddToCart = (product) => {
+    const handleBuyNow = (product) => {
         addToCart(product);
-        successToast("Added to cart");
+        navigate("/cart");
     };
 
     if (loading) {
@@ -413,11 +414,11 @@ const Product = () => {
 
                                                 <button
                                                     onClick={() =>
-                                                        handleAddToCart(product)
+                                                        handleBuyNow(product)
                                                     }
                                                     className="w-full rounded-lg bg-[#C8A45A] py-2.5 font-semibold text-[#0B1C33] hover:bg-yellow-400 shadow-md transition"
                                                 >
-                                                    Add to Cart
+                                                    Buy Now
                                                 </button>
 
                                             </div>

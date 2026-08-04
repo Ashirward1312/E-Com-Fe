@@ -241,10 +241,6 @@ function App() {
         }
       />
 
-      <Route
-    path="/account/library"
-    element={<Library />}
-/>
 
       {/* Admin Routes */}
 
@@ -289,6 +285,8 @@ function App() {
         <Route path="orders" element={<AccountOrders />} />
 
         <Route path="orders/:orderId" element={<AccountOrderDetail />} />
+
+        <Route path="library" element={<Library />} />
       </Route>
     </Routes>
   );

@@ -160,7 +160,6 @@
 // };
 
 // export default Products;
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Pencil, Trash2 } from "lucide-react";
@@ -191,11 +190,9 @@ const Products = () => {
 
         try {
             await adminApi.deleteProduct(id);
-
             setProducts((prev) =>
                 prev.filter((item) => item.id !== id)
             );
-
             successToast("Product deleted successfully");
         } catch (error) {
             console.log(error);
@@ -204,93 +201,151 @@ const Products = () => {
     };
 
     if (loading) {
-        return <div>Loading...</div>;
+        return (
+            <div className="p-10 text-lg font-semibold">
+                Loading...
+            </div>
+        );
     }
 
     return (
-        <div>
+        <div className="p-10">
 
-            <div style={{ marginBottom: "20px" }}>
-                <h2>Products</h2>
+            <div className="flex justify-between items-center mb-8">
 
-                <Link to="/admin/products/add">
+                <h2 className="text-3xl font-bold text-[#0B1C33]">
+                    Products
+                </h2>
+
+                <Link
+                    to="/admin/products/add"
+                    className="bg-[#C8A45A] text-[#0B1C33] px-6 py-2 rounded-lg font-semibold hover:bg-yellow-400 transition"
+                >
                     Add Product
                 </Link>
+
             </div>
 
-            <table border="1" cellPadding="10" width="100%">
+            <div className="overflow-x-auto rounded-2xl shadow-md border border-gray-200">
 
-                <thead>
-                    <tr>
-                        <th>Image</th>
-                        <th>Book</th>
-                        <th>Author</th>
-                        <th>Category</th>
-                        <th>Pages</th>
-                        <th>Language</th>
-                        <th>Price</th>
-                        <th>Type</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
+                <table className="min-w-full bg-white">
 
-                <tbody>
+                    <thead className="bg-[#0B1C33] text-white">
 
-                    {products.map((product) => (
-
-                        <tr key={product.id}>
-
-                            <td>
-                                {product.image && (
-                                    <img
-                                        src={product.image}
-                                        alt={product.name}
-                                        width="60"
-                                    />
-                                )}
-                            </td>
-
-                            <td>{product.name}</td>
-
-                            <td>{product.author}</td>
-
-                            <td>{product.category?.name}</td>
-
-                            <td>{product.pages}</td>
-
-                            <td>{product.language}</td>
-
-                            <td>₹ {product.price}</td>
-
-                            <td>E-Book</td>
-
-                            <td>
-
-                                <Link
-                                    to={`/admin/products/edit/${product.id}`}
-                                >
-                                    <Pencil size={18} />
-                                </Link>
-
-                                {"  "}
-
-                                <button
-                                    onClick={() =>
-                                        handleDelete(product.id)
-                                    }
-                                >
-                                    <Trash2 size={18} />
-                                </button>
-
-                            </td>
-
+                        <tr>
+                            <th className="px-6 py-4 text-left">Image</th>
+                            <th className="px-6 py-4 text-left">Book</th>
+                            <th className="px-6 py-4 text-left">Author</th>
+                            <th className="px-6 py-4 text-left">Category</th>
+                            <th className="px-6 py-4 text-left">Pages</th>
+                            <th className="px-6 py-4 text-left">Language</th>
+                            <th className="px-6 py-4 text-left">Price</th>
+                            <th className="px-6 py-4 text-left">Type</th>
+                            <th className="px-6 py-4 text-left">Actions</th>
                         </tr>
 
-                    ))}
+                    </thead>
 
-                </tbody>
+                    <tbody>
 
-            </table>
+                        {products.map((product) => {
+
+                            const isOnSale =
+                                product.sale_price &&
+                                product.sale_price < product.price;
+
+                            return (
+                                <tr
+                                    key={product.id}
+                                    className="border-b hover:bg-gray-50 transition"
+                                >
+
+                                    <td className="px-6 py-4">
+                                        {product.image && (
+                                            <img
+                                                src={product.image}
+                                                alt={product.name}
+                                                className="w-14 h-16 object-contain rounded shadow-sm"
+                                            />
+                                        )}
+                                    </td>
+
+                                    <td className="px-6 py-4 font-semibold text-[#0B1C33]">
+                                        {product.name}
+                                    </td>
+
+                                    <td className="px-6 py-4 text-gray-600">
+                                        {product.author}
+                                    </td>
+
+                                    <td className="px-6 py-4 text-gray-600">
+                                        {product.category?.name}
+                                    </td>
+
+                                    <td className="px-6 py-4 text-gray-600">
+                                        {product.pages}
+                                    </td>
+
+                                    <td className="px-6 py-4 text-gray-600">
+                                        {product.language}
+                                    </td>
+
+                                    {/* ✅ PRICE WITH SALE SUPPORT */}
+                                    <td className="px-6 py-4">
+
+                                        {isOnSale ? (
+                                            <div>
+                                                <span className="text-[#C8A45A] font-bold">
+                                                    ₹ {product.sale_price}
+                                                </span>
+                                                <span className="ml-2 text-gray-400 line-through text-sm">
+                                                    ₹ {product.price}
+                                                </span>
+                                                <div className="text-xs text-red-500 font-semibold mt-1">
+                                                    {product.discount_percentage}% OFF
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <span className="text-[#C8A45A] font-bold">
+                                                ₹ {product.price}
+                                            </span>
+                                        )}
+
+                                    </td>
+
+                                    <td className="px-6 py-4 text-gray-600">
+                                        E‑Book
+                                    </td>
+
+                                    <td className="px-6 py-4 flex items-center gap-4">
+
+                                        <Link
+                                            to={`/admin/products/edit/${product.id}`}
+                                            className="text-blue-600 hover:text-blue-800"
+                                        >
+                                            <Pencil size={18} />
+                                        </Link>
+
+                                        <button
+                                            onClick={() =>
+                                                handleDelete(product.id)
+                                            }
+                                            className="text-red-600 hover:text-red-800"
+                                        >
+                                            <Trash2 size={18} />
+                                        </button>
+
+                                    </td>
+
+                                </tr>
+                            );
+                        })}
+
+                    </tbody>
+
+                </table>
+
+            </div>
 
         </div>
     );
