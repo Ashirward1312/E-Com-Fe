@@ -12,6 +12,7 @@ const Header = () => {
     { name: "Home", path: "/" },
     { name: "About Us", path: "/about" },
     { name: "Courses", path: "/products" },
+    { name: "Blog", path: "/blogs" },
   ];
 
   // useEffect(() => {

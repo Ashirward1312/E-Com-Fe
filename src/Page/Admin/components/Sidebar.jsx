@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import AuthContext from "../../../context/AuthContext";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
@@ -7,14 +7,14 @@ import {
     ShoppingCart,
     Tags,
     Users,
+    FileText,
     LogOut,
     Menu,
     X,
 } from "lucide-react";
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, setIsOpen }) => {
     const { logout } = useContext(AuthContext);
-    const [open, setOpen] = useState(true);
 
 
     const navigate = useNavigate();
@@ -55,73 +55,78 @@ const Sidebar = () => {
             path: "/admin/users",
             icon: <Users size={20} />,
         },
+        {
+            name: "Blogs",
+            path: "/admin/blogs",
+            icon: <FileText size={20} />,
+        },
     ];
 
     return (
-        <aside
-            className={`min-h-screen bg-[#0B1B31] text-white flex flex-col shadow-2xl transition-all duration-300 ${open ? "w-64" : "w-20"
+        <>
+            {/* Mobile Overlay */}
+            {isOpen && (
+                <div
+                    className="fixed inset-0 bg-black/50 z-40 lg:hidden backdrop-blur-sm"
+                    onClick={() => setIsOpen(false)}
+                />
+            )}
+
+            <aside
+                className={`fixed lg:sticky top-0 left-0 z-50 h-screen w-64 bg-[#0B1B31] text-white flex flex-col shadow-xl transition-transform duration-300 ease-in-out ${
+                    isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
                 }`}
-        >
-
-            {/* Header */}
-            <div className="p-6 border-b border-[#1f2f4a] flex items-center justify-between">
-
-                {open && (
+            >
+                {/* Header */}
+                <div className="p-6 border-b border-[#1f2f4a] flex items-center justify-between">
                     <div>
                         <h2 className="text-2xl font-bold text-[#C8A45A] tracking-wide">
                             IASVeda
                         </h2>
-                        <p className="text-sm text-gray-400 mt-1">
-                            Admin Panel
-                        </p>
+                        <p className="text-sm text-gray-400 mt-1">Admin Panel</p>
                     </div>
-                )}
-
-                <button
-                    onClick={() => setOpen(!open)}
-                    className="text-[#C8A45A] hover:text-white transition"
-                >
-                    {open ? <X size={22} /> : <Menu size={22} />}
-                </button>
-
-            </div>
-
-            {/* Navigation */}
-            <nav className="mt-6 flex-1 space-y-1">
-
-                {menus.map((menu) => (
-
-                    <NavLink
-                        key={menu.path}
-                        to={menu.path}
-                        end={menu.path === "/admin"}
-                        className={({ isActive }) =>
-                            `flex items-center gap-3 px-6 py-4 transition-all duration-300 ${isActive
-                                ? "bg-[#C8A45A] text-[#0B1B31] font-semibold"
-                                : "hover:bg-[#132743] text-gray-300 hover:text-[#C8A45A]"
-                            }`
-                        }
+                    <button
+                        onClick={() => setIsOpen(false)}
+                        className="lg:hidden text-gray-400 hover:text-white"
                     >
-                        {menu.icon}
-                        {open && <span>{menu.name}</span>}
-                    </NavLink>
+                        <X size={24} />
+                    </button>
+                </div>
 
-                ))}
+                {/* Navigation */}
+                <nav className="mt-6 flex-1 px-4 space-y-2 overflow-y-auto custom-scrollbar">
+                    {menus.map((menu) => (
+                        <NavLink
+                            key={menu.path}
+                            to={menu.path}
+                            end={menu.path === "/admin"}
+                            onClick={() => setIsOpen(false)}
+                            className={({ isActive }) =>
+                                `flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${
+                                    isActive
+                                        ? "bg-[#C8A45A] text-[#0B1B31] font-bold shadow-md"
+                                        : "text-gray-300 hover:bg-[#132743] hover:text-white"
+                                }`
+                            }
+                        >
+                            {menu.icon}
+                            <span>{menu.name}</span>
+                        </NavLink>
+                    ))}
+                </nav>
 
-            </nav>
-
-            {/* Logout */}
-            <div className="border-t border-[#1f2f4a]">
-                <button
-                    onClick={handleLogout}
-                    className="flex w-full items-center gap-3 px-6 py-4 transition-all duration-300 text-gray-300 hover:bg-red-600 hover:text-white"
-                >
-                    <LogOut size={20} />
-                    {open && <span>Logout</span>}
-                </button>
-            </div>
-
-        </aside>
+                {/* Logout */}
+                <div className="p-4 border-t border-[#1f2f4a]">
+                    <button
+                        onClick={handleLogout}
+                        className="flex w-full items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-red-500 hover:text-white transition-all duration-300"
+                    >
+                        <LogOut size={20} />
+                        <span className="font-semibold">Logout</span>
+                    </button>
+                </div>
+            </aside>
+        </>
     );
 };
 

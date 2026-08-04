@@ -2,7 +2,6 @@ import API from "../api/axios";
 
 const adminApi = {
 
-
     // ==========================
     // Users
     // ==========================
@@ -22,7 +21,6 @@ const adminApi = {
             `accounts/admin/users/${id}/`,
             data
         );
-
         return response.data;
     },
 
@@ -30,18 +28,24 @@ const adminApi = {
         const response = await API.delete(
             `accounts/admin/users/${id}/`
         );
-
         return response.data;
     },
+
+    // ==========================
     // Dashboard
+    // ==========================
+
     async getDashboard() {
         const response = await API.get(
             "orders/admin/dashboard/"
         );
-
         return response.data;
     },
+
+    // ==========================
     // Products
+    // ==========================
+
     async getProducts() {
         const response = await API.get("products/");
         return response.data;
@@ -62,7 +66,6 @@ const adminApi = {
                 },
             }
         );
-
         return response.data;
     },
 
@@ -76,7 +79,6 @@ const adminApi = {
                 },
             }
         );
-
         return response.data;
     },
 
@@ -84,67 +86,70 @@ const adminApi = {
         const response = await API.delete(
             `products/${id}/`
         );
-
         return response.data;
     },
 
+    // ==========================
+    // BLOGS (✅ ADDED)
+    // ==========================
+
+    // ==========================
+// BLOGS (✅ FIXED WITH IMAGE SUPPORT)
+// ==========================
+
+async getBlogs() {
+    const response = await API.get("blogs/");
+    return response.data;
+},
+
+async getBlog(slug) {
+    const response = await API.get(`blogs/${slug}/`);
+    return response.data;
+},
+
+async addBlog(blogData) {
+    const response = await API.post(
+        "blogs/",
+        blogData,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        }
+    );
+    return response.data;
+},
+
+async updateBlog(slug, blogData) {
+    const response = await API.put(
+        `blogs/${slug}/`,
+        blogData,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        }
+    );
+    return response.data;
+},
+
+async deleteBlog(slug) {
+    const response = await API.delete(
+        `blogs/${slug}/`
+    );
+    return response.data;
+},
+
+    // ==========================
     // Categories
+    // ==========================
+
     async getPublicCategories() {
         const response = await API.get(
             "products/categories/"
         );
         return response.data;
     },
-
-    // Orders
-    async getOrders() {
-        const response = await API.get(
-            "orders/admin/"
-        );
-
-        return response.data;
-    },
-
-    async getOrder(orderId) {
-        const response = await API.get(
-            `orders/admin/${orderId}/`
-        );
-
-        return response.data;
-    },
-
-    async updateOrderStatus(orderId, status) {
-        const response = await API.patch(
-            `orders/admin/${orderId}/status/`,
-            {
-                status,
-            }
-        );
-
-        return response.data;
-    },
-
-    // Coupons
-    async getCoupons() {
-        const response = await API.get(
-            "products/admin/coupons/"
-        );
-
-        return response.data;
-    },
-
-    async addCoupon(couponData) {
-        const response = await API.post(
-            "products/admin/coupons/",
-            couponData
-        );
-
-        return response.data;
-    },
-
-    // ==========================
-    // Categories
-    // ==========================
 
     async getCategories() {
         const response = await API.get(
@@ -158,7 +163,6 @@ const adminApi = {
             "products/admin/categories/",
             data
         );
-
         return response.data;
     },
 
@@ -167,7 +171,6 @@ const adminApi = {
             `products/admin/categories/${id}/`,
             data
         );
-
         return response.data;
     },
 
@@ -175,11 +178,56 @@ const adminApi = {
         const response = await API.delete(
             `products/admin/categories/${id}/`
         );
+        return response.data;
+    },
 
+    // ==========================
+    // Orders
+    // ==========================
+
+    async getOrders() {
+        const response = await API.get(
+            "orders/admin/"
+        );
+        return response.data;
+    },
+
+    async getOrder(orderId) {
+        const response = await API.get(
+            `orders/admin/${orderId}/`
+        );
+        return response.data;
+    },
+
+    async updateOrderStatus(orderId, status) {
+        const response = await API.patch(
+            `orders/admin/${orderId}/status/`,
+            {
+                status,
+            }
+        );
+        return response.data;
+    },
+
+    // ==========================
+    // Coupons
+    // ==========================
+
+    async getCoupons() {
+        const response = await API.get(
+            "products/admin/coupons/"
+        );
+        return response.data;
+    },
+
+    async addCoupon(couponData) {
+        const response = await API.post(
+            "products/admin/coupons/",
+            couponData
+        );
         return response.data;
     },
 
 };
-
 
 export default adminApi;

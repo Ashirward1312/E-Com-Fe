@@ -122,6 +122,11 @@ import AccountOrderDetail from "./Page/account/OrderDetail";
 import EditProduct from "./Page/Admin/EditProduct";
 import Library from "./Page/account/Library";
 
+import Blogs from "./Page/Blog/Blogs";
+import AddBlog from "./Page/Blog/AddBlog";
+import PublicBlogs from "./Page/Blog/PublicBlogs";
+import PublicBlogDetail from "./Page/Blog/PublicBlogDetail";
+
 function Home() {
   return (
     <>
@@ -165,6 +170,26 @@ function App() {
           <>
             <Header />
             <AboutPage />
+          </>
+        }
+      />
+
+      {/* Blog Routes */}
+      <Route
+        path="/blogs"
+        element={
+          <>
+            <Header />
+            <PublicBlogs />
+          </>
+        }
+      />
+      <Route
+        path="/blogs/:slug"
+        element={
+          <>
+            <Header />
+            <PublicBlogDetail />
           </>
         }
       />
@@ -276,6 +301,10 @@ function App() {
 
         <Route path="categories" element={<Categories />} />
         <Route path="users" element={<Users />} />
+        
+        {/* Admin Blog Routes */}
+        <Route path="blogs" element={<Blogs />} />
+        <Route path="blogs/add" element={<AddBlog />} />
       </Route>
 
       {/* user Routes */}
