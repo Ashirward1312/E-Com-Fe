@@ -73,6 +73,8 @@
 import { Routes, Route } from "react-router-dom";
 import PublicRoute from "./routes/PublicRoute";
 import Header from "./Header/Header";
+import PublicLayout from "./PublicLayout";
+import ScrollToTop from "./ScrollToTop";
 import Hero from "./Hero/Hero";
 import Why from "./Why/Why";
 import Mission from "./Mission/Mission";
@@ -127,6 +129,7 @@ import AddBlog from "./Page/Blog/AddBlog";
 import PublicBlogs from "./Page/Blog/PublicBlogs";
 import PublicBlogDetail from "./Page/Blog/PublicBlogDetail";
 import EditBlog from "./Page/Blog/EditBlog";
+import Contact from "./Contact/Contact";
 
 function Home() {
   return (
@@ -152,134 +155,50 @@ function AboutPage() {
 
 function App() {
   return (
-    <Routes>
-      {/* User Routes */}
+    <>
+      <ScrollToTop />
+      <Routes>
+        {/* User Routes */}
+        <Route element={<PublicLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/blogs" element={<PublicBlogs />} />
+          <Route path="/blogs/:slug" element={<PublicBlogDetail />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/products" element={<Product />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/my-orders" element={<MyOrders />} />
+          <Route path="/orders/:orderId" element={<OrderDetail />} />
+          <Route path="/order-success" element={<OrderSuccess />} />
+        </Route>
 
-      <Route
-        path="/"
-        element={
-          <>
-            <Header />
-            <Home />
-          </>
-        }
-      />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
 
-      <Route
-        path="/about"
-        element={
-          <>
-            <Header />
-            <AboutPage />
-          </>
-        }
-      />
+        <Route
+          path="/register"
+          element={
+            <PublicRoute>
+              <Register />
+            </PublicRoute>
+          }
+        />
 
-      {/* Blog Routes */}
-      <Route
-        path="/blogs"
-        element={
-          <>
-            <Header />
-            <PublicBlogs />
-          </>
-        }
-      />
-      <Route
-        path="/blogs/:slug"
-        element={
-          <>
-            <Header />
-            <PublicBlogDetail />
-          </>
-        }
-      />
-
-      <Route
-        path="/login"
-        element={
-          <PublicRoute>
-            <Login />
-          </PublicRoute>
-        }
-      />
-
-      <Route
-        path="/register"
-        element={
-          <PublicRoute>
-            <Register />
-          </PublicRoute>
-        }
-      />
-
-      <Route
-        path="/products"
-        element={
-          <>
-            <Header />
-            <Product />
-          </>
-        }
-      />
-      <Route
-        path="/products/:id"
-        element={
-          <>
-            <Header />
-            <ProductDetail />
-          </>
-        }
-      />
-
-      <Route
-        path="/cart"
-        element={
-          <>
-            <Header />
-            <Cart />
-          </>
-        }
-      />
-
-      <Route
-        path="/checkout"
-        element={
-          <CheckoutRoute>
-            <Checkout />
-          </CheckoutRoute>
-        }
-      />
-
-      <Route
-        path="/my-orders"
-        element={
-          <>
-            <Header />
-            <MyOrders />
-          </>
-        }
-      />
-
-      <Route
-        path="/orders/:orderId"
-        element={
-          <>
-            <Header />
-            <OrderDetail />
-          </>
-        }
-      />
-
-      <Route
-        path="/order-success"
-        element={
-          <>
-            <Header />
-            <OrderSuccess />
-          </>
-        }
-      />
+        <Route
+          path="/checkout"
+          element={
+            <CheckoutRoute>
+              <Checkout />
+            </CheckoutRoute>
+          }
+        />
 
       {/* Admin Routes */}
 
@@ -331,6 +250,7 @@ function App() {
         
       </Route>
     </Routes>
+    </>
   );
 }
 
