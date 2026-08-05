@@ -126,6 +126,7 @@ import Blogs from "./Page/Blog/Blogs";
 import AddBlog from "./Page/Blog/AddBlog";
 import PublicBlogs from "./Page/Blog/PublicBlogs";
 import PublicBlogDetail from "./Page/Blog/PublicBlogDetail";
+import EditBlog from "./Page/Blog/EditBlog";
 
 function Home() {
   return (
@@ -305,6 +306,7 @@ function App() {
         {/* Admin Blog Routes */}
         <Route path="blogs" element={<Blogs />} />
         <Route path="blogs/add" element={<AddBlog />} />
+        <Route path="blogs/edit/:slug" element={<EditBlog />} />
       </Route>
 
       {/* user Routes */}
@@ -326,6 +328,7 @@ function App() {
         <Route path="orders/:orderId" element={<AccountOrderDetail />} />
 
         <Route path="library" element={<Library />} />
+        
       </Route>
     </Routes>
   );
