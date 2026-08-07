@@ -84,12 +84,21 @@ const Dashboard = () => {
 
          {/* Quick Actions */}
          <div className="mt-12 border border-gray-200 rounded-lg bg-white p-8">
-
-            <h2 className="text-xl font-semibold text-[#0B1C33] mb-8">
-               Quick Actions
-            </h2>
-
+            <div className="text-center mb-8">
+               <h2 className="text-xl font-semibold text-[#0B1C33]">
+                  Quick Actions
+               </h2>
+               <div className="w-16 h-1 bg-[#C8A45A] mx-auto mt-3 rounded-full"></div>
+            </div>
             <div className="grid gap-6 md:grid-cols-3">
+
+               <QuickCard
+                  to="/products"
+                  icon={<ShoppingBag size={28} />}
+                  title="Continue Shopping E-Books"
+                  desc="Browse all available e-books and study materials."
+                  highlight={true}
+               />
 
                <QuickCard
                   to="/account/profile"
@@ -102,14 +111,7 @@ const Dashboard = () => {
                   to="/account/orders"
                   icon={<Package size={22} />}
                   title="My Orders"
-                  desc="Track your orders."
-               />
-
-               <QuickCard
-                  to="/products"
-                  icon={<ShoppingBag size={22} />}
-                  title="Continue Shopping"
-                  desc="Browse all available books."
+                  desc="View your past and current orders."
                />
 
             </div>
@@ -141,21 +143,24 @@ const StatCard = ({ title, value, icon }) => {
    );
 };
 
-const QuickCard = ({ to, icon, title, desc }) => {
+const QuickCard = ({ to, icon, title, desc, highlight }) => {
    return (
       <Link
          to={to}
-         className="border border-gray-200 rounded-lg p-6 hover:border-[#C8A45A] hover:shadow-sm transition"
+         className={`border rounded-lg p-6 transition-all duration-300 flex flex-col justify-center ${highlight
+               ? "bg-gradient-to-br from-[#0B1C33] to-[#1A365D] border-transparent shadow-lg hover:shadow-xl hover:-translate-y-1 transform scale-[1.02]"
+               : "border-gray-200 bg-white hover:border-[#C8A45A] hover:shadow-sm"
+            }`}
       >
-         <div className="mb-4 text-[#C8A45A]">
+         <div className={`mb-4 ${highlight ? "text-[#C8A45A]" : "text-[#C8A45A]"}`}>
             {icon}
          </div>
 
-         <h3 className="font-semibold text-[#0B1C33]">
+         <h3 className={`font-semibold ${highlight ? "text-xl text-white" : "text-[#0B1C33]"}`}>
             {title}
          </h3>
 
-         <p className="mt-2 text-sm text-gray-500">
+         <p className={`mt-2 text-sm ${highlight ? "text-gray-300" : "text-gray-500"}`}>
             {desc}
          </p>
       </Link>

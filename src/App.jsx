@@ -70,11 +70,10 @@
 
 // export default App;
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 import PublicRoute from "./routes/PublicRoute";
 import Header from "./Header/Header";
-import PublicLayout from "./PublicLayout";
-import ScrollToTop from "./ScrollToTop";
+import Footer from "./Footer/Footer";
 import Hero from "./Hero/Hero";
 import Why from "./Why/Why";
 import Mission from "./Mission/Mission";
@@ -105,9 +104,6 @@ import Products from "./Page/Admin/Products";
 import ProductDetail from "./Page/Product/Productdetail";
 
 import Orders from "./Page/Admin/Orders";
-// import Categories from "./Page/Admin/Categories";
-// import Coupons from "./Page/Admin/Coupons";
-// import Users from "./Page/Admin/Users";
 import AdminOrderDetail from "./Page/Admin/OrderDetail";
 import AddProduct from "./Page/Admin/AddProduct";
 import Categories from "./Page/Admin/Categories";
@@ -130,6 +126,18 @@ import PublicBlogs from "./Page/Blog/PublicBlogs";
 import PublicBlogDetail from "./Page/Blog/PublicBlogDetail";
 import EditBlog from "./Page/Blog/EditBlog";
 import Contact from "./Contact/Contact";
+
+const PublicLayout = () => {
+  return (
+    <>
+      <Header />
+      <div className="min-h-screen">
+        <Outlet />
+      </div>
+      <Footer />
+    </>
+  );
+};
 
 function Home() {
   return (
@@ -155,53 +163,54 @@ function AboutPage() {
 
 function App() {
   return (
-    <>
-      <ScrollToTop />
-      <Routes>
-        {/* User Routes */}
-        <Route element={<PublicLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/blogs" element={<PublicBlogs />} />
-          <Route path="/blogs/:slug" element={<PublicBlogDetail />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/products" element={<Product />} />
-          <Route path="/products/:id" element={<ProductDetail />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/my-orders" element={<MyOrders />} />
-          <Route path="/orders/:orderId" element={<OrderDetail />} />
-          <Route path="/order-success" element={<OrderSuccess />} />
-        </Route>
+    <Routes>
+      {/* User Routes */}
+      <Route element={<PublicLayout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<AboutPage />} />
+        
+        <Route path="/blogs" element={<PublicBlogs />} />
+        <Route path="/blogs/:slug" element={<PublicBlogDetail />} />
+        
+        <Route path="/contact" element={<Contact />} />
+        
+        <Route path="/products" element={<Product />} />
+        <Route path="/products/:id" element={<ProductDetail />} />
+        
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/my-orders" element={<MyOrders />} />
+        <Route path="/orders/:orderId" element={<OrderDetail />} />
+        <Route path="/order-success" element={<OrderSuccess />} />
+      </Route>
 
-        <Route
-          path="/login"
-          element={
-            <PublicRoute>
-              <Login />
-            </PublicRoute>
-          }
-        />
+      <Route
+        path="/login"
+        element={
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        }
+      />
 
-        <Route
-          path="/register"
-          element={
-            <PublicRoute>
-              <Register />
-            </PublicRoute>
-          }
-        />
+      <Route
+        path="/register"
+        element={
+          <PublicRoute>
+            <Register />
+          </PublicRoute>
+        }
+      />
 
-        <Route
-          path="/checkout"
-          element={
-            <CheckoutRoute>
-              <Checkout />
-            </CheckoutRoute>
-          }
-        />
+      <Route
+        path="/checkout"
+        element={
+          <CheckoutRoute>
+            <Checkout />
+          </CheckoutRoute>
+        }
+      />
 
       {/* Admin Routes */}
-
       <Route
         path="/admin"
         element={
@@ -211,14 +220,11 @@ function App() {
         }
       >
         <Route index element={<Dashboard />} />
-
         <Route path="products" element={<Products />} />
-
         <Route path="products/add" element={<AddProduct />} />
         <Route path="products/edit/:id" element={<EditProduct />} />
         <Route path="orders" element={<Orders />} />
         <Route path="orders/:orderId" element={<AdminOrderDetail />} />
-
         <Route path="categories" element={<Categories />} />
         <Route path="users" element={<Users />} />
         
@@ -229,7 +235,6 @@ function App() {
       </Route>
 
       {/* user Routes */}
-
       <Route
         path="/account"
         element={
@@ -239,18 +244,12 @@ function App() {
         }
       >
         <Route index element={<AccountDashboard />} />
-
         <Route path="profile" element={<Profile />} />
-
         <Route path="orders" element={<AccountOrders />} />
-
         <Route path="orders/:orderId" element={<AccountOrderDetail />} />
-
         <Route path="library" element={<Library />} />
-        
       </Route>
     </Routes>
-    </>
   );
 }
 

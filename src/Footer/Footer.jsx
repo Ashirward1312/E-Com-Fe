@@ -121,14 +121,21 @@ const Footer = () => {
         </div>
 
         {/* ────────── Bottom Bar ────────── */}
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-white/40 text-xs text-center md:text-left">
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0">
+          
+          <p className="text-white/40 text-xs text-center md:text-left flex-1">
             &copy; {currentYear} IASVeda. All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
+
+          <p className="text-white/40 text-xs text-center flex-1">
+            Designed & Developed by <a href="https://spadvertising.in/" target="_blank" rel="noopener noreferrer" className="text-[#C8A45A] hover:text-white transition-colors font-semibold">SP Advertising</a>
+          </p>
+
+          <div className="flex items-center justify-center md:justify-end gap-6 flex-1">
             <Link to="/terms" className="text-white/40 hover:text-white text-xs transition-colors">Terms of Service</Link>
             <Link to="/privacy" className="text-white/40 hover:text-white text-xs transition-colors">Privacy Policy</Link>
           </div>
+
         </div>
       </div>
     </footer>
