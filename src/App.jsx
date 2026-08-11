@@ -70,7 +70,8 @@
 
 // export default App;
 
-import { Routes, Route, Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route, Outlet, useLocation } from "react-router-dom";
 import PublicRoute from "./routes/PublicRoute";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
@@ -126,6 +127,10 @@ import PublicBlogs from "./Page/Blog/PublicBlogs";
 import PublicBlogDetail from "./Page/Blog/PublicBlogDetail";
 import EditBlog from "./Page/Blog/EditBlog";
 import Contact from "./Contact/Contact";
+import Terms from "./Legal/Terms";
+import Privacy from "./Legal/Privacy";
+import Refund from "./Legal/Refund";
+import Disclaimer from "./Legal/Disclamer";
 
 const PublicLayout = () => {
   return (
@@ -161,10 +166,22 @@ function AboutPage() {
   );
 }
 
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
+
 function App() {
   return (
-    <Routes>
-      {/* User Routes */}
+    <>
+      <ScrollToTop />
+      <Routes>
+        {/* User Routes */}
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutPage />} />
@@ -173,6 +190,11 @@ function App() {
         <Route path="/blogs/:slug" element={<PublicBlogDetail />} />
         
         <Route path="/contact" element={<Contact />} />
+        
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/refund" element={<Refund />} />
+        <Route path="/disclaimer" element={<Disclaimer />} />
         
         <Route path="/products" element={<Product />} />
         <Route path="/products/:id" element={<ProductDetail />} />
@@ -250,6 +272,7 @@ function App() {
         <Route path="library" element={<Library />} />
       </Route>
     </Routes>
+    </>
   );
 }
 

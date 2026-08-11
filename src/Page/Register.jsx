@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { register } from "../services/authApi";
+import { handleApiError } from "../utils/handleApiError";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -13,8 +15,6 @@ const Register = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
@@ -26,23 +26,17 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setLoading(true);
-    setError("");
-    setSuccess("");
 
     try {
       await register(formData);
-      setSuccess("Registration successful ✅");
+      toast.success("Registration successful! Redirecting to login…");
 
       setTimeout(() => {
         navigate("/login");
       }, 1500);
-    } catch (error) {
-      setError(
-        error.response?.data?.detail ||
-        "Registration failed."
-      );
+    } catch (err) {
+      handleApiError(err);
     } finally {
       setLoading(false);
     }
@@ -72,18 +66,6 @@ const Register = () => {
               Join India’s Trusted Civil Services Platform
             </p>
           </div>
-
-          {error && (
-            <div className="mb-4 rounded-lg bg-red-100 p-3 text-sm text-red-600">
-              {error}
-            </div>
-          )}
-
-          {success && (
-            <div className="mb-4 rounded-lg bg-green-100 p-3 text-sm text-green-600">
-              {success}
-            </div>
-          )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
 
