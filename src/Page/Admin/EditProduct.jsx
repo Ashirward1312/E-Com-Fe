@@ -22,7 +22,6 @@ const EditProduct = () => {
       language: "English",
       image: null,
       ebook: null,
-      preview: null,
       is_active: true,
    });
 
@@ -56,7 +55,6 @@ const EditProduct = () => {
             language: product.language,
             image: null,
             ebook: null,
-            preview: null,
             is_active: product.is_active,
          });
 
@@ -112,7 +110,6 @@ const EditProduct = () => {
 
          if (formData.image) data.append("upload_image", formData.image);
          if (formData.ebook) data.append("upload_ebook", formData.ebook);
-         if (formData.preview) data.append("upload_preview", formData.preview);
 
          await adminApi.updateProduct(id, data);
 
@@ -285,18 +282,6 @@ const EditProduct = () => {
                   <input
                      type="file"
                      name="ebook"
-                     accept=".pdf"
-                     onChange={handleChange}
-                  />
-               </div>
-
-               <div>
-                  <label className="block mb-2 font-semibold text-gray-700">
-                     Change Preview PDF
-                  </label>
-                  <input
-                     type="file"
-                     name="preview"
                      accept=".pdf"
                      onChange={handleChange}
                   />
