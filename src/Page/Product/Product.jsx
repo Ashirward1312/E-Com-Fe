@@ -406,8 +406,8 @@ const Product = () => {
                                             <div className="mt-auto pt-6 space-y-3">
 
                                                 <Link
-                                                    to={`/products/${product.id}`}
-                                                    className="block w-full rounded-lg bg-[#0B1C33] py-2.5 text-center text-white font-semibold hover:bg-[#162e4f]"
+                                                    to={`/books/${product.id}`}
+                                                    className="w-full inline-flex justify-center items-center gap-2 bg-[#0B1C33] text-white py-3 rounded-xl font-semibold hover:bg-[#162e4f] transition"
                                                 >
                                                     View Details
                                                 </Link>

@@ -21,7 +21,6 @@ const AddProduct = () => {
         language: "English",
         image: null,
         ebook: null,
-        preview: null,
         is_active: true,
     });
 
@@ -99,7 +98,6 @@ const AddProduct = () => {
 
             if (formData.image) data.append("upload_image", formData.image);
             if (formData.ebook) data.append("upload_ebook", formData.ebook);
-            if (formData.preview) data.append("upload_preview", formData.preview);
 
             await adminApi.addProduct(data);
 
@@ -117,23 +115,27 @@ const AddProduct = () => {
     const discount = calculateDiscount();
 
     return (
-        <div className="p-8">
+        <div className="p-4 sm:p-6 lg:p-8">
 
-            <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
 
-                <div className="border-b px-10 py-6 bg-white flex items-center justify-between">
-                    <h2 className="text-2xl font-bold text-[#0B1C33]">
+                {/* Page Header */}
+                <div className="border-b px-6 sm:px-10 py-5 bg-white">
+                    <h2 className="text-xl sm:text-2xl font-bold text-[#0B1C33]">
                         Add New Digital Product
                     </h2>
+                    <p className="text-gray-500 mt-1 text-sm">
+                        Fill in the details to list a new e-book.
+                    </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="p-10">
+                <form onSubmit={handleSubmit} className="p-6 sm:p-10">
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
 
                         {/* Category */}
                         <div>
-                            <label className="block mb-2 text-sm font-semibold text-gray-700">
+                            <label className="block mb-1.5 text-sm font-semibold text-gray-700">
                                 Category
                             </label>
                             <div className="relative">
@@ -142,7 +144,7 @@ const AddProduct = () => {
                                     value={formData.category}
                                     onChange={handleChange}
                                     required
-                                    className="w-full appearance-none bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all shadow-sm cursor-pointer"
+                                    className="w-full appearance-none bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all cursor-pointer"
                                 >
                                     <option value="">Select Category</option>
                                     {categories.map((category) => (
@@ -152,14 +154,16 @@ const AddProduct = () => {
                                     ))}
                                 </select>
                                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
-                                    <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                    <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                    </svg>
                                 </div>
                             </div>
                         </div>
 
                         {/* Book Name */}
                         <div>
-                            <label className="block mb-2 text-sm font-semibold text-gray-700">
+                            <label className="block mb-1.5 text-sm font-semibold text-gray-700">
                                 Book Name
                             </label>
                             <input
@@ -168,13 +172,13 @@ const AddProduct = () => {
                                 value={formData.name}
                                 onChange={handleChange}
                                 required
-                                className="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all shadow-sm"
+                                className="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all"
                             />
                         </div>
 
                         {/* Author */}
                         <div>
-                            <label className="block mb-2 text-sm font-semibold text-gray-700">
+                            <label className="block mb-1.5 text-sm font-semibold text-gray-700">
                                 Author
                             </label>
                             <input
@@ -183,14 +187,14 @@ const AddProduct = () => {
                                 value={formData.author}
                                 onChange={handleChange}
                                 required
-                                className="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all shadow-sm"
+                                className="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all"
                             />
                         </div>
 
                         {/* Actual Price */}
                         <div>
-                            <label className="block mb-2 text-sm font-semibold text-gray-700">
-                                Actual Price
+                            <label className="block mb-1.5 text-sm font-semibold text-gray-700">
+                                Actual Price (₹)
                             </label>
                             <input
                                 type="number"
@@ -198,14 +202,14 @@ const AddProduct = () => {
                                 value={formData.price}
                                 onChange={handleChange}
                                 required
-                                className="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all shadow-sm"
+                                className="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all"
                             />
                         </div>
 
                         {/* Sale Price */}
                         <div>
-                            <label className="flex items-center gap-2 mb-2 text-sm font-semibold text-gray-700">
-                                Sale Price
+                            <label className="flex items-center gap-2 mb-1.5 text-sm font-semibold text-gray-700">
+                                Sale Price (₹)
                                 <span className="text-[10px] uppercase tracking-wider bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-bold">
                                     Optional
                                 </span>
@@ -215,18 +219,18 @@ const AddProduct = () => {
                                 name="sale_price"
                                 value={formData.sale_price}
                                 onChange={handleChange}
-                                className="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all shadow-sm"
+                                className="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all"
                             />
                             {discount > 0 && (
-                                <p className="text-xs text-green-600 mt-2 font-semibold">
-                                    {discount}% Discount Applied
+                                <p className="text-xs text-green-600 mt-1.5 font-semibold">
+                                    ✅ {discount}% Discount Applied
                                 </p>
                             )}
                         </div>
 
                         {/* Pages */}
                         <div>
-                            <label className="block mb-2 text-sm font-semibold text-gray-700">
+                            <label className="block mb-1.5 text-sm font-semibold text-gray-700">
                                 Pages
                             </label>
                             <input
@@ -234,13 +238,13 @@ const AddProduct = () => {
                                 name="pages"
                                 value={formData.pages}
                                 onChange={handleChange}
-                                className="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all shadow-sm"
+                                className="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all"
                             />
                         </div>
 
                         {/* Language */}
                         <div>
-                            <label className="block mb-2 text-sm font-semibold text-gray-700">
+                            <label className="block mb-1.5 text-sm font-semibold text-gray-700">
                                 Language
                             </label>
                             <div className="relative">
@@ -248,13 +252,15 @@ const AddProduct = () => {
                                     name="language"
                                     value={formData.language}
                                     onChange={handleChange}
-                                    className="w-full appearance-none bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all shadow-sm cursor-pointer"
+                                    className="w-full appearance-none bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all cursor-pointer"
                                 >
                                     <option value="English">English</option>
                                     <option value="Hindi">Hindi</option>
                                 </select>
                                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
-                                    <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                    <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                    </svg>
                                 </div>
                             </div>
                         </div>
@@ -262,8 +268,8 @@ const AddProduct = () => {
                     </div>
 
                     {/* Description */}
-                    <div className="mt-8">
-                        <label className="block mb-2 text-sm font-semibold text-gray-700">
+                    <div className="mt-6">
+                        <label className="block mb-1.5 text-sm font-semibold text-gray-700">
                             Description
                         </label>
                         <textarea
@@ -272,14 +278,16 @@ const AddProduct = () => {
                             onChange={handleChange}
                             rows="4"
                             required
-                            className="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all shadow-sm"
+                            className="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-xl px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#C8A45A]/50 focus:border-[#C8A45A] outline-none transition-all"
                         />
                     </div>
 
-                    {/* Files */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+                    {/* File Uploads */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
+
+                        {/* Cover Image */}
                         <div>
-                            <label className="block mb-2 text-sm font-semibold text-gray-700">
+                            <label className="block mb-1.5 text-sm font-semibold text-gray-700">
                                 Cover Image
                             </label>
                             <input
@@ -287,12 +295,18 @@ const AddProduct = () => {
                                 name="image"
                                 accept="image/*"
                                 onChange={handleChange}
-                                className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#C8A45A]/10 file:text-[#C8A45A] hover:file:bg-[#C8A45A]/20 cursor-pointer"
+                                className="w-full text-sm text-gray-500
+                                    file:mr-3 file:py-2 file:px-4
+                                    file:rounded-lg file:border-0
+                                    file:text-sm file:font-semibold
+                                    file:bg-[#C8A45A]/10 file:text-[#C8A45A]
+                                    hover:file:bg-[#C8A45A]/20 cursor-pointer"
                             />
                         </div>
 
+                        {/* E-book PDF */}
                         <div>
-                            <label className="block mb-2 text-sm font-semibold text-gray-700">
+                            <label className="block mb-1.5 text-sm font-semibold text-gray-700">
                                 E-book PDF
                             </label>
                             <input
@@ -300,25 +314,19 @@ const AddProduct = () => {
                                 name="ebook"
                                 accept=".pdf"
                                 onChange={handleChange}
-                                className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#0B1C33]/10 file:text-[#0B1C33] hover:file:bg-[#0B1C33]/20 cursor-pointer"
+                                className="w-full text-sm text-gray-500
+                                    file:mr-3 file:py-2 file:px-4
+                                    file:rounded-lg file:border-0
+                                    file:text-sm file:font-semibold
+                                    file:bg-[#0B1C33]/10 file:text-[#0B1C33]
+                                    hover:file:bg-[#0B1C33]/20 cursor-pointer"
                             />
                         </div>
 
-                        <div>
-                            <label className="block mb-2 text-sm font-semibold text-gray-700">
-                                Preview PDF
-                            </label>
-                            <input
-                                type="file"
-                                name="preview"
-                                accept=".pdf"
-                                onChange={handleChange}
-                                className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200 cursor-pointer"
-                            />
-                        </div>
                     </div>
 
-                    <div className="mt-8 flex items-center gap-3">
+                    {/* Active Toggle */}
+                    <div className="mt-6 flex items-center gap-3">
                         <input
                             type="checkbox"
                             name="is_active"
@@ -332,11 +340,19 @@ const AddProduct = () => {
                         </label>
                     </div>
 
-                    <div className="mt-10 pt-8 border-t border-gray-100 text-right">
+                    {/* Submit */}
+                    <div className="mt-8 pt-6 border-t border-gray-100 flex flex-col sm:flex-row sm:justify-end gap-3">
+                        <button
+                            type="button"
+                            onClick={() => navigate("/admin/products")}
+                            className="w-full sm:w-auto border border-gray-300 text-gray-700 px-8 py-3 rounded-xl text-sm font-semibold hover:bg-gray-50 transition"
+                        >
+                            Cancel
+                        </button>
                         <button
                             type="submit"
                             disabled={loading}
-                            className="bg-[#0B1C33] text-white px-10 py-3 rounded-xl text-sm font-semibold hover:bg-[#162e4f] transition shadow-md disabled:opacity-70 disabled:cursor-not-allowed"
+                            className="w-full sm:w-auto bg-[#0B1C33] text-white px-10 py-3 rounded-xl text-sm font-semibold hover:bg-[#162e4f] transition shadow-md disabled:opacity-70 disabled:cursor-not-allowed"
                         >
                             {loading ? "Saving..." : "Save Product"}
                         </button>

@@ -93,8 +93,8 @@ const OrderSuccess = () => {
                         </Link>
 
                         <Link
-                            to="/products"
-                            className="border border-gray-300 text-gray-600 text-center py-3 rounded-xl font-medium hover:bg-gray-100 transition"
+                            to="/books"
+                            className="inline-flex items-center justify-center gap-2 bg-[#C8A45A] text-[#0B1C33] px-8 py-3 rounded-xl font-semibold hover:bg-yellow-400 transition transform hover:-translate-y-0.5"
                         >
                             Buy More
                         </Link>

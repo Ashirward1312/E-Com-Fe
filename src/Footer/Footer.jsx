@@ -7,7 +7,7 @@ const Footer = () => {
   const exploreLinks = [
     { name: "Home", path: "/" },
     { name: "About Us", path: "/about" },
-    { name: "Courses", path: "/products" },
+    { name: "Books", path: "/books" },
     { name: "Blog", path: "/blogs" },
   ];
 

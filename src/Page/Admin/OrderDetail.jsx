@@ -37,42 +37,6 @@ const OrderDetail = () => {
             </h1>
          </div>
 
-         {/* Top Grid */}
-         <div className="grid lg:grid-cols-2 gap-6 mb-8">
-
-            {/* Customer Info */}
-            <div className="border border-gray-200 bg-white rounded-lg p-6">
-
-               <h2 className="text-lg font-semibold mb-4 text-[#0B1C33]">
-                  Customer Information
-               </h2>
-
-               <div className="space-y-2 text-gray-700">
-                  <p><span className="font-medium">Name:</span> {order.full_name}</p>
-                  <p><span className="font-medium">Phone:</span> {order.phone}</p>
-                  <p><span className="font-medium">Email:</span> {order.email}</p>
-               </div>
-
-            </div>
-
-            {/* Shipping Address */}
-            <div className="border border-gray-200 bg-white rounded-lg p-6">
-
-               <h2 className="text-lg font-semibold mb-4 text-[#0B1C33]">
-                  Shipping Address
-               </h2>
-
-               <div className="space-y-1 text-gray-700">
-                  <p>{order.address}</p>
-                  <p>{order.city}</p>
-                  <p>{order.state}</p>
-                  <p>{order.pincode}</p>
-               </div>
-
-            </div>
-
-         </div>
-
          {/* Items Section */}
          <div className="border border-gray-200 bg-white rounded-lg p-6">
 

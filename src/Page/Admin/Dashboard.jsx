@@ -35,102 +35,78 @@ const Dashboard = () => {
 
     if (loading) {
         return (
-            <div className="flex items-center justify-center h-screen">
+            <div className="flex items-center justify-center py-20 text-lg font-semibold text-gray-500">
                 Loading...
             </div>
         );
     }
 
     return (
-        <div className="space-y-10 p-8">
+        <div className="p-4 sm:p-6 lg:p-8 space-y-8">
 
             {/* Header */}
             <div>
-                <h1 className="text-3xl font-bold text-[#0B1C33]">
+                <h1 className="text-2xl sm:text-3xl font-bold text-[#0B1C33]">
                     Dashboard
                 </h1>
-                <p className="text-gray-500 mt-1">
+                <p className="text-gray-500 mt-1 text-sm sm:text-base">
                     Welcome to Admin Dashboard
                 </p>
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6">
 
                 {/* Products */}
-                <div className="bg-white rounded-xl border border-gray-200 p-6 flex items-center justify-between">
-
-                    <div>
-                        <p className="text-gray-500 text-sm">
-                            Products
-                        </p>
-                        <h2 className="text-3xl font-bold mt-2 text-[#0B1C33]">
+                <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 flex items-center justify-between gap-3">
+                    <div className="min-w-0">
+                        <p className="text-gray-500 text-xs sm:text-sm">Products</p>
+                        <h2 className="text-2xl sm:text-3xl font-bold mt-1 text-[#0B1C33]">
                             {dashboard.total_products}
                         </h2>
                     </div>
-
-                    <Package
-                        size={30}
-                        className="text-indigo-600"
-                    />
-
+                    <div className="p-2.5 rounded-xl bg-indigo-50 shrink-0">
+                        <Package size={24} className="text-indigo-600" />
+                    </div>
                 </div>
 
                 {/* Orders */}
-                <div className="bg-white rounded-xl border border-gray-200 p-6 flex items-center justify-between">
-
-                    <div>
-                        <p className="text-gray-500 text-sm">
-                            Orders
-                        </p>
-                        <h2 className="text-3xl font-bold mt-2 text-[#0B1C33]">
+                <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 flex items-center justify-between gap-3">
+                    <div className="min-w-0">
+                        <p className="text-gray-500 text-xs sm:text-sm">Orders</p>
+                        <h2 className="text-2xl sm:text-3xl font-bold mt-1 text-[#0B1C33]">
                             {dashboard.total_orders}
                         </h2>
                     </div>
-
-                    <ShoppingCart
-                        size={30}
-                        className="text-orange-500"
-                    />
-
+                    <div className="p-2.5 rounded-xl bg-orange-50 shrink-0">
+                        <ShoppingCart size={24} className="text-orange-500" />
+                    </div>
                 </div>
 
                 {/* Users */}
-                <div className="bg-white rounded-xl border border-gray-200 p-6 flex items-center justify-between">
-
-                    <div>
-                        <p className="text-gray-500 text-sm">
-                            Users
-                        </p>
-                        <h2 className="text-3xl font-bold mt-2 text-[#0B1C33]">
+                <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 flex items-center justify-between gap-3">
+                    <div className="min-w-0">
+                        <p className="text-gray-500 text-xs sm:text-sm">Users</p>
+                        <h2 className="text-2xl sm:text-3xl font-bold mt-1 text-[#0B1C33]">
                             {dashboard.total_users}
                         </h2>
                     </div>
-
-                    <Users
-                        size={30}
-                        className="text-green-600"
-                    />
-
+                    <div className="p-2.5 rounded-xl bg-green-50 shrink-0">
+                        <Users size={24} className="text-green-600" />
+                    </div>
                 </div>
 
                 {/* Revenue */}
-                <div className="bg-white rounded-xl border border-gray-200 p-6 flex items-center justify-between">
-
-                    <div>
-                        <p className="text-gray-500 text-sm">
-                            Revenue
-                        </p>
-                        <h2 className="text-3xl font-bold mt-2 text-[#0B1C33]">
+                <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 flex items-center justify-between gap-3">
+                    <div className="min-w-0">
+                        <p className="text-gray-500 text-xs sm:text-sm">Revenue</p>
+                        <h2 className="text-xl sm:text-2xl font-bold mt-1 text-[#0B1C33] truncate">
                             ₹ {dashboard.total_revenue}
                         </h2>
                     </div>
-
-                    <IndianRupee
-                        size={30}
-                        className="text-red-500"
-                    />
-
+                    <div className="p-2.5 rounded-xl bg-red-50 shrink-0">
+                        <IndianRupee size={24} className="text-red-500" />
+                    </div>
                 </div>
 
             </div>

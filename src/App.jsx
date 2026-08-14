@@ -196,8 +196,8 @@ function App() {
         <Route path="/refund" element={<Refund />} />
         <Route path="/disclaimer" element={<Disclaimer />} />
         
-        <Route path="/products" element={<Product />} />
-        <Route path="/products/:id" element={<ProductDetail />} />
+        <Route path="/books" element={<Product />} />
+        <Route path="/books/:id" element={<ProductDetail />} />
         
         <Route path="/cart" element={<Cart />} />
         <Route path="/my-orders" element={<MyOrders />} />

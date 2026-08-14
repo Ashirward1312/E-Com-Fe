@@ -31,31 +31,31 @@ const Orders = () => {
    }
 
    return (
-      <div className="p-8">
+      <div className="p-4 sm:p-6 lg:p-8">
 
          {/* Header */}
-         <div className="mb-10">
-            <h1 className="text-3xl font-bold text-[#0B1C33]">
+         <div className="mb-8">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#0B1C33]">
                My Orders
             </h1>
-            <div className="mt-3 h-1 w-20 bg-[#C8A45A] rounded-full"></div>
-            <p className="mt-4 text-gray-500">
+            <div className="mt-2 h-1 w-16 bg-[#C8A45A] rounded-full"></div>
+            <p className="mt-3 text-gray-500 text-sm sm:text-base">
                View and track your purchase history.
             </p>
          </div>
 
          {orders.length === 0 ? (
 
-            <div className="bg-white border border-gray-200 rounded-2xl p-12 text-center shadow-sm">
-               <h2 className="text-xl font-bold text-[#0B1C33] mb-4">
+            <div className="bg-white border border-gray-200 rounded-2xl p-8 sm:p-12 text-center shadow-sm">
+               <h2 className="text-lg sm:text-xl font-bold text-[#0B1C33] mb-3">
                   No Orders Yet
                </h2>
-               <p className="text-gray-500 mb-8">
+               <p className="text-gray-500 mb-7 text-sm sm:text-base">
                   You haven't purchased any books yet.
                </p>
                <Link
-                  to="/products"
-                  className="inline-block bg-[#0B1C33] text-white px-8 py-3 rounded-xl font-semibold hover:bg-[#162e4f] transition"
+                  to="/books"
+                  className="inline-block bg-[#0B1C33] text-white px-7 py-3 rounded-xl font-semibold hover:bg-[#162e4f] transition text-sm sm:text-base"
                >
                   Browse Books
                </Link>
@@ -63,22 +63,22 @@ const Orders = () => {
 
          ) : (
 
-            <div className="space-y-6">
+            <div className="space-y-5">
 
                {orders.map((order) => (
 
                   <div
                      key={order.order_id}
-                     className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition"
+                     className="bg-white border border-gray-200 rounded-2xl p-5 sm:p-7 shadow-sm hover:shadow-md transition"
                   >
 
-                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
+                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
 
                         <div>
-                           <h2 className="text-xl font-bold text-[#0B1C33]">
+                           <h2 className="text-lg sm:text-xl font-bold text-[#0B1C33]">
                               Order #{order.order_id}
                            </h2>
-                           <p className="text-gray-500 mt-1 text-sm">
+                           <p className="text-gray-500 mt-0.5 text-sm">
                               {new Date(order.created_at).toLocaleDateString()}
                            </p>
                         </div>
@@ -95,9 +95,9 @@ const Orders = () => {
 
                      </div>
 
-                     <div className="border-t border-gray-100 my-6"></div>
+                     <div className="border-t border-gray-100 my-5"></div>
 
-                     <div className="grid grid-cols-3 gap-6 text-sm">
+                     <div className="grid grid-cols-3 gap-3 sm:gap-6 text-sm">
 
                         <div>
                            <p className="text-gray-400 uppercase tracking-wide text-xs">Books</p>
@@ -116,10 +116,10 @@ const Orders = () => {
 
                      </div>
 
-                     <div className="mt-6 text-right">
+                     <div className="mt-5 flex justify-end">
                         <Link
                            to={`/account/orders/${order.order_id}`}
-                           className="bg-[#C8A45A] text-[#0B1C33] px-6 py-2 rounded-xl text-sm font-semibold hover:bg-yellow-400 transition"
+                           className="bg-[#C8A45A] text-[#0B1C33] px-5 py-2 rounded-xl text-sm font-semibold hover:bg-yellow-400 transition"
                         >
                            View Details
                         </Link>

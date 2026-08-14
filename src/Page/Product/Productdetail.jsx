@@ -219,6 +219,7 @@
 
 import { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { ChevronRight } from "lucide-react";
 import { getProductDetail } from "../../services/productApi";
 import CartContext from "../../context/CartContext";
 import { successToast, errorToast } from "../../utils/toast";
@@ -281,26 +282,20 @@ const ProductDetail = () => {
                 {/* Back Button */}
                 <div className="mb-6">
                     <button
-                        onClick={() => navigate("/products")}
-                        className="flex items-center gap-2 text-gray-600 hover:text-[#C8A45A] font-medium transition"
+                        onClick={() => navigate("/books")}
+                        className="w-full sm:w-auto inline-flex justify-center items-center gap-2 border-2 border-[#0B1C33] text-[#0B1C33] px-8 py-3.5 rounded-xl font-bold hover:bg-[#0B1C33] hover:text-white transition"
                     >
                         <span>&larr;</span> Back to Products
                     </button>
                 </div>
 
                 {/* Breadcrumb */}
-                <div className="mb-10 text-sm text-gray-500">
-                    <Link to="/" className="hover:text-[#C8A45A]">
-                        Home
-                    </Link>{" "}
-                    /{" "}
-                    <Link to="/products" className="hover:text-[#C8A45A]">
-                        Products
-                    </Link>{" "}
-                    /{" "}
-                    <span className="text-[#0B1C33] font-medium">
-                        {product.name}
-                    </span>
+                <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
+                    <Link to="/" className="hover:text-[#C8A45A]">Home</Link>
+                    <ChevronRight size={16} />
+                    <Link to="/books" className="hover:text-[#C8A45A]">Books</Link>
+                    <ChevronRight size={16} />
+                    <span className="text-[#0B1C33] font-medium truncate">{product.name}</span>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-16 bg-white shadow-2xl rounded-3xl p-12">
