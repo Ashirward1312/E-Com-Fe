@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import book1 from "./Hero images/hero1.png";
-import book2 from "./Hero images/hero2.png";
-import book3 from "./Hero images/hero3.png";
-import book4 from "./Hero images/hero4.png";
+import book1 from "./Hero images/home1.png";
+import book2 from "./Hero images/home2.png";
+import book3 from "./Hero images/home3.png";
+import book4 from "./Hero images/home4.png";
 
 const books = [book1, book2, book3, book4];
 
@@ -94,7 +94,7 @@ const Hero = () => {
                                         src={book}
                                         alt="Civil Services Book"
                                         draggable="false"
-                                        className={`absolute w-full rounded-xl shadow-[0_50px_120px_-25px_rgba(15,46,87,0.35)] transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] ${isActive
+                                        className={`absolute w-full mix-blend-multiply transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] ${isActive
                                             ? "opacity-100 scale-105 translate-y-0 z-20"
                                             : "opacity-0 scale-95 translate-y-10 z-10"
                                             }`}
