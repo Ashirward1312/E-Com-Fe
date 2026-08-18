@@ -150,7 +150,7 @@ function Home() {
       <Hero />
       <Why />
       <Mission />
-      <Videostrip />
+      {/* <Videostrip /> */}
       <PremiumStrip />
       <Faq />
     </>

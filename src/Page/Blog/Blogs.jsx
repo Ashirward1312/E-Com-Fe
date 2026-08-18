@@ -81,7 +81,7 @@ const Blogs = () => {
 
               <thead className="bg-[#0B1C33] text-white text-sm uppercase tracking-wider">
                 <tr>
-                  <th className="px-6 py-4">Image</th>
+                  {/* <th className="px-6 py-4">Image</th> */}
                   <th className="px-6 py-4">Title</th>
                   <th className="px-6 py-4">Status</th>
                   <th className="px-6 py-4">Created</th>
@@ -97,13 +97,13 @@ const Blogs = () => {
                     className="hover:bg-gray-50 transition"
                   >
                     {/* Image */}
-                    <td className="px-6 py-4">
+                    {/* <td className="px-6 py-4">
                       <img
                         src={blog.image}
                         alt={blog.title}
                         className="w-20 h-14 object-cover rounded-lg shadow-sm"
                       />
-                    </td>
+                    </td> */}
 
                     {/* Title */}
                     <td className="px-6 py-4 font-medium text-[#0B1C33]">

@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { Book, CheckCircle2, ArrowRight, Play, X } from "lucide-react";
+import { Book, CheckCircle2, ArrowRight } from "lucide-react";
 import aboutImg from "../aboutimages/about.jpeg";
 
 const checklist = [
@@ -12,10 +11,7 @@ const checklist = [
   "Trusted by Civil Service Aspirants",
 ];
 
-const VIDEO_ID = "VhBl3dHT5SY";
-
 const About = () => {
-  const [playing, setPlaying] = useState(false);
 
   return (
     <section className="relative bg-[#FFFCF7] py-20 lg:py-28 font-poppins overflow-hidden">
@@ -38,7 +34,6 @@ const About = () => {
               {/* Main Image Container */}
               <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/5] sm:aspect-auto sm:h-[500px] w-full bg-[#0F172A]">
                 
-                {!playing ? (
                   <>
                     <img
                       src={aboutImg}
@@ -46,39 +41,7 @@ const About = () => {
                       className="absolute inset-0 w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/80 via-transparent to-transparent" />
-                    
-                    {/* Play Button Overlay */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div 
-                        className="relative group cursor-pointer"
-                        onClick={() => setPlaying(true)}
-                      >
-                        <div className="absolute inset-0 bg-[#C9A227]/30 rounded-full animate-ping scale-150" />
-                        <div className="relative w-20 h-20 bg-white/20 backdrop-blur-md border border-white/40 rounded-full flex items-center justify-center group-hover:bg-[#C9A227] transition-all duration-300 shadow-[0_10px_30px_rgba(201,162,39,0.3)]">
-                          <Play className="w-8 h-8 text-white ml-1 fill-white" strokeWidth={1} />
-                        </div>
-                      </div>
-                    </div>
                   </>
-                ) : (
-                  <>
-                    <iframe
-                      src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&rel=0&modestbranding=1`}
-                      title="IAS Veda Learning Approach"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full absolute inset-0"
-                    />
-                    {/* Close button */}
-                    <button
-                      onClick={() => setPlaying(false)}
-                      aria-label="Close video"
-                      className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-[#0F172A]/80 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-[#C9A227] hover:border-[#C9A227] transition-all duration-300 shadow-xl group"
-                    >
-                      <X className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" strokeWidth={2.5} />
-                    </button>
-                  </>
-                )}
               </div>
 
             </motion.div>

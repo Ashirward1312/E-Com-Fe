@@ -99,7 +99,7 @@ const AddBlog = () => {
             </div>
 
             {/* Image Upload */}
-            <div>
+            {/* <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Upload Image
               </label>
@@ -120,7 +120,7 @@ const AddBlog = () => {
                   className="hidden"
                 />
               </label>
-            </div>
+            </div> */}
 
             {/* Content */}
             <div>

@@ -139,12 +139,12 @@ const EditBlog = () => {
             )}
 
             {/* Upload New Image */}
-            <div>
+            {/* <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Upload New Image
-              </label>
+              </label> */}
 
-              <label className="flex items-center justify-center gap-3 w-full border-2 border-dashed border-gray-300 rounded-xl py-6 cursor-pointer hover:border-[#C8A45A] transition">
+              {/* <label className="flex items-center justify-center gap-3 w-full border-2 border-dashed border-gray-300 rounded-xl py-6 cursor-pointer hover:border-[#C8A45A] transition">
                 <UploadCloud className="text-[#C8A45A]" size={22} />
                 <span className="text-sm text-gray-600">
                   {formData.image
@@ -159,7 +159,7 @@ const EditBlog = () => {
                   className="hidden"
                 />
               </label>
-            </div>
+            </div> */}
 
             {/* Content */}
             <div>
