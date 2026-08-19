@@ -9,6 +9,7 @@ import {
   ArrowRight,
   CheckCircle2,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const features = [
   {
@@ -50,6 +51,7 @@ const features = [
 ];
 
 const WhyChoose = () => {
+  const navigate = useNavigate();
   return (
     <section className="relative overflow-hidden bg-[#F9F6EF] py-28 lg:py-36 font-poppins">
 
@@ -121,7 +123,8 @@ const WhyChoose = () => {
             return (
               <div
                 key={index}
-                className="group relative bg-white border border-[#E7E1D5] rounded-2xl p-10 shadow-[0_10px_40px_rgba(15,46,87,0.06)] transition-all duration-300 hover:-translate-y-3 hover:shadow-[0_20px_60px_rgba(15,46,87,0.12)]"
+                onClick={() => navigate('/books')}
+                className="group relative bg-white border border-[#E7E1D5] rounded-2xl p-10 shadow-[0_10px_40px_rgba(15,46,87,0.06)] transition-all duration-300 hover:-translate-y-3 hover:shadow-[0_20px_60px_rgba(15,46,87,0.12)] cursor-pointer"
               >
                 {/* Soft Hover Glow */}
                 <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-[#C8A45A]/5 to-transparent"></div>
@@ -157,7 +160,10 @@ const WhyChoose = () => {
 
         {/* CTA */}
         <div className="mt-20 text-center">
-          <button className="group inline-flex items-center gap-3 px-10 py-4 bg-[#0F2E57] rounded-2xl text-base font-semibold text-white shadow-[0_15px_40px_rgba(15,46,87,0.2)] transition-all duration-300 hover:bg-[#183D73] hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(15,46,87,0.3)]">
+          <button
+            onClick={() => navigate('/books')}
+            className="group inline-flex items-center gap-3 px-10 py-4 bg-[#0F2E57] rounded-2xl text-base font-semibold text-white shadow-[0_15px_40px_rgba(15,46,87,0.2)] transition-all duration-300 hover:bg-[#183D73] hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(15,46,87,0.3)] cursor-pointer"
+          >
             <span>Explore All Features</span>
             <ArrowRight
               size={18}
