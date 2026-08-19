@@ -2,7 +2,7 @@ import { ShieldCheck, Mail, Phone, MapPin } from "lucide-react";
 
 const TermsConditions = () => {
   return (
-    <section className="relative bg-gradient-to-br from-[#FDFBF7] via-white to-[#F9F6EF] py-28 font-poppins">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#FDFBF7] via-white to-[#F9F6EF] py-28 font-poppins">
       <div className="mx-auto max-w-5xl px-6 lg:px-8">
 
         {/* Page Header */}

@@ -44,10 +44,10 @@ const Orders = () => {
          </div>
 
          {/* Table */}
-         <div className="overflow-x-auto rounded-2xl shadow-sm border border-gray-200">
+         <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-200px)] rounded-2xl shadow-sm border border-gray-200">
             <table className="min-w-full bg-white text-sm">
 
-               <thead className="bg-[#0B1C33] text-white">
+               <thead className="bg-[#0B1C33] text-white sticky top-0 z-10">
                   <tr>
                      <th className="px-4 py-4 text-left whitespace-nowrap">Order ID</th>
                      <th className="px-4 py-4 text-left whitespace-nowrap">Total</th>
