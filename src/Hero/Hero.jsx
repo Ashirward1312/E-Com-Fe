@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import book1 from "./Hero images/home1.png";
 import book2 from "./Hero images/home2.png";
 import book3 from "./Hero images/home3.png";
@@ -8,6 +9,7 @@ const books = [book1, book2, book3, book4];
 
 const Hero = () => {
     const [active, setActive] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -65,11 +67,17 @@ const Hero = () => {
                         </p>
 
                         <div className="mt-12 flex flex-col sm:flex-row gap-6">
-                            <button className="rounded-xl bg-[#0F2E57] px-9 py-4 text-base font-semibold text-white shadow-[0_20px_60px_-15px_rgba(15,46,87,0.5)] transition-all duration-300 hover:bg-[#183D73] hover:-translate-y-1">
+                            <button
+                                onClick={() => navigate('/books')}
+                                className="rounded-xl bg-[#0F2E57] px-9 py-4 text-base font-semibold text-white shadow-[0_20px_60px_-15px_rgba(15,46,87,0.5)] transition-all duration-300 hover:bg-[#183D73] hover:-translate-y-1 cursor-pointer"
+                            >
                                 Explore Books →
                             </button>
 
-                            <button className="rounded-xl border border-[#E7E1D5] bg-white px-9 py-4 text-base font-semibold text-[#0F2E57] shadow-sm transition-all duration-300 hover:border-[#C8A45A] hover:bg-[#F3EFE6] hover:-translate-y-1">
+                            <button
+                                onClick={() => navigate('/books')}
+                                className="rounded-xl border border-[#E7E1D5] bg-white px-9 py-4 text-base font-semibold text-[#0F2E57] shadow-sm transition-all duration-300 hover:border-[#C8A45A] hover:bg-[#F3EFE6] hover:-translate-y-1 cursor-pointer"
+                            >
                                 Browse Collection
                             </button>
                         </div>
