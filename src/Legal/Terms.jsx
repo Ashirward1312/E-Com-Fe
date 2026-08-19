@@ -19,7 +19,7 @@ const TermsConditions = () => {
           </h1>
 
           <p className="mt-6 text-lg text-[#6B7280] leading-relaxed max-w-3xl mx-auto">
-            Welcome to <span className="font-semibold text-[#0F2E57]">Thesgstudy.com</span>. 
+            Welcome to <span className="font-semibold text-[#0F2E57]">IAS Veda</span>. 
             By accessing our website, purchasing any course, or using our services, 
             you agree to comply with the following terms and conditions.
           </p>
@@ -32,11 +32,11 @@ const TermsConditions = () => {
           <div>
             <h2 className="text-2xl font-bold text-[#0F2E57] mb-4">Ownership & Contact Details</h2>
             <p>This website is owned and operated by:</p>
-            <p className="mt-2 font-medium">Thesgstudy.com</p>
+            <p className="mt-2 font-medium">IAS Veda</p>
             <p>T/9, Green Paradise, Vishal Nagar,<br/>Raipur – 492007, Chhattisgarh, India</p>
             <div className="mt-4 space-y-1 text-sm">
               <div className="flex items-center gap-2"><Mail className="w-4 h-4 text-[#C8A45A]" /> bksinha1756@gmail.com / bksinha2801@gmail.com</div>
-              <div className="flex items-center gap-2"><Phone className="w-4 h-4 text-[#C8A45A]" /> +91 94252 13213 / +91 99261 97075</div>
+              <div className="flex items-center gap-2"><Phone className="w-4 h-4 text-[#C8A45A]" /> +91-9926197075</div>
             </div>
           </div>
 
@@ -61,7 +61,7 @@ const TermsConditions = () => {
             </p>
             <p className="mt-3">
               All materials including PDFs, videos, and notes are intellectual property of 
-              <span className="font-semibold"> Thesgstudy.com</span> and are for personal learning only.
+              <span className="font-semibold"> IAS Veda</span> and are for personal learning only.
             </p>
           </div>
 
@@ -93,9 +93,9 @@ const TermsConditions = () => {
               Only the following are official channels:
             </p>
             <ul className="mt-3 space-y-2 text-sm">
-              <li>Website: thesgstudy.com</li>
-              <li>Email: bksinha2801@gmail.com</li>
-              <li>Contact: +91 94252 13213 / +91 99261 97075</li>
+              <li>Website: iasveda.com</li>
+              <li>Email: bksinha1756@gmail.com / bksinha2801@gmail.com</li>
+              <li>Contact: +91-9926197075</li>
             </ul>
             <p className="mt-3 text-red-600 font-medium">
               Payments made outside official channels are not our responsibility.
@@ -115,7 +115,7 @@ const TermsConditions = () => {
           <div>
             <h2 className="text-2xl font-bold text-[#0F2E57] mb-4">Limitation of Liability</h2>
             <p>
-              Thesgstudy.com is not responsible for indirect damages, data loss, or 
+              IAS Veda is not responsible for indirect damages, data loss, or 
               third-party service disruptions. Content is provided for educational 
               purposes without guaranteed exam success.
             </p>
@@ -134,9 +134,9 @@ const TermsConditions = () => {
           <div>
             <h2 className="text-2xl font-bold text-[#0F2E57] mb-4">Contact Us</h2>
             <div className="space-y-2 text-sm">
-              <div className="flex items-center gap-2"><Mail className="w-4 h-4 text-[#C8A45A]" /> support@thesgstudy.com</div>
-              <div className="flex items-center gap-2"><Phone className="w-4 h-4 text-[#C8A45A]" /> +91 94252 13213 / +91 99261 97075</div>
-              <div className="flex items-center gap-2"><MapPin className="w-4 h-4 text-[#C8A45A]" /> Raipur, Chhattisgarh, India</div>
+              <div className="flex items-center gap-2"><Mail className="w-4 h-4 text-[#C8A45A]" /> bksinha1756@gmail.com / bksinha2801@gmail.com</div>
+              <div className="flex items-center gap-2"><Phone className="w-4 h-4 text-[#C8A45A]" /> +91-9926197075</div>
+              <div className="flex items-center gap-2"><MapPin className="w-4 h-4 text-[#C8A45A]" /> T/9, Green Paradise, Vishal Nagar, Raipur – 492007, Chhattisgarh, India</div>
             </div>
           </div>
 

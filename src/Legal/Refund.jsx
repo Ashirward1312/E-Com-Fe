@@ -29,7 +29,7 @@ const RefundPolicy = () => {
           </h1>
 
           <p className="mt-6 text-lg text-[#6B7280] leading-relaxed max-w-3xl mx-auto">
-            At <span className="font-semibold text-[#0F2E57]">Thesgstudy.com</span>, 
+            At <span className="font-semibold text-[#0F2E57]">IAS Veda</span>, 
             we are committed to delivering high-quality digital study resources.
             Due to the digital nature of our products, all sales are final.
           </p>
@@ -125,7 +125,7 @@ const RefundPolicy = () => {
               Important Note
             </h2>
             <p>
-              Thesgstudy.com reserves the right to decline refund requests that
+              IAS Veda reserves the right to decline refund requests that
               do not meet the conditions mentioned above. All purchases imply
               agreement with this no-cancellation and no-refund policy.
             </p>
@@ -140,11 +140,11 @@ const RefundPolicy = () => {
             <div className="space-y-2 text-sm">
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-[#C8A45A]" />
-                support@thesgstudy.com / bksinha1756@gmail.com
+                bksinha1756@gmail.com / bksinha2801@gmail.com
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-[#C8A45A]" />
-                +91 94252 13213 / +91 99261 97075
+                +91-9926197075
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-[#C8A45A]" />

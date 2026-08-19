@@ -29,7 +29,7 @@ const PrivacyPolicy = () => {
           </h1>
 
           <p className="mt-6 text-lg text-[#6B7280] leading-relaxed max-w-3xl mx-auto">
-            Welcome to <span className="font-semibold text-[#0F2E57]">Thesgstudy.com</span>. 
+            Welcome to <span className="font-semibold text-[#0F2E57]">IAS Veda</span>. 
             We are committed to protecting your personal information and ensuring 
             transparency in how we collect, use, and safeguard your data.
           </p>
@@ -43,7 +43,7 @@ const PrivacyPolicy = () => {
             <h2 className="text-2xl font-bold text-[#0F2E57] mb-4">
               Ownership & Contact Details
             </h2>
-            <p className="font-medium">Thesgstudy.com</p>
+            <p className="font-medium">IAS Veda</p>
             <p>
               T/9, Green Paradise, Vishal Nagar,<br />
               Raipur – 492007, Chhattisgarh, India
@@ -55,7 +55,7 @@ const PrivacyPolicy = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-[#C8A45A]" />
-                +91 94252 13213 / +91 99261 97075
+                +91-9926197075
               </div>
             </div>
           </div>
@@ -141,7 +141,7 @@ const PrivacyPolicy = () => {
             <p className="mt-4">
               To exercise these rights, email us at{" "}
               <span className="font-semibold text-[#0F2E57]">
-                support@thesgstudy.com
+                bksinha1756@gmail.com
               </span>.
             </p>
           </div>
@@ -165,11 +165,11 @@ const PrivacyPolicy = () => {
             <div className="space-y-2 text-sm">
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-[#C8A45A]" />
-                support@thesgstudy.com
+                bksinha1756@gmail.com / bksinha2801@gmail.com
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-[#C8A45A]" />
-                +91 94252 13213 / +91 99261 97075
+                +91-9926197075
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-[#C8A45A]" />

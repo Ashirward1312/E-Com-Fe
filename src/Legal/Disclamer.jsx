@@ -45,7 +45,7 @@ const ProductDisclaimer = () => {
             </h2>
             <p>
               All study materials, e-books, notes, and online content available on
-              <span className="font-semibold text-[#0F2E57]"> Thesgstudy.com</span>
+              <span className="font-semibold text-[#0F2E57]"> IAS Veda</span>
               are original and carefully prepared by our subject experts.
             </p>
 
@@ -82,7 +82,7 @@ const ProductDisclaimer = () => {
               with official government sources.
             </p>
             <p className="mt-3 font-medium text-[#0F2E57]">
-              Thesgstudy.com is not affiliated with UPSC, any State PSC, or any government body.
+              IAS Veda is not affiliated with UPSC, any State PSC, or any government body.
             </p>
           </div>
 
@@ -101,15 +101,15 @@ const ProductDisclaimer = () => {
             <div className="mt-4 space-y-2 text-sm">
               <div className="flex items-center gap-2">
                 <Globe className="w-4 h-4 text-[#C8A45A]" />
-                www.thesgstudy.com
+                iasveda.com
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-[#C8A45A]" />
-                bksinha1756@gmail.com / support@thesgstudy.com
+                bksinha1756@gmail.com / bksinha2801@gmail.com
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-[#C8A45A]" />
-                +91 94252 13213 / +91 99261 97075
+                +91-9926197075
               </div>
             </div>
 
