@@ -7,7 +7,7 @@ import {
 
 const PrivacyPolicy = () => {
   return (
-    <section className="relative bg-gradient-to-br from-[#FDFBF7] via-white to-[#F9F6EF] py-28 font-poppins">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#FDFBF7] via-white to-[#F9F6EF] py-28 font-poppins">
 
       {/* Soft Background Glow */}
       <div className="absolute -top-40 -right-40 w-[700px] h-[700px] bg-[#C8A45A]/10 rounded-full blur-3xl" />

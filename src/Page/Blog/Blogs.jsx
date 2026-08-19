@@ -76,10 +76,10 @@ const Blogs = () => {
         {/* ✅ Table Card */}
         <div className="bg-white rounded-3xl shadow-xl border border-gray-200 overflow-hidden">
 
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-200px)]">
             <table className="w-full text-sm text-left">
 
-              <thead className="bg-[#0B1C33] text-white text-sm uppercase tracking-wider">
+              <thead className="bg-[#0B1C33] text-white text-sm uppercase tracking-wider sticky top-0 z-10">
                 <tr>
                   {/* <th className="px-6 py-4">Image</th> */}
                   <th className="px-6 py-4">Title</th>
