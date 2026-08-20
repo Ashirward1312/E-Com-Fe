@@ -109,17 +109,76 @@ export const cancelOrder = async (orderId) => {
 };
 
 // Download Ebook
+// export const downloadEbook = async (orderItemId) => {
+//     const response = await API.get(
+//         `orders/download/${orderItemId}/`,
+//         {
+//             responseType: "blob",
+//         }
+//     );
+
+//     return response.data;
+// };
+
 export const downloadEbook = async (orderItemId) => {
-    const response = await API.get(
-        `orders/download/${orderItemId}/`,
-        {
-            responseType: "blob",
+    try {
+        const response = await API.get(
+            `orders/download/${orderItemId}/`,
+            {
+                responseType: "blob",
+            }
+        );
+
+        return response.data;
+
+    } catch (error) {
+
+        const responseData = error.response?.data;
+
+        if (responseData instanceof Blob) {
+
+            const text = await responseData.text();
+
+            let data;
+
+            try {
+                data = JSON.parse(text);
+            } catch {
+                throw new Error(
+                    "Failed to download e-book."
+                );
+            }
+
+            // Response is directly an array
+            if (Array.isArray(data)) {
+                throw new Error(
+                    data[0] || "Failed to download e-book."
+                );
+            }
+
+            // Response is { detail: [...] }
+            if (Array.isArray(data?.detail)) {
+                throw new Error(
+                    data.detail[0] || "Failed to download e-book."
+                );
+            }
+
+            // Response is { detail: "..." }
+            if (typeof data?.detail === "string") {
+                throw new Error(data.detail);
+            }
+
+            throw new Error(
+                "Failed to download e-book."
+            );
         }
-    );
 
-    return response.data;
+        throw new Error(
+            responseData?.detail ||
+            "Failed to download e-book."
+        );
+    }
 };
-
 // Library
 export const getLibrary = async () => {
     const response = await API.get(

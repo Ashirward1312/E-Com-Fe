@@ -30,9 +30,7 @@ const OrderDetail = () => {
    };
 
    const handleDownload = async (item) => {
-
       try {
-
          const blob = await downloadEbook(item.id);
 
          const url = window.URL.createObjectURL(blob);
@@ -50,8 +48,11 @@ const OrderDetail = () => {
          successToast("Download Started");
 
       } catch (error) {
-         console.log(error);
-         errorToast("Unable to download e-book.");
+         console.log("E-book download error:", error);
+
+         errorToast(
+            error?.message || "Unable to download e-book."
+         );
       }
    };
 
@@ -92,11 +93,10 @@ const OrderDetail = () => {
                <div>
                   <p className="text-gray-400 uppercase tracking-wide text-xs">Payment</p>
                   <span
-                     className={`inline-block mt-1 px-3 py-1 rounded-full text-xs font-semibold ${
-                        order.payment_status === "paid"
+                     className={`inline-block mt-1 px-3 py-1 rounded-full text-xs font-semibold ${order.payment_status === "paid"
                            ? "bg-green-100 text-green-700"
                            : "bg-yellow-100 text-yellow-700"
-                     }`}
+                        }`}
                   >
                      {order.payment_status.toUpperCase()}
                   </span>
