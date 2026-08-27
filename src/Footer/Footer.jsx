@@ -161,10 +161,7 @@ const Footer = () => {
               </li>
               <li className="flex items-start gap-3 text-sm text-white/60 group hover:text-white transition-colors">
                 <MapPin className="w-4 h-4 text-[#C8A45A] mt-1 flex-shrink-0" />
-                <span>
-                  T/9, Green Paradise, Vishal Nagar,<br />
-                  Raipur – 492007, Chhattisgarh, India
-                </span>
+                <span>Raipur, Chhattisgarh, India</span>
               </li>
             </ul>
           </div>

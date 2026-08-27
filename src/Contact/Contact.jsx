@@ -198,9 +198,7 @@ Message: ${formData.message}`;
                                             Visit Us
                                         </h3>
                                         <p className="text-sm text-gray-600">
-                                            Green Paradise GPRA,
-                                            <br />
-                                            Raipur, Chhattisgarh
+                                            Raipur, Chhattisgarh, India
                                         </p>
                                     </div>
                                 </div>
@@ -272,7 +270,7 @@ Message: ${formData.message}`;
                             </div>
 
                             {/* MAP */}
-                            <div className="rounded-2xl overflow-hidden shadow-md border border-[#e6ecf5] mt-6">
+                            {/* <div className="rounded-2xl overflow-hidden shadow-md border border-[#e6ecf5] mt-6">
                                 <iframe
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3538.7531309095048!2d81.6677299!3d21.2766435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a28dd3b660224ed%3A0xd080b45f88c41562!2sGreen%20Paradise%20GPRA!5e1!3m2!1sen!2sin!4v1785911404430!5m2!1sen!2sin"
                                     width="100%"
@@ -281,7 +279,7 @@ Message: ${formData.message}`;
                                     loading="lazy"
                                     title="Google Map"
                                 ></iframe>
-                            </div>
+                            </div> */}
 
                         </div>
 
