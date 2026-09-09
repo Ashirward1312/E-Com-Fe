@@ -41,7 +41,7 @@ const EditBlog = () => {
       });
     } catch (error) {
       console.log(error);
-      errorToast("Failed to load blog.");
+      errorToast("Failed to load current affair.");
     }
   };
 
@@ -79,11 +79,11 @@ const EditBlog = () => {
 
       await updateBlog(slug, data);
 
-      successToast("Blog updated successfully.");
+      successToast("Current Affair updated successfully.");
       navigate("/admin/blogs");
     } catch (error) {
       console.log(error);
-      errorToast("Failed to update blog.");
+      errorToast("Failed to update current affair.");
     } finally {
       setLoading(false);
     }
@@ -96,11 +96,11 @@ const EditBlog = () => {
         {/* ✅ Header */}
         <div className="mb-10">
           <h2 className="text-3xl font-bold text-[#0B1C33]">
-            Edit Blog
+            Edit Current Affair
           </h2>
           <div className="w-16 h-1 bg-[#C8A45A] rounded mt-3"></div>
           <p className="text-gray-500 mt-3 text-sm">
-            Update blog content and SEO information.
+            Update current affair content and SEO information.
           </p>
         </div>
 
@@ -164,7 +164,7 @@ const EditBlog = () => {
             {/* Content */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Blog Content
+                Current Affair Content
               </label>
               <textarea
                 name="content"
@@ -236,7 +236,7 @@ const EditBlog = () => {
                 className="w-5 h-5 accent-[#0B1C33]"
               />
               <label className="text-sm font-medium text-gray-700">
-                Publish Blog
+                Publish Current Affair
               </label>
             </div>
 
@@ -247,7 +247,7 @@ const EditBlog = () => {
                 disabled={loading}
                 className="w-full bg-gradient-to-r from-[#0B1C33] to-[#1b355e] text-white py-3 rounded-xl font-semibold hover:shadow-lg transition disabled:opacity-70"
               >
-                {loading ? "Updating..." : "Update Blog"}
+                {loading ? "Updating..." : "Update Current Affair"}
               </button>
             </div>
 

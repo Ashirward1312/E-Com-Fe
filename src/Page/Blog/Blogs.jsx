@@ -25,7 +25,7 @@ const Blogs = () => {
   };
 
   const handleDelete = async (slug) => {
-    const confirmDelete = window.confirm("Delete this blog?");
+    const confirmDelete = window.confirm("Delete this current affair?");
     if (!confirmDelete) return;
 
     try {
@@ -35,7 +35,7 @@ const Blogs = () => {
         prev.filter((blog) => blog.slug !== slug)
       );
 
-      successToast("Blog deleted successfully.");
+      successToast("Current Affair deleted successfully.");
     } catch (error) {
       console.log(error);
       errorToast("Delete failed.");
@@ -46,7 +46,7 @@ const Blogs = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#f4f6fb]">
         <div className="text-[#0B1C33] text-lg font-medium">
-          Loading Blogs...
+          Loading Current Affairs...
         </div>
       </div>
     );
@@ -60,7 +60,7 @@ const Blogs = () => {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h2 className="text-3xl font-bold text-[#0B1C33]">
-              Blogs Management
+              Current Affairs Management
             </h2>
             <div className="w-16 h-1 bg-[#C8A45A] rounded mt-2"></div>
           </div>
@@ -68,7 +68,7 @@ const Blogs = () => {
           <Link to="/admin/blogs/add">
             <button className="flex items-center gap-2 bg-gradient-to-r from-[#0B1C33] to-[#1b355e] text-white px-5 py-2.5 rounded-xl font-medium hover:shadow-lg transition">
               <Plus size={18} />
-              Add Blog
+              Add Current Affair
             </button>
           </Link>
         </div>

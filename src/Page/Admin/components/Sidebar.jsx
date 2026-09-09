@@ -48,7 +48,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
             icon: <Users size={20} />,
         },
         {
-            name: "Blogs",
+            name: "Current Affairs",
             path: "/admin/blogs",
             icon: <FileText size={20} />,
         },

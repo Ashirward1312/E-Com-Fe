@@ -131,6 +131,7 @@ import Terms from "./Legal/Terms";
 import Privacy from "./Legal/Privacy";
 import Refund from "./Legal/Refund";
 import Disclaimer from "./Legal/Disclamer";
+import NotFound from "./Page/NotFound";
 
 const PublicLayout = () => {
   return (
@@ -271,6 +272,9 @@ function App() {
         <Route path="orders/:orderId" element={<AccountOrderDetail />} />
         <Route path="library" element={<Library />} />
       </Route>
+
+      {/* 404 Catch-All */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
     </>
   );

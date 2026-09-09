@@ -52,11 +52,11 @@ const AddBlog = () => {
 
       await createBlog(data);
 
-      successToast("Blog created successfully.");
+      successToast("Current Affair created successfully.");
       navigate("/admin/blogs");
     } catch (error) {
       console.log(error);
-      errorToast("Failed to create blog.");
+      errorToast("Failed to create current affair.");
     } finally {
       setLoading(false);
     }
@@ -69,11 +69,11 @@ const AddBlog = () => {
         {/* ✅ Header */}
         <div className="mb-10">
           <h2 className="text-3xl font-bold text-[#0B1C33]">
-            Add New Blog
+            Add New Current Affair
           </h2>
           <div className="w-16 h-1 bg-[#C8A45A] rounded mt-3"></div>
           <p className="text-gray-500 mt-3 text-sm">
-            Create and publish a new blog post with SEO details.
+            Create and publish a new current affair post with SEO details.
           </p>
         </div>
 
@@ -94,7 +94,7 @@ const AddBlog = () => {
                 onChange={handleChange}
                 required
                 className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#C8A45A] outline-none"
-                placeholder="Enter blog title"
+                placeholder="Enter current affair title"
               />
             </div>
 
@@ -125,7 +125,7 @@ const AddBlog = () => {
             {/* Content */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Blog Content
+                Current Affair Content
               </label>
               <textarea
                 name="content"
@@ -134,7 +134,7 @@ const AddBlog = () => {
                 onChange={handleChange}
                 required
                 className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#C8A45A] outline-none"
-                placeholder="Write blog content here..."
+                placeholder="Write current affair content here..."
               />
             </div>
 
@@ -212,7 +212,7 @@ const AddBlog = () => {
                 disabled={loading}
                 className="w-full bg-gradient-to-r from-[#0B1C33] to-[#1b355e] text-white py-3 rounded-xl font-semibold hover:shadow-lg transition disabled:opacity-70"
               >
-                {loading ? "Saving..." : "Save Blog"}
+                {loading ? "Saving..." : "Save Current Affair"}
               </button>
             </div>
 
