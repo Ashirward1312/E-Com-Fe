@@ -186,8 +186,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutPage />} />
         
-        <Route path="/blogs" element={<PublicBlogs />} />
-        <Route path="/blogs/:slug" element={<PublicBlogDetail />} />
+        <Route path="/current-affairs" element={<PublicBlogs />} />
+        <Route path="/current-affairs/:slug" element={<PublicBlogDetail />} />
         
         <Route path="/contact" element={<Contact />} />
         
