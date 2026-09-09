@@ -42,12 +42,12 @@ const PublicBlogDetail = () => {
         return (
             <div className="text-center py-24">
                 <h2 className="text-3xl font-bold mb-6 text-[#0B1B31]">
-                    Blog Not Found
+                    Current Affair Not Found
                 </h2>
 
-                <Link to="/blogs">
+                <Link to="/current-affairs">
                     <button className="bg-gradient-to-r from-[#0B1B31] to-[#1c355e] text-white px-6 py-2.5 rounded-xl shadow-md hover:shadow-xl transition">
-                        Back to Blogs
+                        Back
                     </button>
                 </Link>
             </div>
