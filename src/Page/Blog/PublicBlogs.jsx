@@ -28,7 +28,7 @@ const PublicBlogs = () => {
         return (
             <div className="flex justify-center items-center min-h-[60vh]">
                 <div className="text-lg font-medium text-gray-500">
-                    Loading blogs...
+                    Loading Current Affairs...
                 </div>
             </div>
         );
@@ -44,7 +44,7 @@ const PublicBlogs = () => {
                 
                 <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#F3EFE6] text-[#C8A45A] font-semibold text-sm uppercase tracking-widest mb-6">
                     <span className="w-2 h-2 rounded-full bg-[#C8A45A] animate-pulse"></span>
-                    Our Blog
+                    Current Affairs
                 </div>
 
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#0B1B31] tracking-tight leading-tight mb-6">
