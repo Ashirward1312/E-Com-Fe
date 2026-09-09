@@ -61,12 +61,12 @@ const PublicBlogDetail = () => {
 
                 {/* ✅ Back Button */}
                 <div className="mb-12">
-                    <Link to="/blogs">
+                    <Link to="/current-affairs">
                         <button className="group bg-[#0B1B31] text-white px-7 py-3 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2">
                             <span className="group-hover:-translate-x-1 transition-transform duration-300">
                                 ←
                             </span>
-                            Back to Blogs
+                            Back
                         </button>
                     </Link>
                 </div>

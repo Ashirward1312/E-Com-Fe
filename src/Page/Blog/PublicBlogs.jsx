@@ -82,7 +82,7 @@ const PublicBlogs = () => {
 
                         <Link
                             key={blog.id}
-                            to={`/blogs/${blog.slug}`}
+                            to={`/current-affairs/${blog.slug}`}
                             className="bg-white rounded-3xl p-8 border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(200,164,90,0.15)] hover:border-[#C8A45A]/30 transition-all duration-500 group flex flex-col items-center text-center relative overflow-hidden"
                         >
                             {/* Decorative Top Accent */}
