@@ -85,7 +85,7 @@ const AddBlog = () => {
             {/* Title */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Blog Title
+                Current Affair Title
               </label>
               <input
                 type="text"
