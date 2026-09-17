@@ -24,15 +24,15 @@ const Blogs = () => {
     }
   };
 
-  const handleDelete = async (slug) => {
+  const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Delete this current affair?");
     if (!confirmDelete) return;
 
     try {
-      await deleteBlog(slug);
+      await deleteBlog(id);
 
       setBlogs((prev) =>
-        prev.filter((blog) => blog.slug !== slug)
+        prev.filter((blog) => blog.id !== id)
       );
 
       successToast("Current Affair deleted successfully.");
@@ -56,12 +56,13 @@ const Blogs = () => {
     <div className="min-h-screen bg-[#f4f6fb] py-12 px-6">
       <div className="max-w-6xl mx-auto">
 
-        {/* ✅ Header Section */}
+        {/* Header Section */}
         <div className="flex items-center justify-between mb-8">
           <div>
             <h2 className="text-3xl font-bold text-[#0B1C33]">
               Current Affairs Management
             </h2>
+
             <div className="w-16 h-1 bg-[#C8A45A] rounded mt-2"></div>
           </div>
 
@@ -73,7 +74,7 @@ const Blogs = () => {
           </Link>
         </div>
 
-        {/* ✅ Table Card */}
+        {/* Table Card */}
         <div className="bg-white rounded-3xl shadow-xl border border-gray-200 overflow-hidden">
 
           <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-200px)]">
@@ -81,7 +82,6 @@ const Blogs = () => {
 
               <thead className="bg-[#0B1C33] text-white text-sm uppercase tracking-wider sticky top-0 z-10">
                 <tr>
-                  {/* <th className="px-6 py-4">Image</th> */}
                   <th className="px-6 py-4">Title</th>
                   <th className="px-6 py-4">Status</th>
                   <th className="px-6 py-4">Created</th>
@@ -96,14 +96,6 @@ const Blogs = () => {
                     key={blog.id}
                     className="hover:bg-gray-50 transition"
                   >
-                    {/* Image */}
-                    {/* <td className="px-6 py-4">
-                      <img
-                        src={blog.image}
-                        alt={blog.title}
-                        className="w-20 h-14 object-cover rounded-lg shadow-sm"
-                      />
-                    </td> */}
 
                     {/* Title */}
                     <td className="px-6 py-4 font-medium text-[#0B1C33]">
@@ -132,16 +124,18 @@ const Blogs = () => {
                     <td className="px-6 py-4">
                       <div className="flex items-center justify-center gap-3">
 
+                        {/* Edit */}
                         <Link
-                          to={`/admin/blogs/edit/${blog.slug}`}
+                          to={`/admin/blogs/edit/${blog.id}`}
                         >
                           <button className="p-2 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition">
                             <Pencil size={18} />
                           </button>
                         </Link>
 
+                        {/* Delete */}
                         <button
-                          onClick={() => handleDelete(blog.slug)}
+                          onClick={() => handleDelete(blog.id)}
                           className="p-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition"
                         >
                           <Trash2 size={18} />

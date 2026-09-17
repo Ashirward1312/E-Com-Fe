@@ -4,7 +4,7 @@ import { getBlog } from "../../services/blogApi";
 
 const PublicBlogDetail = () => {
 
-    const { slug } = useParams();
+    const { id } = useParams();
 
     const [blog, setBlog] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -14,7 +14,7 @@ const PublicBlogDetail = () => {
         const fetchBlog = async () => {
 
             try {
-                const data = await getBlog(slug);
+                const data = await getBlog(id);
                 setBlog(data);
             } catch (error) {
                 console.log(error);
@@ -26,7 +26,7 @@ const PublicBlogDetail = () => {
 
         fetchBlog();
 
-    }, [slug]);
+    }, [id]);
 
     if (loading) {
         return (
@@ -59,7 +59,7 @@ const PublicBlogDetail = () => {
 
             <div className="max-w-5xl mx-auto px-6">
 
-                {/* ✅ Back Button */}
+                {/* Back Button */}
                 <div className="mb-12">
                     <Link to="/current-affairs">
                         <button className="group bg-[#0B1B31] text-white px-7 py-3 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2">
@@ -71,7 +71,7 @@ const PublicBlogDetail = () => {
                     </Link>
                 </div>
 
-                {/* ✅ Title Section */}
+                {/* Title Section */}
                 <div className="text-center mb-10">
 
                     <h1 className="text-4xl md:text-5xl font-extrabold text-[#0B1B31] leading-tight">
@@ -93,13 +93,12 @@ const PublicBlogDetail = () => {
 
                 </div>
 
-                {/* ✅ Premium Image Frame */}
+                {/* Premium Image Frame */}
                 {blog.image && (
                     <div className="flex justify-center mb-16">
 
                         <div className="relative">
 
-                            {/* Decorative Glow */}
                             <div className="absolute -inset-4 bg-[#C8A45A]/10 rounded-3xl blur-2xl"></div>
 
                             <div className="relative w-80 h-80 bg-white rounded-3xl shadow-2xl flex items-center justify-center p-8 border border-gray-100">
@@ -117,7 +116,7 @@ const PublicBlogDetail = () => {
                     </div>
                 )}
 
-                {/* ✅ Content Section */}
+                {/* Content Section */}
                 <div className="max-w-3xl mx-auto">
 
                     <div className="bg-white shadow-xl rounded-3xl p-10 border border-gray-100">

@@ -6,10 +6,11 @@ export const getBlogs = async () => {
    return response.data;
 };
 
-export const getBlog = async (slug) => {
-   const response = await API.get(`blogs/${slug}/`);
+export const getBlog = async (id) => {
+   const response = await API.get(`blogs/${id}/`);
    return response.data;
 };
+
 
 // Admin Blogs
 export const createBlog = async (blogData) => {
@@ -27,11 +28,11 @@ export const createBlog = async (blogData) => {
 };
 
 export const updateBlog = async (
-   slug,
+   id,
    blogData
 ) => {
    const response = await API.put(
-      `blogs/${slug}/`,
+      `blogs/${id}/`,
       blogData,
       {
          headers: {
@@ -43,9 +44,9 @@ export const updateBlog = async (
    return response.data;
 };
 
-export const deleteBlog = async (slug) => {
+export const deleteBlog = async (id) => {
    const response = await API.delete(
-      `blogs/${slug}/`
+      `blogs/${id}/`
    );
 
    return response.data;

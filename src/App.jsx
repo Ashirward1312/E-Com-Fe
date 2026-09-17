@@ -1,75 +1,3 @@
-// import { Routes, Route } from "react-router-dom";
-
-// import Header from "./Header/Header";
-// import Hero from "./Hero/Hero";
-// import Why from "./Why/Why";
-// import Mission from "./Mission/Mission";
-// import Videostrip from "./Videosection/Videosection";
-// import PremiumStrip from "./PremiumStrip/PremiumStrip";
-// import Faq from "./Faq/Faq";
-// import About from "./About/About";
-// import Founder from "./Founder/Founder";
-// import Login from "./Page/Login";
-// import Register from "./Page/Register";
-// import Product from "./Page/Product/Product";
-// import Checkout from "./Page/Checkout/Checkout";
-// import MyOrders from "./Page/Orders/MyOrders";
-// import Cart from "./Page/Cart/Cart";
-// import OrderDetail from "./Page/Orders/OrderDetail";
-// import OrderSuccess from "./Page/Success/OrderSuccess";
-// import AdminRoute from "./Page/Admin/components/AdminRoute";
-// import AdminLayout from "./Page/layouts/AdminLayout";
-// import Dashboard from "./Page/Admin/Dashboard";
-
-// function Home() {
-//   return (
-//     <>
-//       <Hero />
-//       <Why />
-//       <Mission />
-//       <Videostrip />
-//       <PremiumStrip />
-//       <Faq />
-//     </>
-//   );
-// }
-
-// // About page + Founder section
-// function AboutPage() {
-//   return (
-//     <>
-//       <About />
-//       <Founder />
-//     </>
-//   );
-// }
-
-// function App() {
-//   return (
-//     <>
-//       <Header />
-
-//       <Routes>
-//         <Route path="/" element={<Home />} />
-//         <Route path="/about" element={<AboutPage />} />
-//         <Route path="/login" element={<Login />} />
-//         <Route path="/register" element={<Register />} />
-//         <Route path="/products" element={<Product />} />
-//         <Route path="/cart" element={<Cart />} />
-//         <Route path="/checkout" element={<Checkout />} />
-//         <Route path="/my-orders" element={<MyOrders />} />
-//         <Route path="/orders/:orderId" element={<OrderDetail />} />
-//         <Route
-//           path="/order-success"
-//           element={<OrderSuccess />}
-//         />
-//       </Routes>
-//     </>
-//   );
-// }
-
-// export default App;
-
 import { useEffect } from "react";
 import { Routes, Route, Outlet, useLocation } from "react-router-dom";
 import PublicRoute from "./routes/PublicRoute";
@@ -183,99 +111,99 @@ function App() {
       <ScrollToTop />
       <Routes>
         {/* User Routes */}
-      <Route element={<PublicLayout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<AboutPage />} />
-        
-        <Route path="/current-affairs" element={<PublicBlogs />} />
-        <Route path="/current-affairs/:slug" element={<PublicBlogDetail />} />
-        
-        <Route path="/contact" element={<Contact />} />
-        
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/refund" element={<Refund />} />
-        <Route path="/disclaimer" element={<Disclaimer />} />
-        
-        <Route path="/books" element={<Product />} />
-        <Route path="/books/:id" element={<ProductDetail />} />
-        
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/my-orders" element={<MyOrders />} />
-        <Route path="/orders/:orderId" element={<OrderDetail />} />
-        <Route path="/order-success" element={<OrderSuccess />} />
-      </Route>
+        <Route element={<PublicLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<AboutPage />} />
 
-      <Route
-        path="/login"
-        element={
-          <PublicRoute>
-            <Login />
-          </PublicRoute>
-        }
-      />
+          <Route path="/current-affairs" element={<PublicBlogs />} />
+          <Route path="/current-affairs/:id" element={<PublicBlogDetail />} />
 
-      <Route
-        path="/register"
-        element={
-          <PublicRoute>
-            <Register />
-          </PublicRoute>
-        }
-      />
+          <Route path="/contact" element={<Contact />} />
 
-      <Route
-        path="/checkout"
-        element={
-          <CheckoutRoute>
-            <Checkout />
-          </CheckoutRoute>
-        }
-      />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/refund" element={<Refund />} />
+          <Route path="/disclaimer" element={<Disclaimer />} />
 
-      {/* Admin Routes */}
-      <Route
-        path="/admin"
-        element={
-          <AdminRoute>
-            <AdminLayout />
-          </AdminRoute>
-        }
-      >
-        <Route index element={<Dashboard />} />
-        <Route path="products" element={<Products />} />
-        <Route path="products/add" element={<AddProduct />} />
-        <Route path="products/edit/:id" element={<EditProduct />} />
-        <Route path="orders" element={<Orders />} />
-        <Route path="orders/:orderId" element={<AdminOrderDetail />} />
-        <Route path="categories" element={<Categories />} />
-        <Route path="users" element={<Users />} />
-        
-        {/* Admin Blog Routes */}
-        <Route path="blogs" element={<Blogs />} />
-        <Route path="blogs/add" element={<AddBlog />} />
-        <Route path="blogs/edit/:slug" element={<EditBlog />} />
-      </Route>
+          <Route path="/books" element={<Product />} />
+          <Route path="/books/:id" element={<ProductDetail />} />
 
-      {/* user Routes */}
-      <Route
-        path="/account"
-        element={
-          <UserRoute>
-            <AccountLayout />
-          </UserRoute>
-        }
-      >
-        <Route index element={<AccountDashboard />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="orders" element={<AccountOrders />} />
-        <Route path="orders/:orderId" element={<AccountOrderDetail />} />
-        <Route path="library" element={<Library />} />
-      </Route>
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/my-orders" element={<MyOrders />} />
+          <Route path="/orders/:orderId" element={<OrderDetail />} />
+          <Route path="/order-success" element={<OrderSuccess />} />
+        </Route>
 
-      {/* 404 Catch-All */}
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
+
+        <Route
+          path="/register"
+          element={
+            <PublicRoute>
+              <Register />
+            </PublicRoute>
+          }
+        />
+
+        <Route
+          path="/checkout"
+          element={
+            <CheckoutRoute>
+              <Checkout />
+            </CheckoutRoute>
+          }
+        />
+
+        {/* Admin Routes */}
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
+              <AdminLayout />
+            </AdminRoute>
+          }
+        >
+          <Route index element={<Dashboard />} />
+          <Route path="products" element={<Products />} />
+          <Route path="products/add" element={<AddProduct />} />
+          <Route path="products/edit/:id" element={<EditProduct />} />
+          <Route path="orders" element={<Orders />} />
+          <Route path="orders/:orderId" element={<AdminOrderDetail />} />
+          <Route path="categories" element={<Categories />} />
+          <Route path="users" element={<Users />} />
+
+          {/* Admin Blog Routes */}
+          <Route path="blogs" element={<Blogs />} />
+          <Route path="blogs/add" element={<AddBlog />} />
+          <Route path="blogs/edit/:id" element={<EditBlog />} />
+        </Route>
+
+        {/* user Routes */}
+        <Route
+          path="/account"
+          element={
+            <UserRoute>
+              <AccountLayout />
+            </UserRoute>
+          }
+        >
+          <Route index element={<AccountDashboard />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="orders" element={<AccountOrders />} />
+          <Route path="orders/:orderId" element={<AccountOrderDetail />} />
+          <Route path="library" element={<Library />} />
+        </Route>
+
+        {/* 404 Catch-All */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </>
   );
 }
