@@ -131,19 +131,14 @@
 // export default PublicBlogs;
 
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getBlogs } from "../../services/blogApi";
-import { getPublicQuizList } from "../../services/quizApi";
 import { BookOpen, Clock, Star, Zap, ChevronRight, FileText, HelpCircle, MessageSquare } from "lucide-react";
 
 const PublicBlogs = () => {
 
-    const navigate = useNavigate();
-    const [activeTab, setActiveTab] = useState("articles");
     const [blogs, setBlogs] = useState([]);
-    const [quizzes, setQuizzes] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [quizzesLoading, setQuizzesLoading] = useState(true);
 
     useEffect(() => {
         const fetchBlogs = async () => {
@@ -157,20 +152,6 @@ const PublicBlogs = () => {
             }
         };
         fetchBlogs();
-    }, []);
-
-    useEffect(() => {
-        const fetchQuizzes = async () => {
-            try {
-                const data = await getPublicQuizList();
-                setQuizzes(data);
-            } catch {
-                setQuizzes([]);
-            } finally {
-                setQuizzesLoading(false);
-            }
-        };
-        fetchQuizzes();
     }, []);
 
     return (
@@ -189,7 +170,7 @@ const PublicBlogs = () => {
                 </h1>
 
                 <p className="text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
-                    Stay updated with the latest news, insights, and test your IAS preparation with curated quizzes.
+                    Stay updated with the latest news, insights, and current affairs for your IAS preparation.
                 </p>
 
                 <div className="mt-6 flex justify-center items-center gap-2">
@@ -199,57 +180,11 @@ const PublicBlogs = () => {
                 </div>
             </div>
 
-            {/* Tab Switcher */}
-            <div className="flex justify-center mb-12">
-                <div className="inline-flex items-center bg-[#F3EFE6] rounded-2xl p-1.5 gap-1 shadow-inner">
-                    <button
-                        id="tab-articles"
-                        onClick={() => setActiveTab("articles")}
-                        className={`flex items-center gap-2.5 px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${
-                            activeTab === "articles"
-                                ? "bg-[#0B1B31] text-white shadow-lg"
-                                : "text-[#6B5E3F] hover:text-[#0B1B31]"
-                        }`}
-                    >
-                        <FileText size={16} />
-                        Current Affairs
-                        {blogs.length > 0 && (
-                            <span className={`text-xs px-2 py-0.5 rounded-full font-semibold ${
-                                activeTab === "articles" ? "bg-[#C8A45A] text-white" : "bg-[#C8A45A]/20 text-[#C8A45A]"
-                            }`}>
-                                {blogs.length}
-                            </span>
-                        )}
-                    </button>
-                    <button
-                        id="tab-quiz"
-                        onClick={() => setActiveTab("quiz")}
-                        className={`flex items-center gap-2.5 px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${
-                            activeTab === "quiz"
-                                ? "bg-[#0B1B31] text-white shadow-lg"
-                                : "text-[#6B5E3F] hover:text-[#0B1B31]"
-                        }`}
-                    >
-                        <HelpCircle size={16} />
-                        Practice Quiz
-                        {quizzes.length > 0 && (
-                            <span className={`text-xs px-2 py-0.5 rounded-full font-semibold ${
-                                activeTab === "quiz" ? "bg-[#C8A45A] text-white" : "bg-[#C8A45A]/20 text-[#C8A45A]"
-                            }`}>
-                                {quizzes.length}
-                            </span>
-                        )}
-                    </button>
-                </div>
+            {/* ── ARTICLES GRID ── */}
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#F3EFE6] text-[#C8A45A] font-semibold text-xs uppercase tracking-widest mb-8">
+                <span className="w-2 h-2 rounded-full bg-[#C8A45A] animate-pulse"></span>
+                Current Affairs
             </div>
-
-            {/* ── ARTICLES TAB ── */}
-            {activeTab === "articles" && (
-                <>
-                    <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#F3EFE6] text-[#C8A45A] font-semibold text-xs uppercase tracking-widest mb-8">
-                        <span className="w-2 h-2 rounded-full bg-[#C8A45A] animate-pulse"></span>
-                        Current Affairs
-                    </div>
 
                     {loading ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -296,85 +231,7 @@ const PublicBlogs = () => {
                             ))}
                         </div>
                     )}
-                </>
-            )}
 
-            {/* ── QUIZ TAB ── */}
-            {activeTab === "quiz" && (
-                <>
-                    <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#F3EFE6] text-[#C8A45A] font-semibold text-xs uppercase tracking-widest mb-8">
-                        <Zap size={13} className="animate-pulse" />
-                        Practice Quiz
-                    </div>
-
-                    {quizzesLoading ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {[1,2,3].map(i => (
-                                <div key={i} className="bg-white rounded-3xl p-8 animate-pulse border border-gray-100">
-                                    <div className="h-4 bg-gray-200 rounded w-3/4 mb-3" />
-                                    <div className="h-3 bg-gray-100 rounded w-full mb-2" />
-                                    <div className="h-3 bg-gray-100 rounded w-2/3" />
-                                </div>
-                            ))}
-                        </div>
-                    ) : quizzes.length === 0 ? (
-                        <div className="text-center py-20 bg-gray-50 rounded-3xl shadow-sm">
-                            <div className="w-16 h-16 mx-auto rounded-2xl bg-[#F3EFE6] flex items-center justify-center mb-4">
-                                <BookOpen size={28} className="text-[#C8A45A]" />
-                            </div>
-                            <h2 className="text-xl font-semibold text-[#0B1B31] mb-2">No Quizzes Yet</h2>
-                            <p className="text-gray-400">New quizzes are coming soon. Stay tuned!</p>
-                        </div>
-                    ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {quizzes.slice(0, 6).map((quiz) => (
-                                <Link
-                                    key={quiz.id}
-                                    to="/quiz"
-                                    className="bg-white rounded-3xl p-8 border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(200,164,90,0.15)] hover:border-[#C8A45A]/30 transition-all duration-500 group flex flex-col items-start text-left relative overflow-hidden"
-                                >
-                                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#C8A45A] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#C8A45A] to-[#B19047] flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                                        <MessageSquare size={22} className="text-white" />
-                                    </div>
-
-                                    <h3 className="text-lg font-bold text-[#0B1B31] mb-2 line-clamp-3 group-hover:text-[#C8A45A] transition-colors duration-300 text-left leading-snug">
-                                        {quiz.question}
-                                    </h3>
-
-                                    {quiz.category && (
-                                        <div className="mt-auto pt-4">
-                                            <span className="inline-block text-xs bg-[#F3EFE6] text-[#C8A45A] px-2.5 py-0.5 rounded-full font-medium">
-                                                {quiz.category}
-                                            </span>
-                                        </div>
-                                    )}
-
-                                    <div className="w-full flex items-center justify-between text-sm font-semibold text-[#0B1B31] group-hover:text-[#C8A45A] transition-colors duration-300 mt-5 pt-5 border-t border-gray-50">
-                                        <span>Reveal Answer</span>
-                                        <div className="w-8 h-8 rounded-full bg-gray-50 group-hover:bg-[#C8A45A]/10 flex items-center justify-center transition-colors duration-300">
-                                            <ChevronRight size={16} className="group-hover:translate-x-0.5 transition-transform duration-300" />
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
-                    )}
-
-                    {/* Link to full quiz page */}
-                    <div className="text-center mt-12">
-                        <Link
-                            to="/quiz"
-                            className="inline-flex items-center gap-2 bg-[#0B1B31] hover:bg-[#132743] text-white px-8 py-3.5 rounded-2xl font-bold text-sm transition-all shadow-lg hover:shadow-xl"
-                        >
-                            <HelpCircle size={18} />
-                            View All Quizzes
-                            <ChevronRight size={16} />
-                        </Link>
-                    </div>
-                </>
-            )}
 
         </div>
     );
