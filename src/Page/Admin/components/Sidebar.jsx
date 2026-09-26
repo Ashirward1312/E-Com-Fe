@@ -10,6 +10,8 @@ import {
     FileText,
     LogOut,
     X,
+    HelpCircle,
+    MessageSquare,
 } from "lucide-react";
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
@@ -51,6 +53,11 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
             name: "Current Affairs",
             path: "/admin/blogs",
             icon: <FileText size={20} />,
+        },
+        {
+            name: "Quiz",
+            path: "/admin/quiz",
+            icon: <HelpCircle size={20} />,
         },
     ];
 

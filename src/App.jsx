@@ -60,6 +60,8 @@ import Privacy from "./Legal/Privacy";
 import Refund from "./Legal/Refund";
 import Disclaimer from "./Legal/Disclamer";
 import NotFound from "./Page/NotFound";
+import PublicQuizPage from "./Page/Quiz/PublicQuizPage";
+import AdminQuiz from "./Page/Admin/Quiz";
 
 const PublicLayout = () => {
   return (
@@ -128,6 +130,8 @@ function App() {
           <Route path="/books" element={<Product />} />
           <Route path="/books/:id" element={<ProductDetail />} />
 
+          <Route path="/quiz" element={<PublicQuizPage />} />
+
           <Route path="/cart" element={<Cart />} />
           <Route path="/my-orders" element={<MyOrders />} />
           <Route path="/orders/:orderId" element={<OrderDetail />} />
@@ -183,6 +187,9 @@ function App() {
           <Route path="blogs" element={<Blogs />} />
           <Route path="blogs/add" element={<AddBlog />} />
           <Route path="blogs/edit/:id" element={<EditBlog />} />
+
+          {/* Admin Quiz Routes */}
+          <Route path="quiz" element={<AdminQuiz />} />
         </Route>
 
         {/* user Routes */}
