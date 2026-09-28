@@ -585,9 +585,15 @@ const AdminQuiz = () => {
 
             console.log(error);
 
-            setError(
-                "Failed to save quiz."
-            );
+            const backendError = error.response?.data;
+            if (backendError && typeof backendError === 'object') {
+                const errorMessages = Object.entries(backendError)
+                    .map(([field, msgs]) => `${field}: ${Array.isArray(msgs) ? msgs.join(", ") : msgs}`)
+                    .join(" | ");
+                setError(`Failed to save: ${errorMessages}`);
+            } else {
+                setError("Failed to save quiz.");
+            }
 
         } finally {
 
@@ -810,7 +816,7 @@ const AdminQuiz = () => {
 
 
                                 {/* Actions */}
-                                <div className="flex items-center gap-1 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div className="flex items-center gap-1 shrink-0">
 
                                     {/* Preview */}
                                     <button
@@ -937,6 +943,13 @@ const AdminQuiz = () => {
                             onSubmit={handleSave}
                             className="px-6 pt-5 pb-6 space-y-4"
                         >
+                            {/* Error Message Display */}
+                            {error && (
+                                <div className="flex items-start gap-2 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm mb-2">
+                                    <AlertCircle size={16} className="shrink-0 mt-0.5" />
+                                    <span className="font-medium whitespace-pre-wrap">{error}</span>
+                                </div>
+                            )}
 
                             {/* Category */}
                             <div>
