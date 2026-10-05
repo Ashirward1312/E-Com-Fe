@@ -421,7 +421,6 @@ import {
     Loader2,
     AlertCircle,
     ChevronDown,
-    Search,
 } from "lucide-react";
 
 import {
@@ -441,12 +440,12 @@ const EMPTY_FORM = {
 
 const AdminQuiz = () => {
 
+    const ITEMS_PER_PAGE = 100;
+
     const [items, setItems] = useState([]);
-    const [filtered, setFiltered] = useState([]);
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-    const [search, setSearch] = useState("");
 
     const [showModal, setShowModal] = useState(false);
     const [editItem, setEditItem] = useState(null);
@@ -460,41 +459,19 @@ const AdminQuiz = () => {
 
     const [expanded, setExpanded] = useState(null);
 
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
+
+    const paginatedItems = items.slice(
+        (currentPage - 1) * ITEMS_PER_PAGE,
+        currentPage * ITEMS_PER_PAGE
+    );
+
 
     useEffect(() => {
         fetchItems();
     }, []);
-
-
-    useEffect(() => {
-
-        if (!search.trim()) {
-
-            setFiltered(items);
-
-        } else {
-
-            const q = search.toLowerCase();
-
-            setFiltered(
-                items.filter(
-                    (item) =>
-                        item.question
-                            .toLowerCase()
-                            .includes(q) ||
-
-                        item.answer
-                            .toLowerCase()
-                            .includes(q) ||
-
-                        (item.category || "")
-                            .toLowerCase()
-                            .includes(q)
-                )
-            );
-        }
-
-    }, [search, items]);
 
 
     const fetchItems = async () => {
@@ -674,29 +651,6 @@ const AdminQuiz = () => {
             )}
 
 
-            {/* Search */}
-            {items.length > 0 && (
-                <div className="relative max-w-sm">
-
-                    <Search
-                        size={16}
-                        className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-300"
-                    />
-
-                    <input
-                        type="text"
-                        value={search}
-                        onChange={(e) =>
-                            setSearch(e.target.value)
-                        }
-                        placeholder="Search quizzes..."
-                        className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm text-[#0B1B31] focus:outline-none focus:border-[#C8A45A] focus:ring-2 focus:ring-[#C8A45A]/20 transition bg-white"
-                    />
-
-                </div>
-            )}
-
-
             {/* Stats */}
             {items.length > 0 && (
                 <div className="flex items-center gap-3 text-sm text-gray-400">
@@ -705,12 +659,9 @@ const AdminQuiz = () => {
                         {items.length} Total Quizzes
                     </span>
 
-                    {search && (
-                        <span className="text-gray-400 text-xs">
-                            Showing {filtered.length} result
-                            {filtered.length !== 1 ? "s" : ""}
-                        </span>
-                    )}
+                    <span className="text-gray-400 text-xs">
+                        Page {currentPage} of {totalPages}
+                    </span>
 
                 </div>
             )}
@@ -783,7 +734,7 @@ const AdminQuiz = () => {
                 /* Quiz List */
                 <div className="space-y-3">
 
-                    {filtered.map((item, idx) => (
+                    {paginatedItems.map((item, idx) => (
 
                         <div
                             key={item.id}
@@ -795,7 +746,7 @@ const AdminQuiz = () => {
 
                                 {/* Number */}
                                 <span className="shrink-0 w-7 h-7 rounded-lg bg-[#F3EFE6] text-[#C8A45A] flex items-center justify-center text-xs font-bold mt-0.5">
-                                    {idx + 1}
+                                    {(currentPage - 1) * ITEMS_PER_PAGE + idx + 1}
                                 </span>
 
 
@@ -895,6 +846,78 @@ const AdminQuiz = () => {
 
                 </div>
 
+            )}
+
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+                <div className="flex items-center justify-center gap-2 pt-4 pb-2 flex-wrap">
+
+                    {/* Prev Button */}
+                    <button
+                        onClick={() => {
+                            setCurrentPage((p) => Math.max(1, p - 1));
+                            setExpanded(null);
+                            window.scrollTo({ top: 0, behavior: "smooth" });
+                        }}
+                        disabled={currentPage === 1}
+                        className="px-4 py-2 rounded-xl border border-gray-200 text-sm font-semibold text-gray-500 hover:bg-[#F3EFE6] hover:text-[#C8A45A] hover:border-[#C8A45A]/30 disabled:opacity-40 disabled:cursor-not-allowed transition"
+                    >
+                        ← Prev
+                    </button>
+
+                    {/* Page Numbers */}
+                    {Array.from({ length: totalPages }, (_, i) => i + 1)
+                        .filter((page) => {
+                            if (totalPages <= 7) return true;
+                            if (page === 1 || page === totalPages) return true;
+                            if (Math.abs(page - currentPage) <= 2) return true;
+                            return false;
+                        })
+                        .reduce((acc, page, idx, arr) => {
+                            if (idx > 0 && page - arr[idx - 1] > 1) {
+                                acc.push("...");
+                            }
+                            acc.push(page);
+                            return acc;
+                        }, [])
+                        .map((page, idx) =>
+                            page === "..." ? (
+                                <span key={`ellipsis-${idx}`} className="px-2 text-gray-400 text-sm">...</span>
+                            ) : (
+                                <button
+                                    key={page}
+                                    onClick={() => {
+                                        setCurrentPage(page);
+                                        setExpanded(null);
+                                        window.scrollTo({ top: 0, behavior: "smooth" });
+                                    }}
+                                    className={`w-9 h-9 rounded-xl text-sm font-bold transition ${
+                                        currentPage === page
+                                            ? "bg-[#0B1B31] text-white shadow-md"
+                                            : "border border-gray-200 text-gray-500 hover:bg-[#F3EFE6] hover:text-[#C8A45A] hover:border-[#C8A45A]/30"
+                                    }`}
+                                >
+                                    {page}
+                                </button>
+                            )
+                        )
+                    }
+
+                    {/* Next Button */}
+                    <button
+                        onClick={() => {
+                            setCurrentPage((p) => Math.min(totalPages, p + 1));
+                            setExpanded(null);
+                            window.scrollTo({ top: 0, behavior: "smooth" });
+                        }}
+                        disabled={currentPage === totalPages}
+                        className="px-4 py-2 rounded-xl border border-gray-200 text-sm font-semibold text-gray-500 hover:bg-[#F3EFE6] hover:text-[#C8A45A] hover:border-[#C8A45A]/30 disabled:opacity-40 disabled:cursor-not-allowed transition"
+                    >
+                        Next →
+                    </button>
+
+                </div>
             )}
 
 
