@@ -213,9 +213,9 @@ const PublicBlogDetail = () => {
                 {/* Title Section */}
                 <div className="text-center mb-10">
 
-                    <h1 className="text-4xl md:text-5xl font-extrabold text-[#0B1B31] leading-tight">
+                    <h2 className="text-1xl md:text-1xl font-extrabold text-[#0B1B31] leading-tight">
                         {blog.title}
-                    </h1>
+                    </h2>
 
                     <div className="w-24 h-1.5 bg-gradient-to-r from-[#C8A45A] to-[#e6c06d] mx-auto mt-5 rounded-full"></div>
 
@@ -237,7 +237,7 @@ const PublicBlogDetail = () => {
 
                     <div className="bg-white shadow-xl rounded-3xl p-10 border border-gray-100">
 
-                        <div className="text-gray-700 leading-8 text-[16px] whitespace-pre-wrap">
+                        <div className="text-gray-700 leading-8 text-[14px] whitespace-pre-wrap">
                             {blog.content}
                         </div>
 
